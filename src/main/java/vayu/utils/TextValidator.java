@@ -12,4 +12,11 @@ public class TextValidator {
         return matcher.matches();
     }
 
+    public static boolean isHexColorCode(String text) {
+        Pattern pattern = Pattern.compile("^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$");
+        Matcher matcher = pattern.matcher(text);
+
+        return matcher.matches();
+    }
+
 }
