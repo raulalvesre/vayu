@@ -12,16 +12,19 @@ public class Course {
     private String instructorName;
     private String syllabus;
     private String developedAbilities;
+    private SubCategory subCategory;
 
     public Course(String code,
                   String name,
                   int timeToFinish,
-                  String instructorName) {
+                  String instructorName,
+                  SubCategory subCategory) {
         setCode(code);
         setName(name);
         setTimeToFinish(timeToFinish);
         isVisible = false;
         setInstructorName(instructorName);
+        this.subCategory = subCategory;
     }
 
     public String getCode() {
@@ -100,4 +103,12 @@ public class Course {
         this.developedAbilities = developedAbilities;
     }
 
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(SubCategory subCategory) {
+        this.subCategory = subCategory;
+    }
+    
 }
