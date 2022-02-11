@@ -13,7 +13,7 @@ public class Explication extends Activity {
                        int order,
                        Section section,
                        String text) {
-        super(code, title, active, order, section);
+        super(code, title, section);
         setText(text);
     }
 
@@ -23,7 +23,7 @@ public class Explication extends Activity {
 
     public void setText(String text) {
         if (text.isBlank())
-            throw new IllegalArgumentException("An explanation text should not be blank!");
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be blank");
 
         this.text = text;
     }
