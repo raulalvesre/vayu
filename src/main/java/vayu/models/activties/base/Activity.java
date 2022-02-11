@@ -17,7 +17,7 @@ public abstract class Activity {
         setCode(code);
         setTitle(title);
         this.isActive = false;
-        this.section = section;
+        setSection(section);
     }
 
     public String getCode() {
@@ -66,6 +66,10 @@ public abstract class Activity {
     }
 
     public void setSection(Section section) {
+        if (section == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Section should not be null");
+
         this.section = section;
     }
+
 }

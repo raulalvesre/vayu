@@ -89,7 +89,7 @@ public class Category {
     }
 
     public void setColorCode(String colorCode) {
-        if (TextValidator.isHexColorCode(colorCode))
+        if (!TextValidator.isHexColorCode(colorCode))
             throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s color code should be a hex triplet");
 
         this.colorCode = colorCode;

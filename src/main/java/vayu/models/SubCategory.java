@@ -17,7 +17,7 @@ public class SubCategory {
                        Category category) {
         setCode(code);
         setName(name);
-        this.category = category;
+        setCategory(category);
     }
 
     public String getCode() {
@@ -82,6 +82,9 @@ public class SubCategory {
     }
 
     public void setCategory(Category category) {
+        if (category == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Category should not be null");
+
         this.category = category;
     }
 

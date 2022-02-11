@@ -3,11 +3,11 @@ package vayu.models.activties;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
 
-public class Explication extends Activity {
+public class Explanation extends Activity {
 
     private String text;
 
-    public Explication(String code,
+    public Explanation(String code,
                        String title,
                        Section section,
                        String text) {

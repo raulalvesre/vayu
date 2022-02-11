@@ -18,7 +18,7 @@ public class Section {
         setName(name);
         this.active = false;
         this.isTest = false;
-        this.course = course;
+        setCourse(course);
     }
 
     public String getCode() {
@@ -75,6 +75,9 @@ public class Section {
     }
 
     public void setCourse(Course course) {
+        if (course == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Course should not be null");
+
         this.course = course;
     }
 

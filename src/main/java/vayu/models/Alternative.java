@@ -13,7 +13,7 @@ public class Alternative {
     public Alternative(String text, boolean isCorrect, Question question) {
         setText(text);
         this.isCorrect = isCorrect;
-        this.question = question;
+        setQuestion(question);
     }
 
     public String getText() {
@@ -56,6 +56,9 @@ public class Alternative {
     }
 
     public void setQuestion(Question question) {
+        if (question == null)
+            throw new IllegalArgumentException(this.getClass().getName() + "s Question should not be null");
+
         this.question = question;
     }
 

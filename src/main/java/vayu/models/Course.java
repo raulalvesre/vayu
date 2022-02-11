@@ -24,7 +24,7 @@ public class Course {
         setTimeToFinish(timeToFinish);
         isVisible = false;
         setInstructorName(instructorName);
-        this.subCategory = subCategory;
+        setSubCategory(subCategory);
     }
 
     public String getCode() {
@@ -111,6 +111,9 @@ public class Course {
     }
 
     public void setSubCategory(SubCategory subCategory) {
+        if (subCategory == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Sub Category should not be null");
+
         this.subCategory = subCategory;
     }
 
