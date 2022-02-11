@@ -4,33 +4,19 @@ import vayu.utils.TextValidator;
 
 public class SubCategory {
 
-    private final String code;
-    private final String name;
-    private final String description;
-    private final String studyGuide;
-    private final boolean isActive;
-    private final int order;
-    private final Category category;
+    private String code;
+    private String name;
+    private String description;
+    private String studyGuide;
+    private boolean isActive;
+    private int order;
+    private Category category;
 
     public SubCategory(String code,
                        String name,
-                       String description,
-                       String studyGuide,
-                       boolean isActive,
-                       int order,
                        Category category) {
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s name should not be null or empty");
-
-        this.code = code;
-        this.name = name;
-        this.description = description;
-        this.studyGuide = studyGuide;
-        this.isActive = isActive;
-        this.order = order;
+        setCode(code);
+        setName(name);
         this.category = category;
     }
 
@@ -38,27 +24,62 @@ public class SubCategory {
         return code;
     }
 
+    public void setCode(String code) {
+        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
+
+        this.code = code;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Name should not be null or blank");
+
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getStudyGuide() {
         return studyGuide;
+    }
+
+    public void setStudyGuide(String studyGuide) {
+        this.studyGuide = studyGuide;
     }
 
     public boolean isActive() {
         return isActive;
     }
 
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public int getOrder() {
         return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 
     public Category getCategory() {
         return category;
     }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }
