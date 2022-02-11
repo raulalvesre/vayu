@@ -9,8 +9,6 @@ public class Explication extends Activity {
 
     public Explication(String code,
                        String title,
-                       boolean active,
-                       int order,
                        Section section,
                        String text) {
         super(code, title, section);

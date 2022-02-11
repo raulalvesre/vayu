@@ -11,12 +11,11 @@ public class Video extends Activity {
 
     public Video(String code,
                  String title,
-                 boolean active,
-                 int order,
                  Section section,
                  String URL
                  ) {
         super(code, title, section);
+        setURL(URL);
     }
 
     public String getURL() {
