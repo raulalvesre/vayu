@@ -17,6 +17,7 @@ public class Section {
         setCode(code);
         setName(name);
         this.active = false;
+        this.isTest = false;
         this.course = course;
     }
 
@@ -73,5 +74,5 @@ public class Section {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
+
 }
