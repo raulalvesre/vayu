@@ -9,8 +9,30 @@ public class Question extends Activity {
     private String wording;
     private QuestionType type;
 
-    public Question(String code, String title, boolean active, int order, Section section) {
-        super(code, title, active, order, section);
+    public Question(String code,
+                    String title,
+                    Section section,
+                    String wording,
+                    QuestionType type) {
+        super(code, title, section);
+        this.wording = wording;
+        this.type = type;
     }
 
+    public String getWording() {
+        return wording;
+    }
+
+    public void setWording(String wording) {
+        this.wording = wording;
+    }
+
+    public QuestionType getType() {
+        return type;
+    }
+
+    public void setType(QuestionType type) {
+        this.type = type;
+    }
+    
 }
