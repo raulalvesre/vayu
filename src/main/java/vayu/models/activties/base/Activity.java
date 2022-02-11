@@ -25,6 +25,9 @@ public abstract class Activity {
     }
 
     public void setCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should not be null");
+
         if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
             throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
 
@@ -36,8 +39,8 @@ public abstract class Activity {
     }
 
     public void setTitle(String title) {
-        if (title.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should not be blank");
+        if (title == null || title.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Text should not be null or blank");
 
         this.title = title;
     }

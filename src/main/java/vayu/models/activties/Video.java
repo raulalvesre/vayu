@@ -24,8 +24,8 @@ public class Video extends Activity {
     }
 
     public void setURL(String URL) {
-        if (URL.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be blank");
+        if (URL == null || URL.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
 
         this.URL = URL;
     }

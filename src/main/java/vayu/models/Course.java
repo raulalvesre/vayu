@@ -32,6 +32,9 @@ public class Course {
     }
 
     public void setCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should not be null");
+
         if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
             throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
 
@@ -110,5 +113,5 @@ public class Course {
     public void setSubCategory(SubCategory subCategory) {
         this.subCategory = subCategory;
     }
-    
+
 }

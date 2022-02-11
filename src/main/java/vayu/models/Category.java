@@ -24,6 +24,9 @@ public class Category {
     }
 
     public void setCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should not be null");
+
         if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
             throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Category should only contain lower case letters, numbers and '-'");
 

@@ -22,8 +22,8 @@ public class Explication extends Activity {
     }
 
     public void setText(String text) {
-        if (text.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be blank");
+        if (text == null || text.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Text should not be null or blank");
 
         this.text = text;
     }
