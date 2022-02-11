@@ -5,24 +5,18 @@ import vayu.utils.TextValidator;
 
 public abstract class Activity {
 
-    private final String code;
-    private final String title;
-    private final boolean active;
-    private final int order;
-    private final Section section;
+    private String code;
+    private String title;
+    private boolean isActive;
+    private int order;
+    private Section section;
 
     public Activity(String code,
                     String title,
-                    boolean active,
-                    int order,
                     Section section) {
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
-
-        this.code = code;
-        this.title = title;
-        this.active = active;
-        this.order = order;
+        setCode(code);
+        setTitle(title);
+        this.isActive = false;
         this.section = section;
     }
 
@@ -30,19 +24,45 @@ public abstract class Activity {
         return code;
     }
 
+    public void setCode(String code) {
+        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should only contain lower case letters, numbers and '-'");
+
+        this.code = code;
+    }
+
     public String getTitle() {
         return title;
     }
 
+    public void setTitle(String title) {
+        if (title.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s Code should not be blank");
+
+        this.title = title;
+    }
+
     public boolean isActive() {
-        return active;
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public int getOrder() {
         return order;
     }
 
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     public Section getSection() {
         return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
     }
 }
