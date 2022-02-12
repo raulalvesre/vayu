@@ -6,8 +6,8 @@ import vayu.models.activties.base.Activity;
 
 public class Question extends Activity {
 
-    private String wording;
-    private QuestionType type;
+    private final String wording;
+    private final QuestionType type;
 
     public Question(String code,
                     String title,
@@ -15,6 +15,7 @@ public class Question extends Activity {
                     String wording,
                     QuestionType type) {
         super(code, title, section);
+
         this.wording = wording;
         this.type = type;
     }
@@ -23,16 +24,9 @@ public class Question extends Activity {
         return wording;
     }
 
-    public void setWording(String wording) {
-        this.wording = wording;
-    }
 
     public QuestionType getType() {
         return type;
     }
 
-    public void setType(QuestionType type) {
-        this.type = type;
-    }
-    
 }
