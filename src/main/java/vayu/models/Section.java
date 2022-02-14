@@ -29,20 +29,9 @@ public class Section {
     public Section(String code,
                    String name,
                    Course course) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
-
-        if (name == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
-
-        if (course == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("course", ValidationErrorType.Null));
+        validateCode(code);
+        validateName(name);
+        validateCourse(course);
 
         this.code = code;
         this.name = name;
@@ -50,6 +39,27 @@ public class Section {
         this.isActive = false;
         this.isTest = false;
         this.course = course;
+    }
+
+    private void validateCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
+
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+    }
+
+    private void validateName(String name) {
+        if (name == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
+
+        if (name.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+    }
+
+    private void validateCourse(Course course) {
+        if (course == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("course", ValidationErrorType.Null));
     }
 
     public String getCode() {

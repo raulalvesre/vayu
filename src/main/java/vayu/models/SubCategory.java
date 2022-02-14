@@ -32,24 +32,34 @@ public class SubCategory {
     public SubCategory(String code,
                        String name,
                        Category category) {
+        validateCode(code);
+        validateName(name);
+        validateCategory(category);
+
+        this.code = code;
+        this.name = name;
+        this.category = category;
+    }
+
+    private void validateCode(String code) {
         if (code == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
         if (!TextValidationService.isValidCode(code))
             throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+    }
 
+    private void validateName(String name) {
         if (name == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
 
         if (name.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+    }
 
+    private void validateCategory(Category category) {
         if (category == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("category", ValidationErrorType.Null));
-
-        this.code = code;
-        this.name = name;
-        this.category = category;
     }
 
     public String getCode() {

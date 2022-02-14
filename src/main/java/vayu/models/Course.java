@@ -38,26 +38,11 @@ public class Course {
                   int estimatedHoursToFinish,
                   String instructorName,
                   SubCategory subCategory) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
-
-        if (name == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
-
-        if (estimatedHoursToFinish < 1 || estimatedHoursToFinish > 20)
-            throw  new IllegalArgumentException(ValidationErrorMessageService.getRangeMessage("estimated hours to finish", 1, 20));
-
-        if (instructorName.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor", ValidationErrorType.Blank));
-
-        if (subCategory == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("sub category", ValidationErrorType.Null));
+        validateCode(code);
+        validateName(name);
+        validateEstimatedHoursToFinish(estimatedHoursToFinish);
+        validateInstructorName(instructorName);
+        validateSubCategory(subCategory);
 
         this.code = code;
         this.name = name;
@@ -65,6 +50,37 @@ public class Course {
         this.isVisible = false;
         this.instructorName = instructorName;
         this.subCategory = subCategory;
+    }
+
+    private void validateCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
+
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+    }
+
+    private void validateName(String name) {
+        if (name == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
+
+        if (name.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+    }
+
+    private void validateEstimatedHoursToFinish(int estimatedHoursToFinish) {
+        if (estimatedHoursToFinish < 1 || estimatedHoursToFinish > 20)
+            throw  new IllegalArgumentException(ValidationErrorMessageService.getRangeMessage("estimated hours to finish", 1, 20));
+    }
+
+    private void validateInstructorName(String instructorName) {
+        if (instructorName.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor", ValidationErrorType.Blank));
+    }
+
+    private void validateSubCategory(SubCategory subCategory) {
+        if (subCategory == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("sub category", ValidationErrorType.Null));
     }
 
     public String getCode() {

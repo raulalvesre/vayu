@@ -35,21 +35,28 @@ public class Category {
 
     public Category(String code,
                     String name) {
+        validateCode(code);
+        validateName(name);
+
+        this.code = code;
+        this.isActive = false;
+        this.name = name;
+    }
+
+    private void validateCode(String code) {
         if (code == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
         if (!TextValidationService.isValidCode(code))
             throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+    }
 
+    private void validateName(String name) {
         if (name == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
 
         if (name.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
-
-        this.code = code;
-        this.isActive = false;
-        this.name = name;
     }
 
     public String getCode() {

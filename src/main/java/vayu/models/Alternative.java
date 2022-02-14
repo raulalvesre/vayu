@@ -24,18 +24,25 @@ public class Alternative {
     }
 
     public Alternative(String text, boolean isCorrect, Question question) {
+        validateText(text);
+        validateQuestion(question);
+
+        this.text = text;
+        this.isCorrect = isCorrect;
+        this.question = question;
+    }
+
+    private void validateText(String text) {
         if (text == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
 
         if (text.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
+    }
 
+    private void validateQuestion(Question question) {
         if (question == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("question", ValidationErrorType.Null));
-
-        this.text = text;
-        this.isCorrect = isCorrect;
-        this.question = question;
     }
 
     public String getText() {
