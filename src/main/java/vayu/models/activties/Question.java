@@ -16,6 +16,25 @@ public class Question extends Activity {
                     QuestionType type) {
         super(code, title, section);
 
+        if (type == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s type should not be null");
+
+        this.wording = wording;
+        this.type = type;
+    }
+
+    public Question(String code,
+                    String title,
+                    boolean isActive,
+                    int order,
+                    Section section,
+                    String wording,
+                    QuestionType type) {
+        super(code, title, isActive, order, section);
+
+        if (type == null)
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s type should not be null");
+
         this.wording = wording;
         this.type = type;
     }
@@ -23,7 +42,6 @@ public class Question extends Activity {
     public String getWording() {
         return wording;
     }
-
 
     public QuestionType getType() {
         return type;

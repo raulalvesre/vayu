@@ -19,6 +19,20 @@ public class Explanation extends Activity {
         this.text = text;
     }
 
+    public Explanation(String code,
+                       String title,
+                       boolean isActive,
+                       int order,
+                       Section section,
+                       String text) {
+        super(code, title, isActive, order, section);
+
+        if (text == null || text.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be null or blank");
+
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }

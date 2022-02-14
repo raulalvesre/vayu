@@ -33,6 +33,39 @@ public class Video extends Activity {
         this.URL = URL;
     }
 
+    public Video(String code,
+                 String title,
+                 boolean isActive,
+                 int order,
+                 Section section,
+                 String URL) {
+        super(code, title, isActive, order, section);
+
+        if (URL == null || URL.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
+
+        this.URL = URL;
+    }
+
+    public Video(String code,
+                 String title,
+                 boolean isActive,
+                 int order,
+                 Section section,
+                 String URL,
+                 int durationInMinutes,
+                 String transcription) {
+        super(code, title, isActive, order, section);
+
+        if (URL == null || URL.isBlank())
+            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
+
+        this.URL = URL;
+
+        this.durationInMinutes = durationInMinutes;
+        this.transcription = transcription;
+    }
+
     public String getURL() {
         return URL;
     }
