@@ -27,25 +27,36 @@ public abstract class Activity {
     public Activity(String code,
                     String title,
                     Section section) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
-
-        if (title == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Null));
-
-        if (title.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Blank));
-
-        if (section == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("section", ValidationErrorType.Null));
+        validateCode(code);
+        validateTitle(title);
+        validateSection(section);
 
         this.code = code;
         this.title = title;
         this.isActive = false;
         this.section = section;
+    }
+
+    private void validateCode(String code) {
+        if (code == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
+
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+    }
+
+    private void validateTitle(String title) {
+        if (title == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Null));
+
+        if (title.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Blank));
+    }
+
+    private void validateSection(Section section) {
+        if (section == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("section", ValidationErrorType.Null));
+
     }
 
     public String getCode() {
