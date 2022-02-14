@@ -41,6 +41,9 @@ public abstract class Activity {
         if (code == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
+        if (code.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
+
         if (!TextValidationService.isValidCode(code))
             throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
     }

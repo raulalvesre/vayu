@@ -49,6 +49,9 @@ public class Category {
         if (code == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
+        if (code.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
+
         if (!TextValidationService.isValidCode(code))
             throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
     }
@@ -62,6 +65,9 @@ public class Category {
     }
 
     private void validateColorCode(String colorCode) {
+        if (colorCode == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("color's code", ValidationErrorType.Null));
+
         if (!TextValidationService.isHexColorCode(colorCode))
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("color's code", ValidationErrorType.HexColorCode));
     }
