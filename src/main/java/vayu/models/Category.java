@@ -12,7 +12,7 @@ public class Category {
     private String studyGuide;
     private boolean isActive;
     private int order;
-    private String imagePath;
+    private String iconPath;
     private String colorCode;
 
     public Category(String code,
@@ -21,15 +21,17 @@ public class Category {
                     String studyGuide,
                     boolean isActive,
                     int order,
-                    String imagePath,
+                    String iconPath,
                     String colorCode) {
         this(code, name);
+
+        validateColorCode(colorCode);
 
         this.description = description;
         this.studyGuide = studyGuide;
         this.isActive = isActive;
         this.order = order;
-        this.imagePath = imagePath;
+        this.iconPath = iconPath;
         this.colorCode = colorCode;
     }
 
@@ -39,8 +41,8 @@ public class Category {
         validateName(name);
 
         this.code = code;
-        this.isActive = false;
         this.name = name;
+        this.isActive = false;
     }
 
     private void validateCode(String code) {
@@ -57,6 +59,11 @@ public class Category {
 
         if (name.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+    }
+
+    private void validateColorCode(String colorCode) {
+        if (!TextValidationService.isHexColorCode(colorCode))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("color's code", ValidationErrorType.HexColorCode));
     }
 
     public String getCode() {
@@ -83,8 +90,8 @@ public class Category {
         return order;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getIconPath() {
+        return iconPath;
     }
 
     public String getColorCode() {

@@ -12,6 +12,7 @@ public class ValidationErrorMessageService {
             case Blank -> classWhoCalledName + "'s " +  classAttribute + " should not be blank";
             case ModelCode -> classWhoCalledName + "'s code should only contain lower case letters, numbers and '-'";
             case Range -> classWhoCalledName + "'s " + classAttribute + " is not within correct range";
+            case HexColorCode -> classWhoCalledName + "'s " + classAttribute + " is not a valid Hex Color Code";
         };
     }
 

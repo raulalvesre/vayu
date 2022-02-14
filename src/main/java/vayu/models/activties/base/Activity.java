@@ -56,7 +56,6 @@ public abstract class Activity {
     private void validateSection(Section section) {
         if (section == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("section", ValidationErrorType.Null));
-
     }
 
     public String getCode() {

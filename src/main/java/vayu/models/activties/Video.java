@@ -38,11 +38,13 @@ public class Video extends Activity {
                  boolean isActive,
                  int order,
                  Section section,
-                 String URL) {
-        super(code, title, isActive, order, section);
+                 String URL,
+                 int durationInMinutes,
+                 String transcription) {
+        this(code, title, isActive, order, section, URL);
 
-        validateURL(URL);
-        this.URL = URL;
+        this.durationInMinutes = durationInMinutes;
+        this.transcription = transcription;
     }
 
     public Video(String code,
@@ -50,16 +52,11 @@ public class Video extends Activity {
                  boolean isActive,
                  int order,
                  Section section,
-                 String URL,
-                 int durationInMinutes,
-                 String transcription) {
+                 String URL) {
         super(code, title, isActive, order, section);
 
         validateURL(URL);
-
         this.URL = URL;
-        this.durationInMinutes = durationInMinutes;
-        this.transcription = transcription;
     }
 
     private void validateURL(String URL) {

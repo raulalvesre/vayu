@@ -5,6 +5,7 @@ public enum ValidationErrorType {
     Null,
     Blank,
     ModelCode,
-    Range
+    Range,
+    HexColorCode
 
 }

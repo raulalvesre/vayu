@@ -74,6 +74,9 @@ public class Course {
     }
 
     private void validateInstructorName(String instructorName) {
+        if (instructorName == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor's name", ValidationErrorType.Null));
+
         if (instructorName.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor", ValidationErrorType.Blank));
     }
