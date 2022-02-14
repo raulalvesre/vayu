@@ -1,12 +1,10 @@
 package vayu.models.activties;
 
 import vayu.enums.QuestionType;
-import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
-import vayu.services.ValidationErrorMessageService;
 
-import static vayu.services.ValidationService.*;
+import static vayu.services.ValidationService.validateIfItIsNull;
 
 public class Question extends Activity {
 
@@ -44,11 +42,11 @@ public class Question extends Activity {
     }
 
     private void validateWording(String wording) {
-        validateIfItIsNull("wording", wording);
+        validateIfItIsNull(this.getClass().getSimpleName(), "wording", wording);
     }
 
     private void validateType(QuestionType type) {
-        validateIfItIsNull("type", type);
+        validateIfItIsNull(this.getClass().getSimpleName(), "type", type);
     }
 
     public String getWording() {

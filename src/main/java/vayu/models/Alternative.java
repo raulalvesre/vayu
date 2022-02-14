@@ -1,8 +1,6 @@
 package vayu.models;
 
-import vayu.enums.ValidationErrorType;
 import vayu.models.activties.Question;
-import vayu.services.ValidationErrorMessageService;
 
 import static vayu.services.ValidationService.validateIfIsBlankString;
 import static vayu.services.ValidationService.validateIfItIsNull;
@@ -36,12 +34,12 @@ public class Alternative {
     }
 
     private void validateText(String text) {
-        validateIfItIsNull("text", text);
-        validateIfIsBlankString("text", text);
+        validateIfItIsNull(this.getClass().getSimpleName(), "text", text);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "text", text);
     }
 
     private void validateQuestion(Question question) {
-        validateIfItIsNull("question", question);
+        validateIfItIsNull(this.getClass().getSimpleName(), "question", question);
     }
 
     public String getText() {

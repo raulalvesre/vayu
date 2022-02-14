@@ -1,9 +1,5 @@
 package vayu.models;
 
-import vayu.enums.ValidationErrorType;
-import vayu.services.ValidationService;
-import vayu.services.ValidationErrorMessageService;
-
 import static vayu.services.ValidationService.*;
 
 public class Course {
@@ -55,27 +51,27 @@ public class Course {
     }
 
     private void validateCode(String code) {
-        validateIfItIsNull("code", code);
-        validateIfIsBlankString("code", code);
-        validateIfItIsValidCode(code);
+        validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
-        validateIfItIsNull("name", name);
-        validateIfIsBlankString("name", name);
+        validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateEstimatedHoursToFinish(int estimatedHoursToFinish) {
-        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
+        validateIfIntIsWithinRange(this.getClass().getSimpleName(), "estimated hours to finish", estimatedHoursToFinish, 1, 20);
     }
 
     private void validateInstructorName(String instructorName) {
-        validateIfItIsNull("instructor name", instructorName);
-        validateIfIsBlankString("instructor name", instructorName);
+        validateIfItIsNull(this.getClass().getSimpleName(), "instructor name", instructorName);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "instructor name", instructorName);
     }
 
     private void validateSubCategory(SubCategory subCategory) {
-        validateIfItIsNull("sub category", subCategory);
+        validateIfItIsNull(this.getClass().getSimpleName(), "sub category", subCategory);
     }
 
     public String getCode() {

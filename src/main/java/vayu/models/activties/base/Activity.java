@@ -1,9 +1,6 @@
 package vayu.models.activties.base;
 
-import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
-import vayu.services.ValidationService;
-import vayu.services.ValidationErrorMessageService;
 
 import static vayu.services.ValidationService.*;
 
@@ -40,18 +37,18 @@ public abstract class Activity {
     }
 
     private void validateCode(String code) {
-        validateIfItIsNull("code", code);
-        validateIfIsBlankString("code", code);
-        validateIfItIsValidCode(code);
+        validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateTitle(String title) {
-        validateIfItIsNull("title", title);
-        validateIfIsBlankString("title", title);
+        validateIfItIsNull(this.getClass().getSimpleName(), "title", title);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "title", title);
     }
 
     private void validateSection(Section section) {
-        validateIfItIsNull("section", section);
+        validateIfItIsNull(this.getClass().getSimpleName(), "section", section);
     }
 
     public String getCode() {

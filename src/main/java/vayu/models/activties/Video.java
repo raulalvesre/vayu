@@ -63,8 +63,8 @@ public class Video extends Activity {
     }
 
     private void validateURL(String URL) {
-        validateIfItIsNull("URL", URL);
-        validateIfIsBlankString("URL", URL);
+        validateIfItIsNull(this.getClass().getSimpleName(), "URL", URL);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "URL", URL);
     }
 
     public String getURL() {

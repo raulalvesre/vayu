@@ -33,8 +33,8 @@ public class Explanation extends Activity {
     }
 
     private void validateText(String text) {
-        validateIfItIsNull("text", text);
-        validateIfIsBlankString("text", text);
+        validateIfItIsNull(this.getClass().getSimpleName(), "text", text);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "text", text);
     }
 
     public String getText() {

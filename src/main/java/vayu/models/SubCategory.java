@@ -40,18 +40,18 @@ public class SubCategory {
     }
 
     private void validateCode(String code) {
-        validateIfItIsNull("code", code);
-        validateIfIsBlankString("code", code);
-        validateIfItIsValidCode(code);
+        validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
-        validateIfItIsNull("name", name);
-        validateIfIsBlankString("name", name);
+        validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateCategory(Category category) {
-        validateIfItIsNull("category", category);
+        validateIfItIsNull(this.getClass().getSimpleName(), "category", category);
     }
 
     public String getCode() {

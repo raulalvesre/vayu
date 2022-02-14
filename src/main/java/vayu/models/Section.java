@@ -1,9 +1,5 @@
 package vayu.models;
 
-import vayu.enums.ValidationErrorType;
-import vayu.services.ValidationService;
-import vayu.services.ValidationErrorMessageService;
-
 import static vayu.services.ValidationService.*;
 
 public class Section {
@@ -44,18 +40,18 @@ public class Section {
     }
 
     private void validateCode(String code) {
-        validateIfItIsNull("code", code);
-        validateIfIsBlankString("code", code);
-        validateIfItIsValidCode(code);
+        validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
-        validateIfItIsNull("name", name);
-        validateIfIsBlankString("name", name);
+        validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
+        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateCourse(Course course) {
-        validateIfItIsNull("course", course);
+        validateIfItIsNull(this.getClass().getSimpleName(), "course", course);
     }
 
     public String getCode() {
