@@ -18,8 +18,7 @@ public class Question extends Activity {
                     QuestionType type) {
         super(code, title, section);
 
-        if (type == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
+        validateType(type);
 
         this.wording = wording;
         this.type = type;
@@ -34,11 +33,15 @@ public class Question extends Activity {
                     QuestionType type) {
         super(code, title, isActive, order, section);
 
-        if (type == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
+        validateType(type);
 
         this.wording = wording;
         this.type = type;
+    }
+
+    private void validateType(QuestionType type) {
+        if (type == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
     }
 
     public String getWording() {

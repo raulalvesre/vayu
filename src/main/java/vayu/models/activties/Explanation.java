@@ -15,12 +15,7 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        if (text == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
-
-        if (text.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
-
+        validateText(text);
         this.text = text;
     }
 
@@ -32,13 +27,16 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, isActive, order, section);
 
+        validateText(text);
+        this.text = text;
+    }
+
+    private void validateText(String text) {
         if (text == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
 
         if (text.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
-
-        this.text = text;
     }
 
     public String getText() {

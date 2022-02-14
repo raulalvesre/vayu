@@ -29,12 +29,7 @@ public class Video extends Activity {
                  String URL) {
         super(code, title, section);
 
-        if (URL == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
-
-        if (URL.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
-
+        validateURL(URL);
         this.URL = URL;
     }
 
@@ -46,12 +41,7 @@ public class Video extends Activity {
                  String URL) {
         super(code, title, isActive, order, section);
 
-        if (URL == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
-
-        if (URL.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
-
+        validateURL(URL);
         this.URL = URL;
     }
 
@@ -65,16 +55,19 @@ public class Video extends Activity {
                  String transcription) {
         super(code, title, isActive, order, section);
 
+        validateURL(URL);
+
+        this.URL = URL;
+        this.durationInMinutes = durationInMinutes;
+        this.transcription = transcription;
+    }
+
+    private void validateURL(String URL) {
         if (URL == null)
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
 
         if (URL.isBlank())
             throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
-
-        this.URL = URL;
-
-        this.durationInMinutes = durationInMinutes;
-        this.transcription = transcription;
     }
 
     public String getURL() {
