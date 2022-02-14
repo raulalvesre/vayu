@@ -1,7 +1,9 @@
 package vayu.models.activties.base;
 
+import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
-import vayu.utils.TextValidator;
+import vayu.services.TextValidationService;
+import vayu.services.ValidationErrorMessageService;
 
 public abstract class Activity {
 
@@ -26,16 +28,19 @@ public abstract class Activity {
                     String title,
                     Section section) {
         if (code == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should only contain lower case letters, numbers and '-'");
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
 
-        if (title == null || title.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be null or blank");
+        if (title == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Null));
+
+        if (title.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Blank));
 
         if (section == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s section should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("section", ValidationErrorType.Null));
 
         this.code = code;
         this.title = title;

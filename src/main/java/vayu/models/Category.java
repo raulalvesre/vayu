@@ -1,6 +1,8 @@
 package vayu.models;
 
-import vayu.utils.TextValidator;
+import vayu.enums.ValidationErrorType;
+import vayu.services.TextValidationService;
+import vayu.services.ValidationErrorMessageService;
 
 public class Category {
 
@@ -34,13 +36,16 @@ public class Category {
     public Category(String code,
                     String name) {
         if (code == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s category should only contain lower case letters, numbers and '-'");
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
 
-        if (name == null || name.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s category should not be null or blank");
+        if (name == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
+
+        if (name.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
 
         this.code = code;
         this.isActive = false;

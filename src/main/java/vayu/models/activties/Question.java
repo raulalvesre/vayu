@@ -1,8 +1,10 @@
 package vayu.models.activties;
 
 import vayu.enums.QuestionType;
+import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
+import vayu.services.ValidationErrorMessageService;
 
 public class Question extends Activity {
 
@@ -17,7 +19,7 @@ public class Question extends Activity {
         super(code, title, section);
 
         if (type == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s type should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
 
         this.wording = wording;
         this.type = type;
@@ -33,7 +35,7 @@ public class Question extends Activity {
         super(code, title, isActive, order, section);
 
         if (type == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s type should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
 
         this.wording = wording;
         this.type = type;

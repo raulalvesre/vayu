@@ -1,6 +1,8 @@
 package vayu.models;
 
-import vayu.utils.TextValidator;
+import vayu.enums.ValidationErrorType;
+import vayu.services.TextValidationService;
+import vayu.services.ValidationErrorMessageService;
 
 public class Course {
 
@@ -37,22 +39,25 @@ public class Course {
                   String instructorName,
                   SubCategory subCategory) {
         if (code == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should only contain lower case letters, numbers and '-'");
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
 
-        if (name == null || name.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s name should not be null or blank");
+        if (name == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
+
+        if (name.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
 
         if (estimatedHoursToFinish < 1 || estimatedHoursToFinish > 20)
-            throw  new IllegalArgumentException(this.getClass().getSimpleName() + "'s time to finish should be between 1 and 20");
+            throw  new IllegalArgumentException(ValidationErrorMessageService.getRangeMessage("estimated hours to finish", 1, 20));
 
         if (instructorName.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s instructor's name should not be blank");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor", ValidationErrorType.Blank));
 
         if (subCategory == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s sub category should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("sub category", ValidationErrorType.Null));
 
         this.code = code;
         this.name = name;

@@ -1,6 +1,8 @@
 package vayu.models;
 
+import vayu.enums.ValidationErrorType;
 import vayu.models.activties.Question;
+import vayu.services.ValidationErrorMessageService;
 
 public class Alternative {
 
@@ -22,11 +24,14 @@ public class Alternative {
     }
 
     public Alternative(String text, boolean isCorrect, Question question) {
-        if (text == null || text.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be null or blank");
+        if (text == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
+
+        if (text.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
 
         if (question == null)
-            throw new IllegalArgumentException(this.getClass().getName() + "s question should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("question", ValidationErrorType.Null));
 
         this.text = text;
         this.isCorrect = isCorrect;

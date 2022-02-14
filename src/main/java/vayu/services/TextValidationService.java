@@ -1,11 +1,11 @@
-package vayu.utils;
+package vayu.services;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextValidator {
+public class TextValidationService {
 
-    public static boolean containsOnlyNumbersAndLowerCaseLetters(String text) {
+    public static boolean isValidCode(String text) {
         Pattern pattern = Pattern.compile("^[a-z0-9-]+$");
         Matcher matcher = pattern.matcher(text);
 

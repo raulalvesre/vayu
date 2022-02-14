@@ -1,7 +1,9 @@
 package vayu.models.activties;
 
+import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
+import vayu.services.ValidationErrorMessageService;
 
 public class Explanation extends Activity {
 
@@ -13,8 +15,11 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        if (text == null || text.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be null or blank");
+        if (text == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
+
+        if (text.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
 
         this.text = text;
     }
@@ -27,8 +32,11 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, isActive, order, section);
 
-        if (text == null || text.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s text should not be null or blank");
+        if (text == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
+
+        if (text.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
 
         this.text = text;
     }

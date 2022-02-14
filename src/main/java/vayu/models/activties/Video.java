@@ -1,7 +1,9 @@
 package vayu.models.activties;
 
+import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
+import vayu.services.ValidationErrorMessageService;
 
 public class Video extends Activity {
 
@@ -27,8 +29,11 @@ public class Video extends Activity {
                  String URL) {
         super(code, title, section);
 
-        if (URL == null || URL.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
+        if (URL == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
+
+        if (URL.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
 
         this.URL = URL;
     }
@@ -41,8 +46,11 @@ public class Video extends Activity {
                  String URL) {
         super(code, title, isActive, order, section);
 
-        if (URL == null || URL.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
+        if (URL == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
+
+        if (URL.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
 
         this.URL = URL;
     }
@@ -57,8 +65,11 @@ public class Video extends Activity {
                  String transcription) {
         super(code, title, isActive, order, section);
 
-        if (URL == null || URL.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s URL should not be null or blank");
+        if (URL == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
+
+        if (URL.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
 
         this.URL = URL;
 

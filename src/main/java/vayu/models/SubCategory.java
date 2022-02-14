@@ -1,6 +1,8 @@
 package vayu.models;
 
-import vayu.utils.TextValidator;
+import vayu.enums.ValidationErrorType;
+import vayu.services.TextValidationService;
+import vayu.services.ValidationErrorMessageService;
 
 public class SubCategory {
 
@@ -31,16 +33,19 @@ public class SubCategory {
                        String name,
                        Category category) {
         if (code == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
 
-        if (!TextValidator.containsOnlyNumbersAndLowerCaseLetters(code))
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s code should only contain lower case letters, numbers and '-'");
+        if (!TextValidationService.isValidCode(code))
+            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
 
-        if (name == null || name.isBlank())
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s name should not be null or blank");
+        if (name == null)
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
+
+        if (name.isBlank())
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
 
         if (category == null)
-            throw new IllegalArgumentException(this.getClass().getSimpleName() + "'s category should not be null");
+            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("category", ValidationErrorType.Null));
 
         this.code = code;
         this.name = name;
