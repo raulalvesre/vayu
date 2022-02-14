@@ -11,7 +11,7 @@ public class ValidationErrorMessageService {
             case Null -> classWhoCalledName + "'s " +  classAttribute + " should not be null";
             case Blank -> classWhoCalledName + "'s " +  classAttribute + " should not be blank";
             case ModelCode -> classWhoCalledName + "'s code should only contain lower case letters, numbers and '-'";
-            case Range -> classWhoCalledName + "'s " + classAttribute + " is not within correct range";
+            case WithinRange -> classWhoCalledName + "'s " + classAttribute + " is not within correct range";
             case HexColorCode -> classWhoCalledName + "'s " + classAttribute + " is not a valid Hex Color Code";
         };
     }
@@ -22,7 +22,7 @@ public class ValidationErrorMessageService {
         return classWhoCalledName + "'s code should only contain lower case letters, numbers and '-'";
     }
 
-    public static String getRangeMessage(String classAttribute, int min, int max) {
+    public static String getWithingRangeMessage(String classAttribute, int min, int max) {
         String classWhoCalledName = Thread.currentThread().getStackTrace()[2].getClassName();
 
         return classWhoCalledName + "'s " + classAttribute + " should be between " + min + " and " + max;

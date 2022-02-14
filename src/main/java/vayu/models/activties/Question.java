@@ -6,6 +6,8 @@ import vayu.models.Section;
 import vayu.models.activties.base.Activity;
 import vayu.services.ValidationErrorMessageService;
 
+import static vayu.services.ValidationService.*;
+
 public class Question extends Activity {
 
     private final String wording;
@@ -42,13 +44,11 @@ public class Question extends Activity {
     }
 
     private void validateWording(String wording) {
-        if (wording == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("wording", ValidationErrorType.Null));
+        validateIfItIsNull("wording", wording);
     }
 
     private void validateType(QuestionType type) {
-        if (type == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("type", ValidationErrorType.Null));
+        validateIfItIsNull("type", type);
     }
 
     public String getWording() {

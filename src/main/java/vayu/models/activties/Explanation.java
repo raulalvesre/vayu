@@ -1,9 +1,10 @@
 package vayu.models.activties;
 
-import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
-import vayu.services.ValidationErrorMessageService;
+
+import static vayu.services.ValidationService.validateIfIsBlankString;
+import static vayu.services.ValidationService.validateIfItIsNull;
 
 public class Explanation extends Activity {
 
@@ -32,11 +33,8 @@ public class Explanation extends Activity {
     }
 
     private void validateText(String text) {
-        if (text == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
-
-        if (text.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
+        validateIfItIsNull("text", text);
+        validateIfIsBlankString("text", text);
     }
 
     public String getText() {

@@ -4,6 +4,9 @@ import vayu.enums.ValidationErrorType;
 import vayu.models.activties.Question;
 import vayu.services.ValidationErrorMessageService;
 
+import static vayu.services.ValidationService.validateIfIsBlankString;
+import static vayu.services.ValidationService.validateIfItIsNull;
+
 public class Alternative {
 
     private final String text;
@@ -33,16 +36,12 @@ public class Alternative {
     }
 
     private void validateText(String text) {
-        if (text == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Null));
-
-        if (text.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("text", ValidationErrorType.Blank));
+        validateIfItIsNull("text", text);
+        validateIfIsBlankString("text", text);
     }
 
     private void validateQuestion(Question question) {
-        if (question == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("question", ValidationErrorType.Null));
+        validateIfItIsNull("question", question);
     }
 
     public String getText() {

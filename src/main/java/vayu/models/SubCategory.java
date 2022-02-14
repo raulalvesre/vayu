@@ -1,8 +1,6 @@
 package vayu.models;
 
-import vayu.enums.ValidationErrorType;
-import vayu.services.TextValidationService;
-import vayu.services.ValidationErrorMessageService;
+import static vayu.services.ValidationService.*;
 
 public class SubCategory {
 
@@ -42,27 +40,18 @@ public class SubCategory {
     }
 
     private void validateCode(String code) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (code.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+        validateIfItIsNull("code", code);
+        validateIfIsBlankString("code", code);
+        validateIfItIsValidCode(code);
     }
 
     private void validateName(String name) {
-        if (name == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+        validateIfItIsNull("name", name);
+        validateIfIsBlankString("name", name);
     }
 
     private void validateCategory(Category category) {
-        if (category == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("category", ValidationErrorType.Null));
+        validateIfItIsNull("category", category);
     }
 
     public String getCode() {

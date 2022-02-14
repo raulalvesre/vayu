@@ -1,8 +1,10 @@
 package vayu.models;
 
 import vayu.enums.ValidationErrorType;
-import vayu.services.TextValidationService;
+import vayu.services.ValidationService;
 import vayu.services.ValidationErrorMessageService;
+
+import static vayu.services.ValidationService.*;
 
 public class Course {
 
@@ -53,40 +55,27 @@ public class Course {
     }
 
     private void validateCode(String code) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (code.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+        validateIfItIsNull("code", code);
+        validateIfIsBlankString("code", code);
+        validateIfItIsValidCode(code);
     }
 
     private void validateName(String name) {
-        if (name == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+        validateIfItIsNull("name", name);
+        validateIfIsBlankString("name", name);
     }
 
     private void validateEstimatedHoursToFinish(int estimatedHoursToFinish) {
-        if (estimatedHoursToFinish < 1 || estimatedHoursToFinish > 20)
-            throw  new IllegalArgumentException(ValidationErrorMessageService.getRangeMessage("estimated hours to finish", 1, 20));
+        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
     }
 
     private void validateInstructorName(String instructorName) {
-        if (instructorName == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor's name", ValidationErrorType.Null));
-
-        if (instructorName.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("instructor", ValidationErrorType.Blank));
+        validateIfItIsNull("instructor name", instructorName);
+        validateIfIsBlankString("instructor name", instructorName);
     }
 
     private void validateSubCategory(SubCategory subCategory) {
-        if (subCategory == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("sub category", ValidationErrorType.Null));
+        validateIfItIsNull("sub category", subCategory);
     }
 
     public String getCode() {

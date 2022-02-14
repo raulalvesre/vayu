@@ -2,8 +2,10 @@ package vayu.models.activties.base;
 
 import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
-import vayu.services.TextValidationService;
+import vayu.services.ValidationService;
 import vayu.services.ValidationErrorMessageService;
+
+import static vayu.services.ValidationService.*;
 
 public abstract class Activity {
 
@@ -38,27 +40,18 @@ public abstract class Activity {
     }
 
     private void validateCode(String code) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (code.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+        validateIfItIsNull("code", code);
+        validateIfIsBlankString("code", code);
+        validateIfItIsValidCode(code);
     }
 
     private void validateTitle(String title) {
-        if (title == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Null));
-
-        if (title.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("title", ValidationErrorType.Blank));
+        validateIfItIsNull("title", title);
+        validateIfIsBlankString("title", title);
     }
 
     private void validateSection(Section section) {
-        if (section == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("section", ValidationErrorType.Null));
+        validateIfItIsNull("section", section);
     }
 
     public String getCode() {

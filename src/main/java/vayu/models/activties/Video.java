@@ -5,6 +5,9 @@ import vayu.models.Section;
 import vayu.models.activties.base.Activity;
 import vayu.services.ValidationErrorMessageService;
 
+import static vayu.services.ValidationService.validateIfIsBlankString;
+import static vayu.services.ValidationService.validateIfItIsNull;
+
 public class Video extends Activity {
 
     private final String URL;
@@ -60,11 +63,8 @@ public class Video extends Activity {
     }
 
     private void validateURL(String URL) {
-        if (URL == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Null));
-
-        if (URL.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("URL", ValidationErrorType.Blank));
+        validateIfItIsNull("URL", URL);
+        validateIfIsBlankString("URL", URL);
     }
 
     public String getURL() {

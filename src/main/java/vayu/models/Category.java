@@ -1,8 +1,10 @@
 package vayu.models;
 
 import vayu.enums.ValidationErrorType;
-import vayu.services.TextValidationService;
+import vayu.services.ValidationService;
 import vayu.services.ValidationErrorMessageService;
+
+import static vayu.services.ValidationService.*;
 
 public class Category {
 
@@ -46,30 +48,19 @@ public class Category {
     }
 
     private void validateCode(String code) {
-        if (code == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Null));
-
-        if (code.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("code", ValidationErrorType.Blank));
-
-        if (!TextValidationService.isValidCode(code))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getModelCodeMessage());
+        validateIfItIsNull("code", code);
+        validateIfIsBlankString("code", code);
+        validateIfItIsValidCode(code);
     }
 
     private void validateName(String name) {
-        if (name == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Null));
-
-        if (name.isBlank())
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("name", ValidationErrorType.Blank));
+        validateIfItIsNull("name", name);
+        validateIfIsBlankString("name", name);
     }
 
     private void validateColorCode(String colorCode) {
-        if (colorCode == null)
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("color's code", ValidationErrorType.Null));
-
-        if (!TextValidationService.isHexColorCode(colorCode))
-            throw new IllegalArgumentException(ValidationErrorMessageService.getMessage("color's code", ValidationErrorType.HexColorCode));
+        validateIfItIsNull("color code", colorCode);
+        validateIfItIsValidHexColorCode("color code", colorCode);
     }
 
     public String getCode() {
