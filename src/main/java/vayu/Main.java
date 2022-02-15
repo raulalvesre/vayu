@@ -383,13 +383,13 @@ public class Main {
 //                theBasicsSvelteForms,
 //                null);
 
-//        var blankUrl = new Video(
+//        var invalidURL = new Video(
 //                "code",
 //                "intro svelte forms",
 //                true,
 //                1,
 //                theBasicsSvelteForms,
-//                "");
+//                "invalid URL");
         //endregion
     }
 

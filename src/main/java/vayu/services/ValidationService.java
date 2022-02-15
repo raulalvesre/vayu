@@ -2,13 +2,17 @@ package vayu.services;
 
 public class ValidationService {
 
+    public static final String MODEL_CODE_REGEX = "^[a-z0-9-]+$";
+    public static final String HEX_COLOR_REGEX = "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$";
+    public static final String URL_REGEX = "https?://(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)";
+
     public static void validateIfItIsNull(String className, String attrName, Object object) {
         if (object == null)
             throw new IllegalArgumentException(className + "'s " +  attrName + " should not be null");
     }
 
     public static void validateIfItIsValidCode(String className, String text) {
-        if(!text.matches("^[a-z0-9-]+$"))
+        if(!text.matches(MODEL_CODE_REGEX))
             throw new IllegalArgumentException(className + "'s code should only contain lower case letters, numbers and '-'");
     }
 
@@ -23,8 +27,13 @@ public class ValidationService {
     }
 
     public static void validateIfItIsValidHexColorCode(String className, String attrName, String text) {
-        if(!text.matches("^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"))
+        if(!text.matches(HEX_COLOR_REGEX))
             throw new IllegalArgumentException(className + "'s " + attrName + " is not a valid Hex Color Code");
+    }
+
+    public static void validateIfItIsValidURL(String className, String attrName, String text) {
+        if (!text.matches(URL_REGEX))
+            throw new IllegalArgumentException(className + "'s " + attrName + " is not a valid URL");
     }
 
 }

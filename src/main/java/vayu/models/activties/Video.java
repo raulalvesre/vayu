@@ -3,8 +3,7 @@ package vayu.models.activties;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
 
-import static vayu.services.ValidationService.validateIfIsBlankString;
-import static vayu.services.ValidationService.validateIfItIsNull;
+import static vayu.services.ValidationService.*;
 
 public class Video extends Activity {
 
@@ -62,7 +61,7 @@ public class Video extends Activity {
 
     private void validateURL(String URL) {
         validateIfItIsNull(this.getClass().getSimpleName(), "URL", URL);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "URL", URL);
+        validateIfItIsValidURL(this.getClass().getSimpleName(), "URL", URL);
     }
 
     public String getURL() {
