@@ -8,7 +8,7 @@ public class ValidationService {
     }
 
     public static void validateIfItIsValidCode(String className, String text) {
-        if(text.matches("^[a-z0-9-]+$"))
+        if(!text.matches("^[a-z0-9-]+$"))
             throw new IllegalArgumentException(className + "'s code should only contain lower case letters, numbers and '-'");
     }
 
@@ -23,7 +23,7 @@ public class ValidationService {
     }
 
     public static void validateIfItIsValidHexColorCode(String className, String attrName, String text) {
-        if(text.matches("^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"))
+        if(!text.matches("^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$"))
             throw new IllegalArgumentException(className + "'s " + attrName + " is not a valid Hex Color Code");
     }
 

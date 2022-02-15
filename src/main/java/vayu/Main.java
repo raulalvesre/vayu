@@ -179,7 +179,7 @@ public class Main {
                 true, 1,
                 "pasta/arquivo.jpg",
                 "aaa");*/
-            //endregion
+        //endregion
     }
 
 
@@ -270,32 +270,321 @@ public class Main {
                 svelte);
 
         //region code
-        var a = new Section(
-                null,
-                "the basics",
-                svelteForms);
+//        var a = new Section(
+//                null,
+//                "the basics",
+//                svelteForms);
+//
+//        var b = new Section(
+//                "",
+//                "the basics",
+//                svelteForms);
+//
+//        var c = new Section(
+//                "AAA",
+//                "the basics",
+//                svelteForms);
         //endregion
 
         //region name
-        //var a = new Course("code", null, 1, "raul", svelte);
-        //var b = new Course("code", "", 1, "raul", svelte);
+//        var a = new Section(
+//                "code",
+//                null,
+//                svelteForms);
+//
+//        var b = new Section(
+//                "code",
+//                "",
+//                svelteForms);
+        //endregion
+
+        //region course
+//        var a = new Section(
+//                "code",
+//                "name",
+//                null);
         //endregion
     }
 
     private static void testVideoValidation() {
+        var frontEnd = new Category("front-end", "front-end");
+        var svelte = new SubCategory("svelte", "svelte", frontEnd);
+        var svelteForms = new Course(
+                "svelte-forms",
+                "svelt forms",
+                9,
+                "raul",
+                svelte);
+        var theBasicsSvelteForms = new Section(
+                "svelt-forms-basics",
+                "the basics",
+                svelteForms);
 
+        //region code
+//        var a = new Video(
+//                null,
+//                "intro svelte forms",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "uma url");
+
+//        var b = new Video(
+//                "",
+//                "intro svelte forms",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "uma url");
+
+//        var c = new Video(
+//                "AAA",
+//                "intro svelte forms",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "uma url");
+        //endregion
+
+        //region title
+//        var a = new Video(
+//                "code",
+//                null,
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "uma url");
+
+//        var b = new Video(
+//                "code",
+//                "",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "uma url");
+        //endregion
+
+        //region section
+//        var a = new Video(
+//                "code",
+//                "intro svelte forms",
+//                true,
+//                1,
+//                null,
+//                "uma url");
+        //endregion
+
+        //region URL
+        //        var a = new Video(
+//                "code",
+//                "intro svelte forms",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                null);
+
+//        var b = new Video(
+//                "code",
+//                "intro svelte forms",
+//                true,
+//                1,
+//                theBasicsSvelteForms,
+//                "");
+        //endregion
     }
 
     private static void testExplanationValidation() {
+        var frontEnd = new Category("front-end", "front-end");
+        var svelte = new SubCategory("svelte", "svelte", frontEnd);
+        var svelteForms = new Course(
+                "svelte-forms",
+                "svelt forms",
+                9,
+                "raul",
+                svelte);
+        var theBasicsSvelteForms = new Section(
+                "code",
+                "the basics",
+                svelteForms);
 
+        //region code
+//        var a = new Explanation(
+//                null,
+//                "how svelte forms works",
+//                theBasicsSvelteForms,
+//                "it just works");
+
+//        var b = new Explanation(
+//                "",
+//                "how svelte forms works",
+//                theBasicsSvelteForms,
+//                "it just works");
+
+//        var c = new Explanation(
+//                "AAA",
+//                "how svelte forms works",
+//                theBasicsSvelteForms,
+//                "it just works");
+        //endregion
+
+        //region title
+//        var a = new Explanation(
+//                "code",
+//                null,
+//                theBasicsSvelteForms,
+//                "it just works");
+
+//        var b = new Explanation(
+//                "code",
+//                "",
+//                theBasicsSvelteForms,
+//                "it just works");
+        //endregion
+
+        //region section
+//        var a = new Explanation(
+//                "code",
+//                "title",
+//                null,
+//                "it just works");
+        //endregion
+
+        //region text
+//        var a = new Explanation(
+//                "code",
+//                "title",
+//                theBasicsSvelteForms,
+//                null
+//        );
+
+//        var b = new Explanation(
+//                "code",
+//                "title",
+//                theBasicsSvelteForms,
+//                "");
+        //endregion
     }
 
     private static void testQuestionValidation() {
+        var frontEnd = new Category("front-end", "front-end");
+        var svelte = new SubCategory("svelte", "svelte", frontEnd);
+        var svelteForms = new Course(
+                "svelte-forms",
+                "svelt forms",
+                9,
+                "raul",
+                svelte);
+        var theBasicsSvelteForms = new Section(
+                "code",
+                "the basics",
+                svelteForms);
 
+        //region code
+//        var a = new Question(
+//                null,
+//                "how to check current form field value in svelte",
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+
+//        var b = new Question(
+//                "",
+//                "how to check current form field value in svelte",
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+
+//        var c = new Question(
+//                "AAA",
+//                "how to check current form field value in svelte",
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+        //endregion
+
+        //region title
+//        var a = new Question(
+//                "code",
+//                null,
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+
+//        var b = new Question(
+//                "code",
+//                "",
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+        //endregion
+
+        //region section
+//        var a = new Question(
+//                "code",
+//                "how to check current form field value in svelte",
+//                null,
+//                "how do we check a current form field value in svelte?",
+//                QuestionType.UniqueAnswer);
+        //endregion
+
+        //region text
+//        var a = new Question(
+//                "code",
+//                "how to check current form field value in svelte",
+//                theBasicsSvelteForms,
+//                null,
+//                QuestionType.UniqueAnswer);
+        //endregion
+
+        //region question type
+//        var a = new Question(
+//                "code",
+//                "how to check current form field value in svelte",
+//                theBasicsSvelteForms,
+//                "how do we check a current form field value in svelte?",
+//                null);
+        //endregion
     }
 
     private static void testAlternativeValidation() {
+        var frontEnd = new Category("front-end", "front-end");
+        var svelte = new SubCategory("svelte", "svelte", frontEnd);
+        var svelteForms = new Course(
+                "svelte-forms",
+                "svelt forms",
+                9,
+                "raul",
+                svelte);
+        var theBasicsSvelteForms = new Section(
+                "code",
+                "the basics",
+                svelteForms);
 
+        var howToCheckCurrentFormFieldSvelteForms = new Question(
+                "check-form-field-value-svelte-forms",
+                "how to check current form field value in svelte",
+                theBasicsSvelteForms,
+                "how do we check a current form field value in svelte?",
+                QuestionType.UniqueAnswer);
+
+        //region text
+//        var a = new Alternative(
+//                null,
+//                false,
+//                howToCheckCurrentFormFieldSvelteForms);
+
+//        var b = new Alternative(
+//                "",
+//                false,
+//                howToCheckCurrentFormFieldSvelteForms);
+        //endregion
+
+        //region question type
+//        var a = new Alternative(
+//                "text",
+//                false,
+//                null);
+        //endregion
     }
     //endregion
 
