@@ -75,7 +75,7 @@ public class Main {
                 true,
                 1,
                 theBasicsSvelteForms,
-                "uma url");
+                "https://trello.com/b/C8YmF3sU/desafio-semana-1");
 
         Video introSpringValidation = new Video(
                 "01-spring-validation",
@@ -83,7 +83,7 @@ public class Main {
                 true,
                 1,
                 theBasicsSpringValidation,
-                "outra url",
+                "https://trello.com/b/C8YmF3sU/desafio-semana-1",
                 8,
                 "intro spring validation");
         //endregion
