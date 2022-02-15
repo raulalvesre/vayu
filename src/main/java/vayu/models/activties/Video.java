@@ -1,9 +1,7 @@
 package vayu.models.activties;
 
-import vayu.enums.ValidationErrorType;
 import vayu.models.Section;
 import vayu.models.activties.base.Activity;
-import vayu.services.ValidationErrorMessageService;
 
 import static vayu.services.ValidationService.validateIfIsBlankString;
 import static vayu.services.ValidationService.validateIfItIsNull;
