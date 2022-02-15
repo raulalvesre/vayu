@@ -151,18 +151,18 @@ public class Main {
     //region RaulUnit
     private static void testCategoryValidation() {
         //region code
-        //var a = new Category(null, "front-end");
-        //var b = new Category("", "front-end");
-        //var c = new Category("AAA", "front-end");
+        //var nullCode = new Category(null, "front-end");
+        //var blankCode = new Category("", "front-end");
+        //var invalidCode = new Category("AAA", "front-end");
         //endregion
 
         //region name
-        //var a = new Category("aaa", null);
-        //var b = new Category("aaa", "");
+        //var nullName = new Category("aaa", null);
+        //var blankName = new Category("aaa", "");
         //endregion
 
         //region colorCode
-/*        var a = new Category(
+/*        var nullColorCode = new Category(
                 "def-456",
                 "back-end",
                 "curso back-end",
@@ -171,7 +171,7 @@ public class Main {
                 "pasta/arquivo.jpg",
                 null);
 
-        var b = new Category(
+        var invalidColorCode = new Category(
                 "def-456",
                 "back-end",
                 "curso back-end",
@@ -187,18 +187,18 @@ public class Main {
         var frontEnd = new Category("front-end", "front-end");
 
         //region code
-        //var a = new SubCategory(null, "svelt", frontEnd);
-        //var b = new SubCategory("", "svelt", frontEnd);
+        //var nullCode = new SubCategory(null, "svelt", frontEnd);
+        //var blankCode = new SubCategory("", "svelt", frontEnd);
         //var c = new SubCategory("AAA", "svelte", frontEnd);
         //endregion
 
         //region name
-        //var a = new SubCategory("a", null, frontEnd);
-        //var b = new SubCategory("a", "", frontEnd);
+        //var nullName = new SubCategory("a", null, frontEnd);
+        //var blankName = new SubCategory("a", "", frontEnd);
         //endregion
 
         //region category
-        //var a = new SubCategory("a", "a", null);
+        //var nullCategory = new SubCategory("a", "a", null);
         //endregion
     }
 
@@ -207,25 +207,25 @@ public class Main {
         var svelte = new SubCategory("svelte", "svelte", frontEnd);
 
         //region code
-        //var a = new Course(null, "svelte", 1, "raul", svelte);
-        //var b = new Course("", "svelte", 1, "raul", svelte);
-        //var c = new Course("A", "svelte", 1, "raul", svelte);
+        //var nullCode = new Course(null, "svelte", 1, "raul", svelte);
+        //var blankCode = new Course("", "svelte", 1, "raul", svelte);
+        //var invalidCode = new Course("A", "svelte", 1, "raul", svelte);
         //endregion
 
         //region name
-        //var a = new Course("code", null, 1, "raul", svelte);
-        //var b = new Course("code", "", 1, "raul", svelte);
+        //var nullName = new Course("code", null, 1, "raul", svelte);
+        //var blankName = new Course("code", "", 1, "raul", svelte);
         //endregion
 
         //region estimatedHoursToFinish
-        /*var a = new Course(
+        /*var lessOneEstimatedHours = new Course(
                 "svelte-forms",
                 "svelt forms",
                 -1,
                 "raul",
                 svelte);*/
 
-        /*var b = new Course(
+        /*var moreThan20EstimatedHours = new Course(
                 "svelte-forms",
                 "svelt forms",
                 21,
@@ -234,14 +234,14 @@ public class Main {
         //endregion
 
         //region instructorName
-        /*var a = new Course(
+        /*var nullInstructor = new Course(
                 "svelte-forms",
                 "svelt forms",
                 -1,
                 null,
                 svelte);*/
 
-        /*var b = new Course(
+        /*var blankInstructor = new Course(
                 "svelte-forms",
                 "svelt forms",
                 21,
@@ -250,7 +250,7 @@ public class Main {
         //endregion
 
         //region sub category
-        /*var a = new Course(
+        /*var nullCategory = new Course(
                 "svelte-forms",
                 "svelt forms",
                 1,
@@ -270,36 +270,36 @@ public class Main {
                 svelte);
 
         //region code
-//        var a = new Section(
+//        var nullCode = new Section(
 //                null,
 //                "the basics",
 //                svelteForms);
 //
-//        var b = new Section(
+//        var blankCode = new Section(
 //                "",
 //                "the basics",
 //                svelteForms);
 //
-//        var c = new Section(
+//        var invalidCode = new Section(
 //                "AAA",
 //                "the basics",
 //                svelteForms);
         //endregion
 
         //region name
-//        var a = new Section(
+//        var nullName = new Section(
 //                "code",
 //                null,
 //                svelteForms);
 //
-//        var b = new Section(
+//        var blankName = new Section(
 //                "code",
 //                "",
 //                svelteForms);
         //endregion
 
         //region course
-//        var a = new Section(
+//        var nullCourse = new Section(
 //                "code",
 //                "name",
 //                null);
@@ -321,7 +321,7 @@ public class Main {
                 svelteForms);
 
         //region code
-//        var a = new Video(
+//        var nullCode = new Video(
 //                null,
 //                "intro svelte forms",
 //                true,
@@ -329,7 +329,7 @@ public class Main {
 //                theBasicsSvelteForms,
 //                "uma url");
 
-//        var b = new Video(
+//        var blankCode = new Video(
 //                "",
 //                "intro svelte forms",
 //                true,
@@ -337,7 +337,7 @@ public class Main {
 //                theBasicsSvelteForms,
 //                "uma url");
 
-//        var c = new Video(
+//        var invalidCode = new Video(
 //                "AAA",
 //                "intro svelte forms",
 //                true,
@@ -347,7 +347,7 @@ public class Main {
         //endregion
 
         //region title
-//        var a = new Video(
+//        var nullTitle = new Video(
 //                "code",
 //                null,
 //                true,
@@ -355,7 +355,7 @@ public class Main {
 //                theBasicsSvelteForms,
 //                "uma url");
 
-//        var b = new Video(
+//        var blankTitle = new Video(
 //                "code",
 //                "",
 //                true,
@@ -365,7 +365,7 @@ public class Main {
         //endregion
 
         //region section
-//        var a = new Video(
+//        var nullSection = new Video(
 //                "code",
 //                "intro svelte forms",
 //                true,
@@ -375,7 +375,7 @@ public class Main {
         //endregion
 
         //region URL
-        //        var a = new Video(
+        //        var nullUrl = new Video(
 //                "code",
 //                "intro svelte forms",
 //                true,
@@ -383,7 +383,7 @@ public class Main {
 //                theBasicsSvelteForms,
 //                null);
 
-//        var b = new Video(
+//        var blankUrl = new Video(
 //                "code",
 //                "intro svelte forms",
 //                true,
@@ -408,19 +408,19 @@ public class Main {
                 svelteForms);
 
         //region code
-//        var a = new Explanation(
+//        var nullCode = new Explanation(
 //                null,
 //                "how svelte forms works",
 //                theBasicsSvelteForms,
 //                "it just works");
 
-//        var b = new Explanation(
+//        var blankCode = new Explanation(
 //                "",
 //                "how svelte forms works",
 //                theBasicsSvelteForms,
 //                "it just works");
 
-//        var c = new Explanation(
+//        var invalidCode = new Explanation(
 //                "AAA",
 //                "how svelte forms works",
 //                theBasicsSvelteForms,
@@ -428,13 +428,13 @@ public class Main {
         //endregion
 
         //region title
-//        var a = new Explanation(
+//        var nullTitle = new Explanation(
 //                "code",
 //                null,
 //                theBasicsSvelteForms,
 //                "it just works");
 
-//        var b = new Explanation(
+//        var blankTitle = new Explanation(
 //                "code",
 //                "",
 //                theBasicsSvelteForms,
@@ -450,14 +450,14 @@ public class Main {
         //endregion
 
         //region text
-//        var a = new Explanation(
+//        var nullText = new Explanation(
 //                "code",
 //                "title",
 //                theBasicsSvelteForms,
 //                null
 //        );
 
-//        var b = new Explanation(
+//        var blankTitle = new Explanation(
 //                "code",
 //                "title",
 //                theBasicsSvelteForms,
@@ -480,21 +480,21 @@ public class Main {
                 svelteForms);
 
         //region code
-//        var a = new Question(
+//        var nullCode = new Question(
 //                null,
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
 //                QuestionType.UniqueAnswer);
 
-//        var b = new Question(
+//        var blankCode = new Question(
 //                "",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
 //                QuestionType.UniqueAnswer);
 
-//        var c = new Question(
+//        var invalidCode = new Question(
 //                "AAA",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
@@ -503,14 +503,14 @@ public class Main {
         //endregion
 
         //region title
-//        var a = new Question(
+//        var nullTitle = new Question(
 //                "code",
 //                null,
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
 //                QuestionType.UniqueAnswer);
 
-//        var b = new Question(
+//        var blankTitle = new Question(
 //                "code",
 //                "",
 //                theBasicsSvelteForms,
@@ -519,7 +519,7 @@ public class Main {
         //endregion
 
         //region section
-//        var a = new Question(
+//        var nullSection = new Question(
 //                "code",
 //                "how to check current form field value in svelte",
 //                null,
@@ -528,7 +528,7 @@ public class Main {
         //endregion
 
         //region text
-//        var a = new Question(
+//        var nullText = new Question(
 //                "code",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
@@ -537,7 +537,7 @@ public class Main {
         //endregion
 
         //region question type
-//        var a = new Question(
+//        var nullType = new Question(
 //                "code",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
@@ -568,19 +568,19 @@ public class Main {
                 QuestionType.UniqueAnswer);
 
         //region text
-//        var a = new Alternative(
+//        var nullText = new Alternative(
 //                null,
 //                false,
 //                howToCheckCurrentFormFieldSvelteForms);
 
-//        var b = new Alternative(
+//        var blankText = new Alternative(
 //                "",
 //                false,
 //                howToCheckCurrentFormFieldSvelteForms);
         //endregion
 
-        //region question type
-//        var a = new Alternative(
+        //region question
+//        var nullQuestion = new Alternative(
 //                "text",
 //                false,
 //                null);
