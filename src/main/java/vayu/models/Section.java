@@ -14,9 +14,9 @@ public class Section {
     public Section(String code,
                    String name,
                    Course course) {
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
-        validateIfItIsNull(this.getClass().getSimpleName(), "course", course);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfItIsNull("course", course);
 
         this.code = code;
         this.name = name;

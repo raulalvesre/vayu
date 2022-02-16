@@ -17,8 +17,8 @@ public class Question extends Activity {
                     QuestionType type) {
         super(code, title, section);
 
-        validateIfItIsNull(this.getClass().getSimpleName(), "wording", wording);
-        validateIfItIsNull(this.getClass().getSimpleName(), "type", type);
+        validateIfItIsNull("wording", wording);
+        validateIfItIsNull("type", type);
 
         this.wording = wording;
         this.type = type;

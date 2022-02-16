@@ -2,7 +2,7 @@ package vayu.models.activties;
 
 import vayu.models.Section;
 
-import static vayu.services.ValidationService.validateIfIsNullOrBlankString;
+import static vayu.services.ValidationService.validateIfIsBlankString;
 
 public class Explanation extends Activity {
 
@@ -14,7 +14,7 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "text", text);
+        validateIfIsBlankString("text", text);
         this.text = text;
     }
 

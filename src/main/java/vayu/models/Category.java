@@ -15,8 +15,8 @@ public class Category {
 
     public Category(String code,
                     String name) {
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
 
         this.code = code;
         this.name = name;

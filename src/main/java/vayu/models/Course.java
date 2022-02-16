@@ -19,11 +19,11 @@ public class Course {
                   int estimatedHoursToFinish,
                   String instructorName,
                   SubCategory subCategory) {
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
-        validateIfIntIsWithinRange(this.getClass().getSimpleName(), "estimated hours to finish", estimatedHoursToFinish, 1, 20);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "instructor name", instructorName);
-        validateIfItIsNull(this.getClass().getSimpleName(), "sub category", subCategory);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
+        validateIfIsBlankString("instructor name", instructorName);
+        validateIfItIsNull("sub category", subCategory);
 
         this.code = code;
         this.name = name;

@@ -16,7 +16,7 @@ public class Video extends Activity {
                  String URL) {
         super(code, title, section);
 
-        validateIfItIsValidURL(this.getClass().getSimpleName(), "URL", URL);
+        validateIfItIsValidURL("URL", URL);
         this.URL = URL;
     }
 

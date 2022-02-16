@@ -15,9 +15,9 @@ public abstract class Activity {
     public Activity(String code,
                     String title,
                     Section section) {
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "title", title);
-        validateIfItIsNull(this.getClass().getSimpleName(), "section", section);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("title", title);
+        validateIfItIsNull("section", section);
 
         this.code = code;
         this.title = title;

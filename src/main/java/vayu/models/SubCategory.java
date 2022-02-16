@@ -15,9 +15,9 @@ public class SubCategory {
     public SubCategory(String code,
                        String name,
                        Category category) {
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
-        validateIfItIsNull(this.getClass().getSimpleName(), "category", category);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfItIsNull("category", category);
 
         this.code = code;
         this.name = name;
