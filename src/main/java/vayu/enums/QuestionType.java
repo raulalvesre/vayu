@@ -2,8 +2,8 @@ package vayu.enums;
 
 public enum QuestionType {
 
-    UniqueAnswer,
-    MultipleAnswers,
-    TrueOrFalse
+    UNIQUE_ANSWER,
+    MULTIPLE_ANSWERS,
+    TRUE_OR_FALSE
 
 }

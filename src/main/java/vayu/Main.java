@@ -110,7 +110,7 @@ public class Main {
                 "how to check current form field value in svelte",
                 theBasicsSvelteForms,
                 "how do we check a current form field value in svelte?",
-                QuestionType.UniqueAnswer);
+                QuestionType.UNIQUE_ANSWER);
 
         Question howToMakeFieldRequiredInSpringValidation = new Question(
                 "make-field-required-spring-validation",
@@ -119,7 +119,7 @@ public class Main {
                 1,
                 theBasicsSpringValidation,
                 "how do make a field required in spring validation?",
-                QuestionType.UniqueAnswer);
+                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region Alternative
@@ -485,21 +485,21 @@ public class Main {
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
 
 //        var blankCode = new Question(
 //                "",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
 
 //        var invalidCode = new Question(
 //                "AAA",
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region title
@@ -508,14 +508,14 @@ public class Main {
 //                null,
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
 
 //        var blankTitle = new Question(
 //                "code",
 //                "",
 //                theBasicsSvelteForms,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region section
@@ -524,7 +524,7 @@ public class Main {
 //                "how to check current form field value in svelte",
 //                null,
 //                "how do we check a current form field value in svelte?",
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region text
@@ -533,7 +533,7 @@ public class Main {
 //                "how to check current form field value in svelte",
 //                theBasicsSvelteForms,
 //                null,
-//                QuestionType.UniqueAnswer);
+//                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region question type
@@ -565,7 +565,7 @@ public class Main {
                 "how to check current form field value in svelte",
                 theBasicsSvelteForms,
                 "how do we check a current form field value in svelte?",
-                QuestionType.UniqueAnswer);
+                QuestionType.UNIQUE_ANSWER);
 
         //region text
 //        var nullText = new Alternative(
