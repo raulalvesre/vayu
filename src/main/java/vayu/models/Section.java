@@ -13,23 +13,10 @@ public class Section {
 
     public Section(String code,
                    String name,
-                   int order,
-                   boolean isActive,
-                   boolean isTest,
                    Course course) {
-        this(code, name, course);
-
-        this.order = order;
-        this.isActive = isActive;
-        this.isTest = isTest;
-    }
-
-    public Section(String code,
-                   String name,
-                   Course course) {
-        validateCode(code);
-        validateName(name);
-        validateCourse(course);
+        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
+        validateIfItIsNull(this.getClass().getSimpleName(), "course", course);
 
         this.code = code;
         this.name = name;
@@ -37,45 +24,6 @@ public class Section {
         this.isActive = false;
         this.isTest = false;
         this.course = course;
-    }
-
-    private void validateCode(String code) {
-        validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "code", code);
-        validateIfItIsValidCode(this.getClass().getSimpleName(), code);
-    }
-
-    private void validateName(String name) {
-        validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
-        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
-    }
-
-    private void validateCourse(Course course) {
-        validateIfItIsNull(this.getClass().getSimpleName(), "course", course);
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public boolean isTest() {
-        return isTest;
-    }
-
-    public Course getCourse() {
-        return course;
     }
 
 }

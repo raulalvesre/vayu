@@ -16,29 +16,8 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        validateText(text);
-        this.text = text;
-    }
-
-    public Explanation(String code,
-                       String title,
-                       boolean isActive,
-                       int order,
-                       Section section,
-                       String text) {
-        super(code, title, isActive, order, section);
-
-        validateText(text);
-        this.text = text;
-    }
-
-    private void validateText(String text) {
-        validateIfItIsNull(this.getClass().getSimpleName(), "text", text);
         validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "text", text);
-    }
-
-    public String getText() {
-        return text;
+        this.text = text;
     }
 
 }

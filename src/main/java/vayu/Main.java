@@ -11,26 +11,10 @@ public class Main {
     public static void main(String[] args) {
         //region Category
         Category frontEnd = new Category("abc-123", "front-end");
-        Category backEnd = new Category(
-                "def-456",
-                "back-end",
-                "curso back-end",
-                "estude java",
-                true, 1,
-                "pasta/arquivo.jpg",
-                "#008000");
         //endregion
 
         //region SubCategory
         SubCategory svelte = new SubCategory("cod-svelt", "svelt", frontEnd);
-        SubCategory springBoot = new SubCategory(
-                "cod-spring",
-                "spring boot",
-                "curso de spring",
-                "estude spring",
-                true,
-                1,
-                backEnd);
         //endregion
 
         //region Course
@@ -40,17 +24,6 @@ public class Main {
                 9,
                 "raul",
                 svelte);
-
-        Course springValidation = new Course(
-                "spring-validation",
-                "spring validation",
-                9,
-                true,
-                "gente legal",
-                "raul",
-                "spring validation",
-                "validacao no spring",
-                springBoot);
         //endregion
 
         //region Section
@@ -58,34 +31,14 @@ public class Main {
                 "svelt-forms-basics",
                 "the basics",
                 svelteForms);
-
-        Section theBasicsSpringValidation = new Section(
-                "spring-boot-basics",
-                "the basics",
-                1,
-                true,
-                false,
-                springValidation);
         //endregion
 
         //region Video
         Video introSveltForms = new Video(
                 "01-svelt-forms",
                 "intro svelte forms",
-                true,
-                1,
                 theBasicsSvelteForms,
                 "https://trello.com/b/C8YmF3sU/desafio-semana-1");
-
-        Video introSpringValidation = new Video(
-                "01-spring-validation",
-                "intro spring validation",
-                true,
-                1,
-                theBasicsSpringValidation,
-                "https://trello.com/b/C8YmF3sU/desafio-semana-1",
-                8,
-                "intro spring validation");
         //endregion
 
         //region Explanation
@@ -94,14 +47,6 @@ public class Main {
                 "how svelte forms works",
                 theBasicsSvelteForms,
                 "it just works");
-
-        Explanation basicAnnotationsInSpringValidation = new Explanation(
-                "basic-annotations-spring-validation",
-                "basic annotations in spring validation",
-                true,
-                1,
-                theBasicsSpringValidation,
-                "this are the most basic annotations...");
         //endregion
 
         //region Question
@@ -111,15 +56,6 @@ public class Main {
                 theBasicsSvelteForms,
                 "how do we check a current form field value in svelte?",
                 QuestionType.UNIQUE_ANSWER);
-
-        Question howToMakeFieldRequiredInSpringValidation = new Question(
-                "make-field-required-spring-validation",
-                "how to make a field required in spring validation",
-                true,
-                1,
-                theBasicsSpringValidation,
-                "how do make a field required in spring validation?",
-                QuestionType.UNIQUE_ANSWER);
         //endregion
 
         //region Alternative
@@ -127,13 +63,6 @@ public class Main {
                 "just bind it",
                 false,
                 howToCheckCurrentFormFieldSvelteForms);
-
-        Alternative notNullIt = new Alternative(
-                "just use @NotNull",
-                1,
-                false,
-                "yes, this is correct (Y)",
-                howToMakeFieldRequiredInSpringValidation);
         //endregion
 
         //region tests
