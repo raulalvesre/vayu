@@ -2,7 +2,6 @@ package vayu.models.activties;
 
 import vayu.enums.QuestionType;
 import vayu.models.Section;
-import vayu.models.activties.base.Activity;
 
 import static vayu.services.ValidationService.validateIfItIsNull;
 

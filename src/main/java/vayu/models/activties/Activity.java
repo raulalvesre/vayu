@@ -1,4 +1,4 @@
-package vayu.models.activties.base;
+package vayu.models.activties;
 
 import vayu.models.Section;
 

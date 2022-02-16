@@ -1,10 +1,8 @@
 package vayu.models.activties;
 
 import vayu.models.Section;
-import vayu.models.activties.base.Activity;
 
 import static vayu.services.ValidationService.validateIfIsNullOrBlankString;
-import static vayu.services.ValidationService.validateIfItIsNull;
 
 public class Explanation extends Activity {
 
