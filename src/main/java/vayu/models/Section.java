@@ -41,13 +41,13 @@ public class Section {
 
     private void validateCode(String code) {
         validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "code", code);
         validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
         validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateCourse(Course course) {

@@ -45,18 +45,18 @@ public class Category {
 
     private void validateCode(String code) {
         validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "code", code);
         validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
         validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateColorCode(String colorCode) {
         validateIfItIsNull(this.getClass().getSimpleName(), "color code", colorCode);
-        validateIfItIsValidHexColorCode(this.getClass().getSimpleName(), "color code", colorCode);
+        validateIfIsValidHexColorCode(this.getClass().getSimpleName(), "color code", colorCode);
     }
 
     public String getCode() {

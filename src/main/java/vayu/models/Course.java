@@ -52,13 +52,13 @@ public class Course {
 
     private void validateCode(String code) {
         validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "code", code);
         validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateName(String name) {
         validateIfItIsNull(this.getClass().getSimpleName(), "name", name);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "name", name);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "name", name);
     }
 
     private void validateEstimatedHoursToFinish(int estimatedHoursToFinish) {
@@ -67,7 +67,7 @@ public class Course {
 
     private void validateInstructorName(String instructorName) {
         validateIfItIsNull(this.getClass().getSimpleName(), "instructor name", instructorName);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "instructor name", instructorName);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "instructor name", instructorName);
     }
 
     private void validateSubCategory(SubCategory subCategory) {

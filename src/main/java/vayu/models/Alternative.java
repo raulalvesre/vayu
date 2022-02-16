@@ -2,7 +2,7 @@ package vayu.models;
 
 import vayu.models.activties.Question;
 
-import static vayu.services.ValidationService.validateIfIsBlankString;
+import static vayu.services.ValidationService.validateIfIsNullOrBlankString;
 import static vayu.services.ValidationService.validateIfItIsNull;
 
 public class Alternative {
@@ -35,7 +35,7 @@ public class Alternative {
 
     private void validateText(String text) {
         validateIfItIsNull(this.getClass().getSimpleName(), "text", text);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "text", text);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "text", text);
     }
 
     private void validateQuestion(Question question) {

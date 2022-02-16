@@ -38,13 +38,13 @@ public abstract class Activity {
 
     private void validateCode(String code) {
         validateIfItIsNull(this.getClass().getSimpleName(), "code", code);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "code", code);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "code", code);
         validateIfItIsValidCode(this.getClass().getSimpleName(), code);
     }
 
     private void validateTitle(String title) {
         validateIfItIsNull(this.getClass().getSimpleName(), "title", title);
-        validateIfIsBlankString(this.getClass().getSimpleName(), "title", title);
+        validateIfIsNullOrBlankString(this.getClass().getSimpleName(), "title", title);
     }
 
     private void validateSection(Section section) {
