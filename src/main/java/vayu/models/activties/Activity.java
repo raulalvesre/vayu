@@ -8,7 +8,7 @@ public abstract class Activity {
 
     private final String code;
     private final String title;
-    private boolean isActive;
+    private boolean active;
     private int order;
     private final Section section;
 
@@ -21,7 +21,6 @@ public abstract class Activity {
 
         this.code = code;
         this.title = title;
-        this.isActive = false;
         this.section = section;
     }
 

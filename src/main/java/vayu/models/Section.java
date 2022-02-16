@@ -7,8 +7,8 @@ public class Section {
     private final String code;
     private final String name;
     private int order;
-    private boolean isActive;
-    private boolean isTest;
+    private boolean active;
+    private boolean test;
     private final Course course;
 
     public Section(String code,
@@ -21,8 +21,6 @@ public class Section {
         this.code = code;
         this.name = name;
         this.order = 0;
-        this.isActive = false;
-        this.isTest = false;
         this.course = course;
     }
 

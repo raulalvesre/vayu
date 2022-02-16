@@ -8,7 +8,7 @@ public class Category {
     private final String name;
     private String description;
     private String studyGuide;
-    private boolean isActive;
+    private boolean active;
     private int order;
     private String iconPath;
     private String colorCode;

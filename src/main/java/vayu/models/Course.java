@@ -7,7 +7,7 @@ public class Course {
     private final String code;
     private final String name;
     private final int estimatedHoursToFinish;
-    private boolean isVisible;
+    private boolean visible;
     private String targetAudience;
     private final String instructorName;
     private String syllabus;
@@ -28,7 +28,6 @@ public class Course {
         this.code = code;
         this.name = name;
         this.estimatedHoursToFinish = estimatedHoursToFinish;
-        this.isVisible = false;
         this.instructorName = instructorName;
         this.subCategory = subCategory;
     }
