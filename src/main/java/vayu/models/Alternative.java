@@ -10,7 +10,7 @@ public class Alternative {
     private final String text;
     private int order;
     private final boolean correct;
-    private String correctnessJustification;
+    private String justification;
     private final Question question;
 
 
