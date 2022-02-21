@@ -4,21 +4,22 @@ import br.com.vayu.enums.QuestionType;
 import br.com.vayu.models.*;
 import br.com.vayu.models.activties.Question;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        List<Category> categories = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        Map<String, Category> categories = new HashMap<>();
+        Map<String, SubCategory> subCategories = new HashMap<>();
+        Map<String, Course> courses = new HashMap();
 
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("categorias.csv");
+        InputStream categoriesInputStream = classloader.getResourceAsStream("categories.csv");
 
-        try (Scanner lineScanner = new Scanner(is, StandardCharsets.UTF_8)) {
+        try (Scanner lineScanner = new Scanner(categoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
 
             while (lineScanner.hasNext()) {
@@ -46,13 +47,46 @@ public class Main {
                         iconPath,
                         colorCode);
 
-                categories.add(category);
+                categories.put(code, category);
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
-        categories.forEach(System.out::println);
+        categories.values().forEach(System.out::println);
+
+        InputStream subCategoriesInputStream = classloader.getResourceAsStream("subcategories.csv");
+
+        try (Scanner lineScanner = new Scanner(subCategoriesInputStream, StandardCharsets.UTF_8)) {
+            lineScanner.nextLine(); // skip first .csv line
+
+            while (lineScanner.hasNext()) {
+                Scanner columnScanner = new Scanner(lineScanner.nextLine());
+                columnScanner.useDelimiter(",");
+
+                String name = columnScanner.next();
+                String code = columnScanner.next();
+                String orderStr = columnScanner.next();
+                String description = columnScanner.next();
+                String activeStr = columnScanner.next();
+                String categoryCode = columnScanner.next();
+
+                Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
+                boolean active = activeStr.equals("ATIVA");
+                Category category = categories.get(categoryCode);
+
+                SubCategory subCategory = new SubCategory(
+                        code,
+                        name,
+                        description,
+                        null,
+                        active,
+                        order,
+                        category);
+
+                subCategories.put(code, subCategory);
+            }
+        }
+
+        subCategories.values().forEach(System.out::println);
     }
 
     //region RaulUnit
