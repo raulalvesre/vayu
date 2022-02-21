@@ -39,6 +39,10 @@ public class SubCategory {
         this.category = category;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "SubCategory{" +

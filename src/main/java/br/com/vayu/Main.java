@@ -12,12 +12,21 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Map<String, Category> categories = new HashMap<>();
-        Map<String, SubCategory> subCategories = new HashMap<>();
-        Map<String, Course> courses = new HashMap();
-
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream categoriesInputStream = classloader.getResourceAsStream("categories.csv");
+
+        Map<String, Category> categories = getCategoriesMapFromCsv(classloader);
+        Map<String, SubCategory> subCategories = getSubCategoriesMapFromCsv(classloader, categories);
+        Map<String, Course> courses = getCoursesMapFromCsv(classloader, subCategories);
+
+        categories.values().forEach(System.out::println);
+        subCategories.values().forEach(System.out::println);
+        courses.values().forEach(System.out::println);
+    }
+
+    public static Map<String, Category> getCategoriesMapFromCsv(ClassLoader classLoader) {
+        Map<String, Category> categories = new HashMap<>();
+
+        InputStream categoriesInputStream = classLoader.getResourceAsStream("categories.csv");
 
         try (Scanner lineScanner = new Scanner(categoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -26,13 +35,13 @@ public class Main {
                 Scanner columnScanner = new Scanner(lineScanner.nextLine());
                 columnScanner.useDelimiter(",");
 
-                String name = columnScanner.next();
-                String code = columnScanner.next();
+                String name = columnScanner.next().trim();
+                String code = columnScanner.next().trim();
                 String orderStr = columnScanner.next();
-                String description = columnScanner.next();
-                String activeStr = columnScanner.next();
-                String iconPath = columnScanner.next();
-                String colorCode = columnScanner.next();
+                String description = columnScanner.next().trim();
+                String activeStr = columnScanner.next().trim();
+                String iconPath = columnScanner.next().trim();
+                String colorCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
 
                 Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
@@ -51,9 +60,14 @@ public class Main {
             }
         }
 
-        categories.values().forEach(System.out::println);
+        return categories;
+    }
 
-        InputStream subCategoriesInputStream = classloader.getResourceAsStream("subcategories.csv");
+    public static Map<String, SubCategory> getSubCategoriesMapFromCsv(ClassLoader classLoader,
+                                                                      Map<String, Category> categoryMap) {
+        Map<String, SubCategory> subCategories = new HashMap<>();
+
+        InputStream subCategoriesInputStream = classLoader.getResourceAsStream("subcategories.csv");
 
         try (Scanner lineScanner = new Scanner(subCategoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -62,16 +76,21 @@ public class Main {
                 Scanner columnScanner = new Scanner(lineScanner.nextLine());
                 columnScanner.useDelimiter(",");
 
-                String name = columnScanner.next();
-                String code = columnScanner.next();
+                String name = columnScanner.next().trim();
+                String code = columnScanner.next().trim();
                 String orderStr = columnScanner.next();
-                String description = columnScanner.next();
-                String activeStr = columnScanner.next();
-                String categoryCode = columnScanner.next();
+                String description = columnScanner.next().trim();
+                String activeStr = columnScanner.next().trim();
+                String categoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
+
+                if (categoryCode == null) {
+                    System.out.println("Sub Category with invalid Category code could not be created. Please check the .csv!");
+                    continue;
+                }
 
                 Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
-                Category category = categories.get(categoryCode);
+                Category category = categoryMap.get(categoryCode);
 
                 SubCategory subCategory = new SubCategory(
                         code,
@@ -86,7 +105,58 @@ public class Main {
             }
         }
 
-        subCategories.values().forEach(System.out::println);
+        return subCategories;
+    }
+
+    public static Map<String, Course> getCoursesMapFromCsv(ClassLoader classLoader,
+                                                           Map<String, SubCategory> subCategoryMap) {
+        Map<String, Course> courses = new HashMap<>();
+
+        InputStream coursesInputStream = classLoader.getResourceAsStream("courses.csv");
+
+        try (Scanner lineScanner = new Scanner(coursesInputStream, StandardCharsets.UTF_8)) {
+            lineScanner.nextLine(); // skip first .csv line
+
+            while (lineScanner.hasNext()) {
+                Scanner columnScanner = new Scanner(lineScanner.nextLine());
+                columnScanner.useDelimiter(",");
+
+                String name = columnScanner.next().trim();
+                String code = columnScanner.next().trim();
+                String estimatedHoursToFinishStr = columnScanner.next();
+                String visibleStr = columnScanner.next();
+                String targetAudience = columnScanner.next().trim();
+                String instructorName = columnScanner.next().trim();
+                String syllabus = columnScanner.next().trim();
+                String developedAbilities = columnScanner.next().trim();
+                String subCategoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
+
+                if (subCategoryCode == null) {
+                    System.out.println("Course with invalid Sub Category code could not be created. Please check the .csv!");
+                    continue;
+                }
+
+                Integer estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? null
+                        : Integer.parseInt(estimatedHoursToFinishStr);
+                boolean visible = visibleStr.equals("PÚBLICA");
+                SubCategory subCategory = subCategoryMap.get(subCategoryCode);
+
+                Course course = new Course(
+                        code,
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
+                        subCategory);
+
+                courses.put(code, course);
+            }
+        }
+
+        return courses;
     }
 
     //region RaulUnit

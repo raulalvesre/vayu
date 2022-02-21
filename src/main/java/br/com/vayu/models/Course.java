@@ -6,7 +6,7 @@ public class Course {
 
     private final String code;
     private final String name;
-    private final int estimatedHoursToFinish;
+    private final Integer estimatedHoursToFinish;
     private boolean visible;
     private String targetAudience;
     private final String instructorName;
@@ -16,7 +16,24 @@ public class Course {
 
     public Course(String code,
                   String name,
-                  int estimatedHoursToFinish,
+                  Integer estimatedHoursToFinish,
+                  boolean visible,
+                  String targetAudience,
+                  String instructorName,
+                  String syllabus,
+                  String developedAbilities,
+                  SubCategory subCategory) {
+        this(code, name, estimatedHoursToFinish, instructorName, subCategory);
+
+        this.visible = visible;
+        this.targetAudience = targetAudience;
+        this.syllabus = syllabus;
+        this.developedAbilities = developedAbilities;
+    }
+
+    public Course(String code,
+                  String name,
+                  Integer estimatedHoursToFinish,
                   String instructorName,
                   SubCategory subCategory) {
         validateIfItIsValidCode(code);
@@ -30,6 +47,21 @@ public class Course {
         this.estimatedHoursToFinish = estimatedHoursToFinish;
         this.instructorName = instructorName;
         this.subCategory = subCategory;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", estimatedHoursToFinish=" + estimatedHoursToFinish +
+                ", visible=" + visible +
+                ", targetAudience='" + targetAudience + '\'' +
+                ", instructorName='" + instructorName + '\'' +
+                ", syllabus='" + syllabus + '\'' +
+                ", developedAbilities='" + developedAbilities + '\'' +
+                ", subCategory=" + subCategory.getName() +
+                '}';
     }
 
 }
