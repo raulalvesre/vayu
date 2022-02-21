@@ -1,80 +1,58 @@
-package vayu;
+package br.com.vayu;
 
-import vayu.enums.QuestionType;
-import vayu.models.*;
-import vayu.models.activties.Explanation;
-import vayu.models.activties.Question;
-import vayu.models.activties.Video;
+import br.com.vayu.enums.QuestionType;
+import br.com.vayu.models.*;
+import br.com.vayu.models.activties.Question;
+
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        //region Category
-        Category frontEnd = new Category("abc-123", "front-end");
-        //endregion
+        List<Category> categories = new ArrayList<>();
 
-        //region SubCategory
-        SubCategory svelte = new SubCategory("cod-svelt", "svelt", frontEnd);
-        //endregion
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classloader.getResourceAsStream("categorias.csv");
 
-        //region Course
-        Course svelteForms = new Course(
-                "svelte-forms",
-                "svelt forms",
-                9,
-                "raul",
-                svelte);
-        //endregion
+        try (Scanner lineScanner = new Scanner(is, StandardCharsets.UTF_8)) {
+            lineScanner.nextLine(); // skip first .csv line
 
-        //region Section
-        Section theBasicsSvelteForms = new Section(
-                "svelt-forms-basics",
-                "the basics",
-                svelteForms);
-        //endregion
+            while (lineScanner.hasNext()) {
+                Scanner columnScanner = new Scanner(lineScanner.nextLine());
+                columnScanner.useDelimiter(",");
 
-        //region Video
-        Video introSveltForms = new Video(
-                "01-svelt-forms",
-                "intro svelte forms",
-                theBasicsSvelteForms,
-                "https://trello.com/b/C8YmF3sU/desafio-semana-1");
-        //endregion
+                String name = columnScanner.next();
+                String code = columnScanner.next();
+                String orderStr = columnScanner.next();
+                String description = columnScanner.next();
+                String activeStr = columnScanner.next();
+                String iconPath = columnScanner.next();
+                String colorCode = columnScanner.next();
 
-        //region Explanation
-        Explanation howFormsWorksInSvelte = new Explanation(
-                "forms-in-svelte",
-                "how svelte forms works",
-                theBasicsSvelteForms,
-                "it just works");
-        //endregion
+                Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
+                boolean active = activeStr.equals("ATIVA");
 
-        //region Question
-        Question howToCheckCurrentFormFieldSvelteForms = new Question(
-                "check-form-field-value-svelte-forms",
-                "how to check current form field value in svelte",
-                theBasicsSvelteForms,
-                "how do we check a current form field value in svelte?",
-                QuestionType.UNIQUE_ANSWER);
-        //endregion
+                Category category = new Category(
+                        code,
+                        name,
+                        description,
+                        null,
+                        active,
+                        order,
+                        iconPath,
+                        colorCode);
 
-        //region Alternative
-        Alternative justBindIt = new Alternative(
-                "just bind it",
-                false,
-                howToCheckCurrentFormFieldSvelteForms);
-        //endregion
+                categories.add(category);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
-        //region tests
-        testCategoryValidation();
-        testSubCategoryValidation();
-        testCourseValidation();
-        testSectionValidation();
-        testVideoValidation();
-        testExplanationValidation();
-        testQuestionValidation();
-        testAlternativeValidation();
-        //endregion
+        categories.forEach(System.out::println);
     }
 
     //region RaulUnit

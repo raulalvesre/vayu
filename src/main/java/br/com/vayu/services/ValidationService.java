@@ -1,4 +1,4 @@
-package vayu.services;
+package br.com.vayu.services;
 
 public class ValidationService {
 

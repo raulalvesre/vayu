@@ -1,4 +1,4 @@
-package vayu.enums;
+package br.com.vayu.enums;
 
 public enum QuestionType {
 

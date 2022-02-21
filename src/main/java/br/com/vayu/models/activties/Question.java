@@ -1,9 +1,9 @@
-package vayu.models.activties;
+package br.com.vayu.models.activties;
 
-import vayu.enums.QuestionType;
-import vayu.models.Section;
+import br.com.vayu.enums.QuestionType;
+import br.com.vayu.models.Section;
 
-import static vayu.services.ValidationService.validateIfItIsNull;
+import static br.com.vayu.services.ValidationService.validateIfItIsNull;
 
 public class Question extends Activity {
 

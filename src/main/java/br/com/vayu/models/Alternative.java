@@ -1,9 +1,9 @@
-package vayu.models;
+package br.com.vayu.models;
 
-import vayu.models.activties.Question;
+import br.com.vayu.models.activties.Question;
 
-import static vayu.services.ValidationService.validateIfIsBlankString;
-import static vayu.services.ValidationService.validateIfItIsNull;
+import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
+import static br.com.vayu.services.ValidationService.validateIfItIsNull;
 
 public class Alternative {
 

@@ -1,8 +1,8 @@
-package vayu.models.activties;
+package br.com.vayu.models.activties;
 
-import vayu.models.Section;
+import br.com.vayu.models.Section;
 
-import static vayu.services.ValidationService.validateIfIsBlankString;
+import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 
 public class Explanation extends Activity {
 
