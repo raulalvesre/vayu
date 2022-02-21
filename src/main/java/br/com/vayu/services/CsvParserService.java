@@ -33,7 +33,7 @@ public class CsvParserService {
                 String iconPath = columnScanner.next().trim();
                 String colorCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
 
-                Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
+                int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
 
                 Category category = new Category(
@@ -74,11 +74,12 @@ public class CsvParserService {
                 String categoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
 
                 if (categoryCode == null) {
-                    System.out.println("Sub Category with invalid Category code could not be created. Please check the .csv!");
+                    System.out.printf("Sub Category[%s] with invalid Category code could not be created. " +
+                            "Please check the .csv!", code);
                     continue;
                 }
 
-                Integer order = orderStr.isBlank() ? null : Integer.parseInt(orderStr);
+                int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
                 Category category = categoryMap.get(categoryCode);
 
@@ -122,11 +123,12 @@ public class CsvParserService {
                 String subCategoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
 
                 if (subCategoryCode == null) {
-                    System.out.println("Course with invalid Sub Category code could not be created. Please check the .csv!");
+                    System.out.printf("Course[%s] with invalid Sub Category's code could not be created." +
+                            " Please check the .csv!%n", code);
                     continue;
                 }
 
-                Integer estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? null
+                int estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? 0
                         : Integer.parseInt(estimatedHoursToFinishStr);
                 boolean visible = visibleStr.equals("PÚBLICA");
                 SubCategory subCategory = subCategoryMap.get(subCategoryCode);

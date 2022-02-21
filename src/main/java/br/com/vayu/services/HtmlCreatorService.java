@@ -30,7 +30,7 @@ public class HtmlCreatorService {
         StringBuilder newHtmlBodyContent = new StringBuilder();
 
         categories.stream()
-                .sorted(Comparator.comparing(Category::getOrder, Comparator.nullsFirst(Comparator.naturalOrder())))
+                .sorted(Comparator.comparingInt(Category::getOrder))
                 .forEachOrdered(category -> {
                     long numberOfCoursesInCategory = courses.stream()
                             .filter(course -> course.getSubCategory().getCategory().equals(category))
@@ -51,8 +51,7 @@ public class HtmlCreatorService {
 
                     subCategories.stream()
                             .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
-                            .sorted(Comparator.comparing(SubCategory::getOrder,
-                                    Comparator.nullsFirst(Comparator.naturalOrder())))
+                            .sorted(Comparator.comparingInt(SubCategory::getOrder))
                             .forEachOrdered(sb -> {
                                 List<String> coursesInThisSubCategoryNames = courses.stream()
                                         .filter(course -> course.getSubCategory().equals(sb))

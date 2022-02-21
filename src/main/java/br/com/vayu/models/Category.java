@@ -11,7 +11,7 @@ public class Category {
     private String description;
     private String studyGuide;
     private boolean active;
-    private Integer order;
+    private int order;
     private String iconPath;
     private String colorCode;
 
@@ -52,7 +52,7 @@ public class Category {
         return description;
     }
 
-    public Integer getOrder() {
+    public int getOrder() {
         return order;
     }
 

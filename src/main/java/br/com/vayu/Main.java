@@ -16,7 +16,6 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-
         Map<String, Category> categories = CsvParserService.getCategoriesMapFromCsv();
         Map<String, SubCategory> subCategories = CsvParserService.getSubCategoriesMapFromCsv(categories);
         Map<String, Course> courses = CsvParserService.getCoursesMapFromCsv(subCategories);
@@ -32,7 +31,6 @@ public class Main {
         subCategories.values().forEach(System.out::println);
         System.out.println();
         courses.values().forEach(System.out::println);
-
     }
 
     //region RaulUnit

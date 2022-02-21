@@ -11,7 +11,7 @@ public class SubCategory {
     private String description;
     private String studyGuide;
     private boolean active;
-    private Integer order;
+    private int order;
     private final Category category;
 
     public SubCategory(String code,
@@ -53,7 +53,7 @@ public class SubCategory {
         return active;
     }
 
-    public Integer getOrder() {
+    public int getOrder() {
         return order;
     }
 

@@ -16,7 +16,7 @@ public class Course {
 
     public Course(String code,
                   String name,
-                  Integer estimatedHoursToFinish,
+                  int estimatedHoursToFinish,
                   boolean visible,
                   String targetAudience,
                   String instructorName,
