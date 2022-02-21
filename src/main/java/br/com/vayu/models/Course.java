@@ -49,6 +49,18 @@ public class Course {
         this.subCategory = subCategory;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Integer getEstimatedHoursToFinish() {
+        return estimatedHoursToFinish;
+    }
+
+    public SubCategory getSubCategory() {
+        return subCategory;
+    }
+
     @Override
     public String toString() {
         return "Course{" +

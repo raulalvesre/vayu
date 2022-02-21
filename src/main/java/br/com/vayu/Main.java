@@ -7,16 +7,24 @@ import br.com.vayu.models.Section;
 import br.com.vayu.models.SubCategory;
 import br.com.vayu.models.activties.Question;
 import br.com.vayu.services.CsvParserService;
+import br.com.vayu.services.HtmlCreatorService;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
+
         Map<String, Category> categories = CsvParserService.getCategoriesMapFromCsv();
         Map<String, SubCategory> subCategories = CsvParserService.getSubCategoriesMapFromCsv(categories);
         Map<String, Course> courses = CsvParserService.getCoursesMapFromCsv(subCategories);
+
+        HtmlCreatorService.generateCategoriesHtml(
+                categories.values(),
+                subCategories.values(),
+                courses.values());
 
         System.out.println();
         categories.values().forEach(System.out::println);
@@ -24,6 +32,7 @@ public class Main {
         subCategories.values().forEach(System.out::println);
         System.out.println();
         courses.values().forEach(System.out::println);
+
     }
 
     //region RaulUnit

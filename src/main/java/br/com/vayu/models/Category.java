@@ -1,5 +1,7 @@
 package br.com.vayu.models;
 
+import java.util.Objects;
+
 import static br.com.vayu.services.ValidationService.*;
 
 public class Category {
@@ -44,6 +46,35 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(code, category.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code);
     }
 
     @Override
