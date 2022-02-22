@@ -21,54 +21,65 @@ public class HtmlCreatorService {
     public static void generateCategoriesHtml(Collection<Category> categories,
                                               Collection<SubCategory> subCategories,
                                               Collection<Course> courses) throws URISyntaxException, IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        URL htmlTemplateURL = classLoader.getResource("template.html");
-        Path htmlTemplatePath = Path.of(htmlTemplateURL.toURI());
+        List<Category> categoriesListOrdered = categories.stream()
+                .sorted(Comparator.comparingInt(Category::getOrder))
+                .toList();
 
-        String htmlContent = Files.readString(htmlTemplatePath);
+        List<SubCategory> subCategoriesListOrdered = subCategories.stream()
+                .sorted(Comparator.comparingInt(SubCategory::getOrder))
+                .toList();
+
+        Path htmlTemplatePath = getHtmlTemplatePath();
+        String htmlTemplateContent = Files.readString(htmlTemplatePath);
 
         StringBuilder newHtmlBodyContent = new StringBuilder();
 
-        categories.stream()
-                .sorted(Comparator.comparingInt(Category::getOrder))
-                .forEachOrdered(category -> {
-                    long numberOfCoursesInCategory = courses.stream()
-                            .filter(course -> course.getSubCategory().getCategory().equals(category))
-                            .count();
+        for (Category category : categoriesListOrdered) {
+            long numberOfCoursesInCategory = courses.stream()
+                    .filter(course -> course.getSubCategory().getCategory().equals(category))
+                    .count();
 
-                    long sumOfEstimatedHoursToFinish = courses.stream()
-                            .filter(course -> course.getSubCategory().getCategory().equals(category))
-                            .mapToInt(Course::getEstimatedHoursToFinish)
-                            .sum();
+            long sumOfEstimatedHoursToFinish = courses.stream()
+                    .filter(course -> course.getSubCategory().getCategory().equals(category))
+                    .mapToInt(Course::getEstimatedHoursToFinish)
+                    .sum();
 
-                    newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()));
-                    newHtmlBodyContent.append(String.format("<p>%s</p>", category.getDescription()));
-                    newHtmlBodyContent.append(String.format("<img src=\"%s\" style=\"max-height: 300px\"></br>", category.getIconPath()));
-                    newHtmlBodyContent.append(String.format("<span>Cor: <span style=\"background-color: %s\">ㅤㅤ</span></span>", category.getColorCode()));
-                    newHtmlBodyContent.append(String.format("<p>Total de cursos: %s", numberOfCoursesInCategory));
-                    newHtmlBodyContent.append(String.format("<p>Total de horas: %s", sumOfEstimatedHoursToFinish));
-                    newHtmlBodyContent.append("<h3>Subcategorias</h3>");
+            newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()));
+            newHtmlBodyContent.append(String.format("<p>%s</p>", category.getDescription()));
+            newHtmlBodyContent.append(String.format("<img src=\"%s\" style=\"max-height: 300px\"></br>",
+                    category.getIconPath()));
+            newHtmlBodyContent.append(String.format("<span>Cor: <span style=\"background-color: %s\">ㅤㅤ</span></span>",
+                    category.getColorCode()));
+            newHtmlBodyContent.append(String.format("<p>Total de cursos: %s", numberOfCoursesInCategory));
+            newHtmlBodyContent.append(String.format("<p>Total de horas: %s", sumOfEstimatedHoursToFinish));
+            newHtmlBodyContent.append("<h3>Subcategorias</h3>");
 
-                    subCategories.stream()
-                            .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
-                            .sorted(Comparator.comparingInt(SubCategory::getOrder))
-                            .forEachOrdered(sb -> {
-                                List<String> coursesInThisSubCategoryNames = courses.stream()
-                                        .filter(course -> course.getSubCategory().equals(sb))
-                                        .map(Course::getName).toList();
+            subCategoriesListOrdered.stream()
+                    .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
+                    .forEachOrdered(sb -> {
+                        List<String> namesOfCoursesInThisSubcategory = courses.stream()
+                                .filter(course -> course.getSubCategory().equals(sb))
+                                .map(Course::getName)
+                                .toList();
 
-                                newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()));
-                                newHtmlBodyContent.append(String.format("<p>%s</p>", sb.getDescription()));
-                                newHtmlBodyContent.append("<h5>Cursos</h5>");
-                                newHtmlBodyContent.append(String.join(", ", coursesInThisSubCategoryNames));
-                            });
-                });
+                        newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()));
+                        newHtmlBodyContent.append(String.format("<p>%s</p>", sb.getDescription()));
+                        newHtmlBodyContent.append("<h5>Cursos</h5>");
+                        newHtmlBodyContent.append(String.join(", ", namesOfCoursesInThisSubcategory));
+                    });
+        }
 
-        String newHtmlContent = htmlContent.replace("$body", newHtmlBodyContent);
+        String newHtmlContent = htmlTemplateContent.replace("$body", newHtmlBodyContent);
         Path newHtmlPath = Paths.get(htmlTemplatePath.getParent() +
                 String.format("/categories%s.html", LocalDateTime.now()));
 
         Files.writeString(newHtmlPath, newHtmlContent, StandardCharsets.UTF_8);
+    }
+
+    private static Path getHtmlTemplatePath() throws URISyntaxException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        URL htmlTemplateURL = classLoader.getResource("template.html");
+        return Path.of(htmlTemplateURL.toURI());
     }
 
 }
