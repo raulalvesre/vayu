@@ -15,8 +15,7 @@ public class CsvParserService {
     public static Map<String, Category> getCategoriesMapFromCsv() {
         Map<String, Category> categories = new HashMap<>();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream categoriesInputStream = classLoader.getResourceAsStream("categories.csv");
+        InputStream categoriesInputStream = getInputStreamFromResources("categories.csv");
 
         try (Scanner lineScanner = new Scanner(categoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -53,11 +52,15 @@ public class CsvParserService {
         return categories;
     }
 
+    private static InputStream getInputStreamFromResources(String fileName) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        return classLoader.getResourceAsStream(fileName);
+    }
+
     public static Map<String, SubCategory> getSubCategoriesMapFromCsv(Map<String, Category> categoryMap) {
         Map<String, SubCategory> subCategories = new HashMap<>();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream subCategoriesInputStream = classLoader.getResourceAsStream("subcategories.csv");
+        InputStream subCategoriesInputStream = getInputStreamFromResources("subcategories.csv");
 
         try (Scanner lineScanner = new Scanner(subCategoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -102,8 +105,7 @@ public class CsvParserService {
     public static Map<String, Course> getCoursesMapFromCsv(Map<String, SubCategory> subCategoryMap) {
         Map<String, Course> courses = new HashMap<>();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream coursesInputStream = classLoader.getResourceAsStream("courses.csv");
+        InputStream coursesInputStream = getInputStreamFromResources("courses.csv");
 
         try (Scanner lineScanner = new Scanner(coursesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
