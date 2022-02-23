@@ -47,6 +47,8 @@ public class CsvParserService {
 
                 categories.put(code, category);
             }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid categories.csv, please check!!!");
         }
 
         return categories;
@@ -91,6 +93,8 @@ public class CsvParserService {
 
                 subCategories.put(code, subCategory);
             }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid subcategories.csv, please check!!!");
         }
 
         return subCategories;
@@ -136,6 +140,8 @@ public class CsvParserService {
 
                 courses.put(code, course);
             }
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid courses.csv, please check!!!");
         }
 
         return courses;
