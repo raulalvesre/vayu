@@ -30,7 +30,7 @@ public class CsvParserService {
                 String description = columnScanner.next().trim();
                 String activeStr = columnScanner.next().trim();
                 String iconPath = columnScanner.next().trim();
-                String colorCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
+                String colorCode = columnScanner.next().trim();
 
                 int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
@@ -74,7 +74,7 @@ public class CsvParserService {
                 String orderStr = columnScanner.next();
                 String description = columnScanner.next().trim();
                 String activeStr = columnScanner.next().trim();
-                String categoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
+                String categoryCode = columnScanner.next().trim();
 
                 int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
@@ -116,7 +116,7 @@ public class CsvParserService {
                 String instructorName = columnScanner.next().trim();
                 String syllabus = columnScanner.next().trim();
                 String developedAbilities = columnScanner.next().trim();
-                String subCategoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
+                String subCategoryCode = columnScanner.next().trim();
 
                 int estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? 0
                         : Integer.parseInt(estimatedHoursToFinishStr);
