@@ -36,25 +36,25 @@ public class HtmlCreatorService {
                     long numberOfCoursesInCategory = getCoursesRegisteredInCategory(courses, category);
                     long sumOfEstimatedHoursToFinish = getSumOfCoursesEstimatedHoursToFinishInCategory(courses, category);
 
-                    newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()));
-                    newHtmlBodyContent.append(String.format("<p>%s</p>", category.getDescription()));
-                    newHtmlBodyContent.append(String.format("<img src=\"%s\" style=\"max-height: 300px\"></br>",
-                            category.getIconPath()));
-                    newHtmlBodyContent.append(String.format("<span>Cor: <span style=\"background-color: %s\">ㅤㅤ" +
-                            "</span></span>", category.getColorCode()));
-                    newHtmlBodyContent.append(String.format("<p>Total de cursos: %s", numberOfCoursesInCategory));
-                    newHtmlBodyContent.append(String.format("<p>Total de horas: %s", sumOfEstimatedHoursToFinish));
-                    newHtmlBodyContent.append("<h3>Subcategorias</h3>");
+                    newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()))
+                            .append(String.format("<p>%s</p>", category.getDescription()))
+                            .append(String.format("<img src=\"%s\" style=\"max-height: 300px\"></br>",
+                                    category.getIconPath()))
+                            .append(String.format("<span>Cor: <span style=\"background-color: %s\">ㅤㅤ" +
+                                    "</span></span>", category.getColorCode()))
+                            .append(String.format("<p>Total de cursos: %s", numberOfCoursesInCategory))
+                            .append(String.format("<p>Total de horas: %s", sumOfEstimatedHoursToFinish))
+                            .append("<h3>Subcategorias</h3>");
 
                     subCategoriesListOrdered.stream()
                             .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
                             .forEachOrdered(sb -> {
                                 List<String> namesOfCoursesInThisSubcategory = getNamesOfCoursesInSubcategory(courses, sb);
 
-                                newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()));
-                                newHtmlBodyContent.append(String.format("<p>%s</p>", sb.getDescription()));
-                                newHtmlBodyContent.append("<h5>Cursos</h5>");
-                                newHtmlBodyContent.append(String.join(", ", namesOfCoursesInThisSubcategory));
+                                newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()))
+                                        .append(String.format("<p>%s</p>", sb.getDescription()))
+                                        .append("<h5>Cursos</h5>")
+                                        .append(String.join(", ", namesOfCoursesInThisSubcategory));
                             });
                 });
 
