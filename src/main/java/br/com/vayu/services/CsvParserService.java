@@ -76,12 +76,6 @@ public class CsvParserService {
                 String activeStr = columnScanner.next().trim();
                 String categoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
 
-                if (categoryCode == null) {
-                    System.out.printf("Sub Category[%s] with invalid Category code could not be created. " +
-                            "Please check the .csv!", code);
-                    continue;
-                }
-
                 int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
                 Category category = categoryMap.get(categoryCode);
@@ -123,12 +117,6 @@ public class CsvParserService {
                 String syllabus = columnScanner.next().trim();
                 String developedAbilities = columnScanner.next().trim();
                 String subCategoryCode = columnScanner.hasNext() ? columnScanner.next().trim() : null;
-
-                if (subCategoryCode == null) {
-                    System.out.printf("Course[%s] with invalid Sub Category's code could not be created." +
-                            " Please check the .csv!%n", code);
-                    continue;
-                }
 
                 int estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? 0
                         : Integer.parseInt(estimatedHoursToFinishStr);

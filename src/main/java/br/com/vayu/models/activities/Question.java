@@ -1,4 +1,4 @@
-package br.com.vayu.models.activties;
+package br.com.vayu.models.activities;
 
 import br.com.vayu.enums.QuestionType;
 import br.com.vayu.models.Section;

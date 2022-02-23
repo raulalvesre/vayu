@@ -1,6 +1,6 @@
 package br.com.vayu.models;
 
-import br.com.vayu.models.activties.Question;
+import br.com.vayu.models.activities.Question;
 
 import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 import static br.com.vayu.services.ValidationService.validateIfItIsNull;

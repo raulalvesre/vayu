@@ -5,7 +5,7 @@ import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.Section;
 import br.com.vayu.models.SubCategory;
-import br.com.vayu.models.activties.Question;
+import br.com.vayu.models.activities.Question;
 import br.com.vayu.services.CsvParserService;
 import br.com.vayu.services.HtmlCreatorService;
 
