@@ -1,80 +1,36 @@
-package vayu;
+package br.com.vayu;
 
-import vayu.enums.QuestionType;
-import vayu.models.*;
-import vayu.models.activties.Explanation;
-import vayu.models.activties.Question;
-import vayu.models.activties.Video;
+import br.com.vayu.enums.QuestionType;
+import br.com.vayu.models.Category;
+import br.com.vayu.models.Course;
+import br.com.vayu.models.Section;
+import br.com.vayu.models.SubCategory;
+import br.com.vayu.models.activities.Question;
+import br.com.vayu.services.CsvParserService;
+import br.com.vayu.services.HtmlCreatorService;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) {
-        //region Category
-        Category frontEnd = new Category("abc-123", "front-end");
-        //endregion
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        Map<String, Category> categories = CsvParserService.getCategoriesMapFromCsv();
+        Map<String, SubCategory> subCategories = CsvParserService.getSubCategoriesMapFromCsv(categories);
+        Map<String, Course> courses = CsvParserService.getCoursesMapFromCsv(subCategories);
 
-        //region SubCategory
-        SubCategory svelte = new SubCategory("cod-svelt", "svelt", frontEnd);
-        //endregion
+        HtmlCreatorService.generateCategoriesHtml(
+                categories.values(),
+                subCategories.values(),
+                courses.values());
 
-        //region Course
-        Course svelteForms = new Course(
-                "svelte-forms",
-                "svelt forms",
-                9,
-                "raul",
-                svelte);
-        //endregion
-
-        //region Section
-        Section theBasicsSvelteForms = new Section(
-                "svelt-forms-basics",
-                "the basics",
-                svelteForms);
-        //endregion
-
-        //region Video
-        Video introSveltForms = new Video(
-                "01-svelt-forms",
-                "intro svelte forms",
-                theBasicsSvelteForms,
-                "https://trello.com/b/C8YmF3sU/desafio-semana-1");
-        //endregion
-
-        //region Explanation
-        Explanation howFormsWorksInSvelte = new Explanation(
-                "forms-in-svelte",
-                "how svelte forms works",
-                theBasicsSvelteForms,
-                "it just works");
-        //endregion
-
-        //region Question
-        Question howToCheckCurrentFormFieldSvelteForms = new Question(
-                "check-form-field-value-svelte-forms",
-                "how to check current form field value in svelte",
-                theBasicsSvelteForms,
-                "how do we check a current form field value in svelte?",
-                QuestionType.UNIQUE_ANSWER);
-        //endregion
-
-        //region Alternative
-        Alternative justBindIt = new Alternative(
-                "just bind it",
-                false,
-                howToCheckCurrentFormFieldSvelteForms);
-        //endregion
-
-        //region tests
-        testCategoryValidation();
-        testSubCategoryValidation();
-        testCourseValidation();
-        testSectionValidation();
-        testVideoValidation();
-        testExplanationValidation();
-        testQuestionValidation();
-        testAlternativeValidation();
-        //endregion
+        System.out.println();
+        categories.values().forEach(System.out::println);
+        System.out.println();
+        subCategories.values().forEach(System.out::println);
+        System.out.println();
+        courses.values().forEach(System.out::println);
     }
 
     //region RaulUnit

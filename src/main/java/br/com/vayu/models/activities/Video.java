@@ -1,8 +1,8 @@
-package vayu.models.activties;
+package br.com.vayu.models.activities;
 
-import vayu.models.Section;
+import br.com.vayu.models.Section;
 
-import static vayu.services.ValidationService.*;
+import static br.com.vayu.services.ValidationService.*;
 
 public class Video extends Activity {
 

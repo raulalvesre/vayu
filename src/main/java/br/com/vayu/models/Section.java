@@ -1,6 +1,6 @@
-package vayu.models;
+package br.com.vayu.models;
 
-import static vayu.services.ValidationService.*;
+import static br.com.vayu.services.ValidationService.*;
 
 public class Section {
 
