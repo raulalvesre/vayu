@@ -1,11 +1,8 @@
 package br.com.vayu;
 
-import br.com.vayu.enums.QuestionType;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
-import br.com.vayu.models.Section;
 import br.com.vayu.models.SubCategory;
-import br.com.vayu.models.activities.Question;
 import br.com.vayu.services.CsvParserService;
 import br.com.vayu.services.HtmlCreatorService;
 
@@ -31,6 +28,14 @@ public class Main {
         subCategories.forEach(System.out::println);
         System.out.println();
         courses.forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("ACTIVE CATEGORIES:");
+        printActiveCategories(categories);
+
+        System.out.println();
+        System.out.println("SUB CATEGORIES WITHOUT DESCRIPTION");
+        printSubCategoriesWithNoDescription(subCategories);
     }
 
     public static void printActiveCategories(List<Category> categories) {
@@ -38,5 +43,13 @@ public class Main {
                 .filter(Category::isActive)
                 .forEachOrdered(System.out::println);
     }
+
+    public static void printSubCategoriesWithNoDescription(List<SubCategory> subCategories) {
+        subCategories.stream()
+                .filter(x -> x.getDescription() == null || x.getDescription().isBlank())
+                .forEachOrdered(System.out::println);
+    }
+
+
 
 }
