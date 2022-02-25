@@ -53,19 +53,19 @@ public class Main {
 
     }
 
-    public static void printActiveCategories(List<Category> categories) {
+    private static void printActiveCategories(List<Category> categories) {
         categories.stream()
                 .filter(Category::isActive)
                 .forEachOrdered(System.out::println);
     }
 
-    public static void printSubCategoriesWithNoDescription(List<SubCategory> subCategories) {
+    private static void printSubCategoriesWithNoDescription(List<SubCategory> subCategories) {
         subCategories.stream()
                 .filter(x -> x.getDescription() == null || x.getDescription().isBlank())
                 .forEachOrdered(System.out::println);
     }
 
-    public static void printIfThereIsPrivateCourse(List<Course> courses) {
+    private static void printIfThereIsPrivateCourse(List<Course> courses) {
         long privateCourses = courses.stream()
                 .filter(Course::isVisible)
                 .count();
@@ -74,14 +74,14 @@ public class Main {
             System.out.println("There is at least one private course");
     }
 
-    public static void printInstructorNames(List<Course> courses) {
+    private static void printInstructorNames(List<Course> courses) {
         courses.stream()
                 .map(Course::getInstructorName)
                 .distinct()
                 .forEachOrdered(System.out::println);
     }
 
-    public static void printQuantityOfSubCategoriesWithDescription(List<SubCategory> subCategories) {
+    private static void printQuantityOfSubCategoriesWithDescription(List<SubCategory> subCategories) {
         long qtdSubCategoriesWithDescription = subCategories.stream()
                 .filter(x -> x.getDescription() != null && !x.getDescription().isBlank())
                 .count();
@@ -89,7 +89,7 @@ public class Main {
         System.out.println(qtdSubCategoriesWithDescription);
     }
 
-    public static void printInstructorNameAndHowManyCoursesTheyHave(List<Course> courses) {
+    private static void printInstructorNameAndHowManyCoursesTheyHave(List<Course> courses) {
         courses.stream()
                 .map(Course::getInstructorName)
                 .distinct()
