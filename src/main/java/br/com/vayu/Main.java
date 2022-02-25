@@ -44,6 +44,13 @@ public class Main {
         System.out.println("INSTRUCTORS NAMES:");
         printInstructorNames(courses);
 
+        System.out.println();
+        System.out.print("QUANTITY OF SUBCATEGORIES WITH DESCRIPTION: ");
+        printQuantityOfSubCategoriesWithDescription(subCategories);
+        System.out.println();
+
+        System.out.println();
+
     }
 
     public static void printActiveCategories(List<Category> categories) {
@@ -72,6 +79,14 @@ public class Main {
                 .map(Course::getInstructorName)
                 .distinct()
                 .forEachOrdered(System.out::println);
+    }
+
+    public static void printQuantityOfSubCategoriesWithDescription(List<SubCategory> subCategories) {
+        long qtdSubCategoriesWithDescription = subCategories.stream()
+                .filter(x -> x.getDescription() != null && !x.getDescription().isBlank())
+                .count();
+
+        System.out.println(qtdSubCategoriesWithDescription);
     }
 
 
