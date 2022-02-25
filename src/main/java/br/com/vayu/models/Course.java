@@ -6,7 +6,7 @@ public class Course {
 
     private final String code;
     private final String name;
-    private final Integer estimatedHoursToFinish;
+    private final int estimatedHoursToFinish;
     private boolean visible;
     private String targetAudience;
     private final String instructorName;
@@ -53,8 +53,12 @@ public class Course {
         return name;
     }
 
-    public Integer getEstimatedHoursToFinish() {
+    public int getEstimatedHoursToFinish() {
         return estimatedHoursToFinish;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 
     public SubCategory getSubCategory() {

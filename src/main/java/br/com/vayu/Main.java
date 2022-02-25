@@ -36,6 +36,12 @@ public class Main {
         System.out.println();
         System.out.println("SUB CATEGORIES WITHOUT DESCRIPTION");
         printSubCategoriesWithNoDescription(subCategories);
+
+        System.out.println();
+        printIfThereIsPrivateCourse(courses);
+
+        System.out.println();
+
     }
 
     public static void printActiveCategories(List<Category> categories) {
@@ -50,6 +56,14 @@ public class Main {
                 .forEachOrdered(System.out::println);
     }
 
+    public static void printIfThereIsPrivateCourse(List<Course> courses) {
+        long privateCourses = courses.stream()
+                .filter(Course::isVisible)
+                .count();
+
+        if (privateCourses > 0)
+            System.out.println("There is at least one private course");
+    }
 
 
 }
