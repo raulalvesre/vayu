@@ -61,6 +61,10 @@ public class Course {
         return visible;
     }
 
+    public String getInstructorName() {
+        return instructorName;
+    }
+
     public SubCategory getSubCategory() {
         return subCategory;
     }

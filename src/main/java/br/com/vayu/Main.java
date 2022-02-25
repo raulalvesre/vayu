@@ -41,6 +41,8 @@ public class Main {
         printIfThereIsPrivateCourse(courses);
 
         System.out.println();
+        System.out.println("INSTRUCTORS NAMES:");
+        printInstructorNames(courses);
 
     }
 
@@ -63,6 +65,13 @@ public class Main {
 
         if (privateCourses > 0)
             System.out.println("There is at least one private course");
+    }
+
+    public static void printInstructorNames(List<Course> courses) {
+        courses.stream()
+                .map(Course::getInstructorName)
+                .distinct()
+                .forEachOrdered(System.out::println);
     }
 
 
