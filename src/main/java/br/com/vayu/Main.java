@@ -47,9 +47,9 @@ public class Main {
         System.out.println();
         System.out.print("QUANTITY OF SUBCATEGORIES WITH DESCRIPTION: ");
         printQuantityOfSubCategoriesWithDescription(subCategories);
-        System.out.println();
 
         System.out.println();
+        printInstructorNameAndHowManyCoursesTheyHave(courses);
 
     }
 
@@ -87,6 +87,19 @@ public class Main {
                 .count();
 
         System.out.println(qtdSubCategoriesWithDescription);
+    }
+
+    public static void printInstructorNameAndHowManyCoursesTheyHave(List<Course> courses) {
+        courses.stream()
+                .map(Course::getInstructorName)
+                .distinct()
+                .forEachOrdered(instructorName -> {
+                    long qtdCoursesWithThisInstructor = courses.stream()
+                            .filter(course -> course.getInstructorName().equals(instructorName))
+                            .count();
+
+                    System.out.printf("%s has %d courses\n", instructorName, qtdCoursesWithThisInstructor);
+                });
     }
 
 
