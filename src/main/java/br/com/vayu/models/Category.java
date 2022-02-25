@@ -44,12 +44,20 @@ public class Category {
         this.name = name;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public int getOrder() {

@@ -6,14 +6,12 @@ import br.com.vayu.models.SubCategory;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class CsvParserService {
 
-    public static Map<String, Category> getCategoriesMapFromCsv() {
-        Map<String, Category> categories = new HashMap<>();
+    public static List<Category> getCategoriesMapFromCsv() {
+        List<Category> categories = new ArrayList<>();
 
         InputStream categoriesInputStream = getInputStreamFromResources("categories.csv");
 
@@ -45,7 +43,7 @@ public class CsvParserService {
                         iconPath,
                         colorCode);
 
-                categories.put(code, category);
+                categories.add(category);
             }
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid categories.csv, please check!!!");
@@ -59,8 +57,8 @@ public class CsvParserService {
         return classLoader.getResourceAsStream(fileName);
     }
 
-    public static Map<String, SubCategory> getSubCategoriesMapFromCsv(Map<String, Category> categoryMap) {
-        Map<String, SubCategory> subCategories = new HashMap<>();
+    public static List<SubCategory> getSubCategoriesMapFromCsv(List<Category> categoryList) {
+        List<SubCategory> subCategories = new ArrayList<>();
 
         InputStream subCategoriesInputStream = getInputStreamFromResources("subcategories.csv");
 
@@ -80,7 +78,7 @@ public class CsvParserService {
 
                 int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
-                Category category = categoryMap.get(categoryCode);
+                Category category = getCategoryByCode(categoryList, categoryCode);
 
                 SubCategory subCategory = new SubCategory(
                         code,
@@ -91,7 +89,7 @@ public class CsvParserService {
                         order,
                         category);
 
-                subCategories.put(code, subCategory);
+                subCategories.add(subCategory);
             }
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid subcategories.csv, please check!!!");
@@ -100,8 +98,15 @@ public class CsvParserService {
         return subCategories;
     }
 
-    public static Map<String, Course> getCoursesMapFromCsv(Map<String, SubCategory> subCategoryMap) {
-        Map<String, Course> courses = new HashMap<>();
+    public static Category getCategoryByCode(List<Category> categories, String categoryCode) {
+        return categories.stream()
+                .filter(x -> x.getCode().equals(categoryCode))
+                .findAny()
+                .orElse(null);
+    }
+
+    public static List<Course> getCoursesMapFromCsv(List<SubCategory> subCategoryList) {
+        List<Course> courses = new ArrayList<>();
 
         InputStream coursesInputStream = getInputStreamFromResources("courses.csv");
 
@@ -125,7 +130,7 @@ public class CsvParserService {
                 int estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? 0
                         : Integer.parseInt(estimatedHoursToFinishStr);
                 boolean visible = visibleStr.equals("PÚBLICA");
-                SubCategory subCategory = subCategoryMap.get(subCategoryCode);
+                SubCategory subCategory = getSubCategoryByCode(subCategoryList, subCategoryCode);
 
                 Course course = new Course(
                         code,
@@ -138,13 +143,20 @@ public class CsvParserService {
                         developedAbilities,
                         subCategory);
 
-                courses.put(code, course);
+                courses.add(course);
             }
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid courses.csv, please check!!!");
         }
 
         return courses;
+    }
+
+    public static SubCategory getSubCategoryByCode(List<SubCategory> subCategories, String subCategoryCode) {
+        return subCategories.stream()
+                .filter(x -> x.getCode().equals(subCategoryCode))
+                .findAny()
+                .orElse(null);
     }
 
 }

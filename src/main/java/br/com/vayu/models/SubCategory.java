@@ -41,6 +41,10 @@ public class SubCategory {
         this.category = category;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     public String getName() {
         return name;
     }
