@@ -13,9 +13,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<Category> categories = CsvParserService.getCategoriesMapFromCsv();
-        List<SubCategory> subCategories = CsvParserService.getSubCategoriesMapFromCsv(categories);
-        List<Course> courses = CsvParserService.getCoursesMapFromCsv(subCategories);
+        List<Category> categories = CsvParserService.getCategoriesListFromCsv();
+        List<SubCategory> subCategories = CsvParserService.getSubCategoriesListFromCsv(categories);
+        List<Course> courses = CsvParserService.getCoursesListFromCsv(subCategories);
 
         HtmlCreatorService.generateCategoriesHtml(
                 categories,

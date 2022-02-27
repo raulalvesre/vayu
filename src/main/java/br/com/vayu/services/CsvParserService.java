@@ -10,7 +10,7 @@ import java.util.*;
 
 public class CsvParserService {
 
-    public static List<Category> getCategoriesMapFromCsv() {
+    public static List<Category> getCategoriesListFromCsv() {
         List<Category> categories = new ArrayList<>();
 
         InputStream categoriesInputStream = getInputStreamFromResources("categories.csv");
@@ -57,7 +57,7 @@ public class CsvParserService {
         return classLoader.getResourceAsStream(fileName);
     }
 
-    public static List<SubCategory> getSubCategoriesMapFromCsv(List<Category> categoryList) {
+    public static List<SubCategory> getSubCategoriesListFromCsv(List<Category> categoryList) {
         List<SubCategory> subCategories = new ArrayList<>();
 
         InputStream subCategoriesInputStream = getInputStreamFromResources("subcategories.csv");
@@ -105,7 +105,7 @@ public class CsvParserService {
                 .orElse(null);
     }
 
-    public static List<Course> getCoursesMapFromCsv(List<SubCategory> subCategoryList) {
+    public static List<Course> getCoursesListFromCsv(List<SubCategory> subCategoryList) {
         List<Course> courses = new ArrayList<>();
 
         InputStream coursesInputStream = getInputStreamFromResources("courses.csv");
