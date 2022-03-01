@@ -46,7 +46,7 @@ public class Main {
 
         System.out.println();
         System.out.print("QUANTITY OF SUBCATEGORIES WITH DESCRIPTION: ");
-        printQuantityOfSubCategoriesWithDescription(subCategories);
+        printQuantityOfActiveSubCategoriesWithDescription(subCategories);
 
         System.out.println();
         printInstructorNameAndHowManyCoursesTheyHave(courses);
@@ -81,9 +81,9 @@ public class Main {
                 .forEachOrdered(System.out::println);
     }
 
-    private static void printQuantityOfSubCategoriesWithDescription(List<SubCategory> subCategories) {
+    private static void printQuantityOfActiveSubCategoriesWithDescription(List<SubCategory> subCategories) {
         long qtdSubCategoriesWithDescription = subCategories.stream()
-                .filter(x -> x.getDescription() != null && !x.getDescription().isBlank())
+                .filter(x -> x.isActive() && x.getDescription() != null && !x.getDescription().isBlank())
                 .count();
 
         System.out.println(qtdSubCategoriesWithDescription);
