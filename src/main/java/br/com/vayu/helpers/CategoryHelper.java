@@ -4,7 +4,7 @@ import br.com.vayu.models.Category;
 
 import java.util.Collection;
 
-public class CategoryCollectionHelper {
+public class CategoryHelper {
 
     public static void printActiveCategories(Collection<Category> categories) {
         System.out.println("ACTIVE CATEGORIES:");

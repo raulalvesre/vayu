@@ -4,7 +4,7 @@ import br.com.vayu.models.SubCategory;
 
 import java.util.Collection;
 
-public class SubCategoryCollectionHelper {
+public class SubCategoryHelper {
 
     public static void printSubCategoriesWithNoDescription(Collection<SubCategory> subCategories) {
         System.out.println("SUB CATEGORIES WITHOUT DESCRIPTION");

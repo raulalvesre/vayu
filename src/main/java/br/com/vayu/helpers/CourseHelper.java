@@ -4,18 +4,14 @@ import br.com.vayu.models.Course;
 
 import java.util.Collection;
 
-public class CourseCollectionHelper {
+public class CourseHelper {
 
     public static void printIfThereIsPrivateCourse(Collection<Course> courses) {
-        long privateCourses = courses.stream()
-                .filter(Course::isVisible)
-                .count();
+        System.out.println("PRIVATE COURSES:");
 
-        if (privateCourses > 0) {
-            System.out.println("There is at least one private course");
-        } else {
-            System.out.println("There is none private course");
-        }
+        courses.stream()
+                .filter(Course::isVisible)
+                .forEachOrdered(System.out::println);
     }
 
     public static void printInstructorNames(Collection<Course> courses) {

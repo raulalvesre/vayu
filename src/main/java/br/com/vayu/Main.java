@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static br.com.vayu.helpers.CategoryCollectionHelper.*;
-import static br.com.vayu.helpers.CourseCollectionHelper.*;
-import static br.com.vayu.helpers.SubCategoryCollectionHelper.*;
+import static br.com.vayu.helpers.CategoryHelper.*;
+import static br.com.vayu.helpers.CourseHelper.*;
+import static br.com.vayu.helpers.SubCategoryHelper.*;
 
 public class Main {
 
