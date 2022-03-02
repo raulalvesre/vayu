@@ -2,11 +2,11 @@ package br.com.vayu.helpers;
 
 import br.com.vayu.models.Course;
 
-import java.util.Collection;
+import java.util.List;
 
 public class CourseHelper {
 
-    public static void printIfThereIsPrivateCourse(Collection<Course> courses) {
+    public static void printIfThereIsPrivateCourse(List<Course> courses) {
         System.out.println("PRIVATE COURSES:");
 
         courses.stream()
@@ -14,7 +14,7 @@ public class CourseHelper {
                 .forEachOrdered(System.out::println);
     }
 
-    public static void printInstructorNames(Collection<Course> courses) {
+    public static void printInstructorNames(List<Course> courses) {
         System.out.println("INSTRUCTORS NAMES:");
 
         courses.stream()
@@ -23,7 +23,7 @@ public class CourseHelper {
                 .forEachOrdered(System.out::println);
     }
 
-    public static void printInstructorNameAndHowManyCoursesTheyHave(Collection<Course> courses) {
+    public static void printInstructorNameAndHowManyCoursesTheyHave(List<Course> courses) {
         courses.stream()
                 .map(Course::getInstructorName)
                 .distinct()
