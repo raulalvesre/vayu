@@ -1,23 +1,22 @@
 package br.com.vayu.models.activities;
 
+import br.com.vayu.services.ValidationService;
 import br.com.vayu.models.Section;
-
-import static br.com.vayu.services.ValidationService.*;
 
 public class Video extends Activity {
 
-    private final String URL;
+    private final String url;
     private int durationInMinutes;
     private String transcription;
 
     public Video(String code,
                  String title,
                  Section section,
-                 String URL) {
+                 String url) {
         super(code, title, section);
 
-        validateIfItIsValidURL("URL", URL);
-        this.URL = URL;
+        ValidationService.validateIfItIsValidURL("URL", url);
+        this.url = url;
     }
 
 }

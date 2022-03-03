@@ -1,9 +1,7 @@
 package br.com.vayu.models;
 
+import br.com.vayu.services.ValidationService;
 import br.com.vayu.models.activities.Question;
-
-import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
-import static br.com.vayu.services.ValidationService.validateIfItIsNull;
 
 public class Alternative {
 
@@ -15,8 +13,8 @@ public class Alternative {
 
 
     public Alternative(String text, boolean correct, Question question) {
-        validateIfIsBlankString("text", text);
-        validateIfItIsNull("question", question);
+        ValidationService.validateIfIsBlankString("text", text);
+        ValidationService.validateIfItIsNull("question", question);
 
         this.text = text;
         this.correct = correct;

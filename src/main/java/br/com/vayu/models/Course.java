@@ -1,6 +1,6 @@
 package br.com.vayu.models;
 
-import static br.com.vayu.services.ValidationService.*;
+import br.com.vayu.services.ValidationService;
 
 public class Course {
 
@@ -33,14 +33,14 @@ public class Course {
 
     public Course(String code,
                   String name,
-                  Integer estimatedHoursToFinish,
+                  int estimatedHoursToFinish,
                   String instructorName,
                   SubCategory subCategory) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
-        validateIfIsBlankString("instructor name", instructorName);
-        validateIfItIsNull("sub category", subCategory);
+        ValidationService.validateIfItIsValidCode(code);
+        ValidationService.validateIfIsBlankString("name", name);
+        ValidationService.validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
+        ValidationService.validateIfIsBlankString("instructor name", instructorName);
+        ValidationService.validateIfItIsNull("sub category", subCategory);
 
         this.code = code;
         this.name = name;

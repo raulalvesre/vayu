@@ -1,5 +1,6 @@
 package br.com.vayu;
 
+import br.com.vayu.helpers.CourseHelper;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.SubCategory;
@@ -11,7 +12,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import static br.com.vayu.helpers.CategoryHelper.*;
-import static br.com.vayu.helpers.CourseHelper.*;
 import static br.com.vayu.helpers.SubCategoryHelper.*;
 
 public class Main {
@@ -40,16 +40,16 @@ public class Main {
         printSubCategoriesWithNoDescription(subCategories);
 
         System.out.println();
-        printIfThereIsPrivateCourse(courses);
+        CourseHelper.printIfThereIsPrivateCourse(courses);
 
         System.out.println();
-        printInstructorNames(courses);
+        CourseHelper.printInstructorNames(courses);
 
         System.out.println();
         printQuantityOfActiveSubCategoriesWithDescription(subCategories);
 
         System.out.println();
-        printInstructorNameAndHowManyCoursesTheyHave(courses);
+        CourseHelper.printInstructorNameAndHowManyCoursesTheyHave(courses);
     }
 
 }

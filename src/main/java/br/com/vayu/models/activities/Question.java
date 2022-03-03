@@ -2,8 +2,7 @@ package br.com.vayu.models.activities;
 
 import br.com.vayu.enums.QuestionType;
 import br.com.vayu.models.Section;
-
-import static br.com.vayu.services.ValidationService.validateIfItIsNull;
+import br.com.vayu.services.ValidationService;
 
 public class Question extends Activity {
 
@@ -17,8 +16,8 @@ public class Question extends Activity {
                     QuestionType type) {
         super(code, title, section);
 
-        validateIfItIsNull("wording", wording);
-        validateIfItIsNull("type", type);
+        ValidationService.validateIfItIsNull("wording", wording);
+        ValidationService.validateIfItIsNull("type", type);
 
         this.wording = wording;
         this.type = type;
