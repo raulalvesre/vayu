@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS category
     description VARCHAR(255),
     study_guide VARCHAR(1024),
     active      BIT,
+    `order`     TINYINT,
     icon_path   VARCHAR(512),
     color_code  VARCHAR(7)
 );
@@ -31,10 +32,10 @@ CREATE TABLE IF NOT EXISTS course
     name                      VARCHAR(255) NOT NULL,
     estimated_hours_to_finish TINYINT      NOT NULL,
     visible                   BIT,
-    target_audience           VARCHAR(128),
+    target_audience           VARCHAR(256),
     instructor_name           VARCHAR(256),
-    syllabus                  VARCHAR(512),
-    developed_abilities       VARCHAR(256),
+    syllabus                  TEXT,
+    developed_abilities       VARCHAR(512),
 
     PRIMARY KEY (code),
     FOREIGN KEY (subcategory_code)
