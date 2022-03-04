@@ -4,7 +4,7 @@ import br.com.vayu.services.ValidationService;
 
 import java.util.Objects;
 
-public class SubCategory {
+public class Subcategory {
 
     private final String code;
     private final String name;
@@ -14,7 +14,7 @@ public class SubCategory {
     private int order;
     private final Category category;
 
-    public SubCategory(String code,
+    public Subcategory(String code,
                        String name,
                        String description,
                        String studyGuide,
@@ -29,7 +29,7 @@ public class SubCategory {
         this.order = order;
     }
 
-    public SubCategory(String code,
+    public Subcategory(String code,
                        String name,
                        Category category) {
         ValidationService.validateIfItIsValidCode(code);
@@ -69,7 +69,7 @@ public class SubCategory {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SubCategory that = (SubCategory) o;
+        Subcategory that = (Subcategory) o;
         return Objects.equals(code, that.code);
     }
 

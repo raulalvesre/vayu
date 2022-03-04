@@ -2,7 +2,7 @@ package br.com.vayu.services;
 
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
-import br.com.vayu.models.SubCategory;
+import br.com.vayu.models.Subcategory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -19,10 +19,10 @@ import java.util.List;
 public class HtmlCreatorService {
 
     public static void generateCategoriesHtml(Collection<Category> categories,
-                                              Collection<SubCategory> subCategories,
+                                              Collection<Subcategory> subCategories,
                                               Collection<Course> courses) throws URISyntaxException, IOException {
-        List<SubCategory> subCategoriesListOrdered = subCategories.stream()
-                .sorted(Comparator.comparingInt(SubCategory::getOrder))
+        List<Subcategory> subCategoriesListOrdered = subCategories.stream()
+                .sorted(Comparator.comparingInt(Subcategory::getOrder))
                 .toList();
 
         Path htmlTemplatePath = getHtmlTemplatePath();
@@ -84,7 +84,7 @@ public class HtmlCreatorService {
                 .sum();
     }
 
-    private static List<String> getNamesOfCoursesInSubcategory(Collection<Course> courses, SubCategory subCategory) {
+    private static List<String> getNamesOfCoursesInSubcategory(Collection<Course> courses, Subcategory subCategory) {
         return courses.stream()
                 .filter(course -> course.getSubCategory().equals(subCategory))
                 .map(Course::getName)

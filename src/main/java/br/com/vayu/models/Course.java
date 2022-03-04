@@ -12,7 +12,7 @@ public class Course {
     private final String instructorName;
     private String syllabus;
     private String developedAbilities;
-    private final SubCategory subCategory;
+    private final Subcategory subCategory;
 
     public Course(String code,
                   String name,
@@ -22,7 +22,7 @@ public class Course {
                   String instructorName,
                   String syllabus,
                   String developedAbilities,
-                  SubCategory subCategory) {
+                  Subcategory subCategory) {
         this(code, name, estimatedHoursToFinish, instructorName, subCategory);
 
         this.visible = visible;
@@ -35,7 +35,7 @@ public class Course {
                   String name,
                   int estimatedHoursToFinish,
                   String instructorName,
-                  SubCategory subCategory) {
+                  Subcategory subCategory) {
         ValidationService.validateIfItIsValidCode(code);
         ValidationService.validateIfIsBlankString("name", name);
         ValidationService.validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
@@ -65,7 +65,7 @@ public class Course {
         return instructorName;
     }
 
-    public SubCategory getSubCategory() {
+    public Subcategory getSubCategory() {
         return subCategory;
     }
 
