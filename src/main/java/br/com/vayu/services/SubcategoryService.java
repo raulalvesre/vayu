@@ -11,10 +11,12 @@ import java.util.Scanner;
 
 public class SubcategoryService {
 
-    public static List<Subcategory> getSubCategoriesListFromCsv(String fileName, List<Category> categoryList) {
+    public static List<Subcategory> getSubcategoriesListFromCsv(String resourcesFolderPath, List<Category> categoryList) {
         List<Subcategory> subCategories = new ArrayList<>();
 
-        InputStream subCategoriesInputStream = getInputStreamFromResources(fileName + ".csv");
+        InputStream subCategoriesInputStream = getInputStreamFromResources(resourcesFolderPath);
+        if (subCategoriesInputStream == null)
+            throw new IllegalArgumentException(resourcesFolderPath + ".csv does not exist!");
 
         try (Scanner lineScanner = new Scanner(subCategoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -32,7 +34,7 @@ public class SubcategoryService {
 
                 int order = orderStr.isBlank() ? 0 : Integer.parseInt(orderStr);
                 boolean active = activeStr.equals("ATIVA");
-                Category category = getCategoryByCode(categoryList, categoryCode);
+                Category category = CategoryService.getCategoryByCode(categoryList, categoryCode);
 
                 Subcategory subCategory = new Subcategory(
                         code,
@@ -46,7 +48,7 @@ public class SubcategoryService {
                 subCategories.add(subCategory);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid subcategories.csv, please check!!!");
+            throw new IllegalArgumentException("Invalid .csv, please check!!!");
         }
 
         return subCategories;
@@ -57,9 +59,9 @@ public class SubcategoryService {
         return classLoader.getResourceAsStream(fileName);
     }
 
-    private static Category getCategoryByCode(List<Category> categories, String categoryCode) {
-        return categories.stream()
-                .filter(x -> x.getCode().equals(categoryCode))
+    public static Subcategory getSubcategoryByCode(List<Subcategory> subCategories, String subCategoryCode) {
+        return subCategories.stream()
+                .filter(x -> x.getCode().equals(subCategoryCode))
                 .findAny()
                 .orElse(null);
     }

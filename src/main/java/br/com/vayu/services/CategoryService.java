@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 public class CategoryService {
 
-    public static List<Category> getCategoriesListFromCsv(String fileName) {
+    public static List<Category> getCategoriesListFromCsv(String resourcesFolderPath) {
         List<Category> categories = new ArrayList<>();
 
-        InputStream categoriesInputStream = getInputStreamFromResources(fileName + ".csv");
+        InputStream categoriesInputStream = getInputStreamFromResources(resourcesFolderPath); //
+        if (categoriesInputStream == null)
+            throw new IllegalArgumentException(resourcesFolderPath + ".csv does not exist!");
 
         try (Scanner lineScanner = new Scanner(categoriesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -46,7 +48,7 @@ public class CategoryService {
                 categories.add(category);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid categories.csv, please check!!!");
+            throw new IllegalArgumentException("Invalid .csv, please check!!!");
         }
 
         return categories;
@@ -55,6 +57,13 @@ public class CategoryService {
     private static InputStream getInputStreamFromResources(String fileName) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         return classLoader.getResourceAsStream(fileName);
+    }
+
+    public static Category getCategoryByCode(List<Category> categories, String categoryCode) {
+        return categories.stream()
+                .filter(x -> x.getCode().equals(categoryCode))
+                .findAny()
+                .orElse(null);
     }
 
     public static void printActiveCategories(List<Category> categories) {

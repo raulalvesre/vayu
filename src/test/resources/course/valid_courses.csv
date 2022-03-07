@@ -1,0 +1,4 @@
+nome,codigo,tempoFinalizacaoEmHoras,visibilidade,publicoAlvo,instrutor,ementa,habilidades,subcategoria
+name1,code1,1,PÚBLICA,targetAudience1,Instructor1,syllabus1,dev_abilities1,code1
+name2,code2,2,PRIVADA,targetAudience2,Instructor2,syllabus2,dev_abilities2,code2
+name3,code3,3,PÚBLICA,targetAudience3,Instructor2,syllabus3,dev_abilities3,code2

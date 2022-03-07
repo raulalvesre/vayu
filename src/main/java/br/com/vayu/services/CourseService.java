@@ -11,10 +11,12 @@ import java.util.Scanner;
 
 public class CourseService {
 
-    public static List<Course> getCoursesListFromCsv(String fileName, List<Subcategory> subcategoryList) {
+    public static List<Course> getCourseListFromCsv(String resourcesFolderPath, List<Subcategory> subcategoryList) {
         List<Course> courses = new ArrayList<>();
 
-        InputStream coursesInputStream = getInputStreamFromResources(fileName + ".csv");
+        InputStream coursesInputStream = getInputStreamFromResources(resourcesFolderPath);
+        if (coursesInputStream == null)
+            throw new IllegalArgumentException(resourcesFolderPath + ".csv does not exist!");
 
         try (Scanner lineScanner = new Scanner(coursesInputStream, StandardCharsets.UTF_8)) {
             lineScanner.nextLine(); // skip first .csv line
@@ -36,7 +38,7 @@ public class CourseService {
                 int estimatedHoursToFinish = estimatedHoursToFinishStr.isBlank() ? 0
                         : Integer.parseInt(estimatedHoursToFinishStr);
                 boolean visible = visibleStr.equals("PÚBLICA");
-                Subcategory subCategory = getSubCategoryByCode(subcategoryList, subCategoryCode);
+                Subcategory subCategory = SubcategoryService.getSubcategoryByCode(subcategoryList, subCategoryCode);
 
                 Course course = new Course(
                         code,
@@ -52,7 +54,7 @@ public class CourseService {
                 courses.add(course);
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid courses.csv, please check!!!");
+            throw new IllegalArgumentException("Invalid .csv, please check!!!");
         }
 
         return courses;
@@ -63,18 +65,11 @@ public class CourseService {
         return classLoader.getResourceAsStream(fileName);
     }
 
-    private static Subcategory getSubCategoryByCode(List<Subcategory> subCategories, String subCategoryCode) {
-        return subCategories.stream()
-                .filter(x -> x.getCode().equals(subCategoryCode))
-                .findAny()
-                .orElse(null);
-    }
-
     public static void printIfThereIsPrivateCourse(List<Course> courses) {
         System.out.println("PRIVATE COURSES:");
 
         courses.stream()
-                .filter(Course::isVisible)
+                .filter(c -> !c.isVisible())
                 .forEachOrdered(System.out::println);
     }
 

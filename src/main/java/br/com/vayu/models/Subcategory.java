@@ -53,6 +53,10 @@ public class Subcategory {
         return description;
     }
 
+    public String getStudyGuide() {
+        return studyGuide;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -70,12 +74,18 @@ public class Subcategory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subcategory that = (Subcategory) o;
-        return Objects.equals(code, that.code);
+        return active == that.active &&
+                order == that.order &&
+                code.equals(that.code) &&
+                name.equals(that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(studyGuide, that.studyGuide) &&
+                category.equals(that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code);
+        return Objects.hash(code, name, description, studyGuide, active, order, category);
     }
 
     @Override
