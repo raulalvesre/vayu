@@ -23,7 +23,7 @@ public class SqlCreatorService {
 
         String finalStr = auxStr.replace("'null'", "null");
 
-        Path resourcesPath = Paths.get("src", "main", "resources", "data.sql");
+        Path resourcesPath = Paths.get("target", "classes", "data.sql");
         Files.writeString(resourcesPath, finalStr, StandardCharsets.UTF_8);
     }
 
@@ -35,11 +35,13 @@ public class SqlCreatorService {
                     .append(String.format("VALUES ('%s', '%s', '%s', '%s', %d, %d, '%s', '%s');\n",
                             c.getCode(),
                             c.getName(),
-                            c.getDescription().replace("'", "\\'"),
-                            c.getStudyGuide().replace("'", "\\'"),
+                            c.getDescription() != null ? c.getDescription().replace("'", "\\'")
+                                    : null,
+                            c.getStudyGuide() != null ? c.getDescription().replace("'", "\\'")
+                                    : null,
                             c.isActive() ? 1 : 0,
                             c.getOrder(),
-                            c.getIconPath().replace("'", "\\'"),
+                            c.getIconPath() != null ? c.getIconPath().replace("'", "\\'") : null,
                             c.getColorCode()));
         });
 
@@ -55,8 +57,10 @@ public class SqlCreatorService {
                             sb.getCode(),
                             sb.getCategory().getCode(),
                             sb.getName(),
-                            sb.getDescription().replace("'", "\\'"),
-                            sb.getStudyGuide().replace("'", "\\'"),
+                            sb.getDescription() != null ? sb.getDescription().replace("'", "\\'")
+                                    : null,
+                            sb.getStudyGuide() != null ? sb.getStudyGuide().replace("'", "\\'")
+                                    : null,
                             sb.isActive() ? 1 : 0,
                             sb.getOrder()));
         });
@@ -67,18 +71,20 @@ public class SqlCreatorService {
     private static String createCourseInserts(List<Course> courseList) {
         StringBuilder aux = new StringBuilder();
 
-        courseList.forEach(course -> {
+        courseList.forEach(c -> {
             aux.append("\nINSERT INTO course\n")
                     .append(String.format("VALUES ('%s', '%s', '%s', %d, %d, '%s', '%s', '%s', '%s');\n",
-                            course.getCode(),
-                            course.getSubCategory().getCode(),
-                            course.getName(),
-                            course.getEstimatedHoursToFinish(),
-                            course.isVisible() ? 1 : 0,
-                            course.getTargetAudience(),
-                            course.getInstructorName().replace("'", "\\'"),
-                            course.getSyllabus().replace("'", "\\'"),
-                            course.getDevelopedAbilities()).replace("'", "\\'"));
+                            c.getCode(),
+                            c.getSubCategory().getCode(),
+                            c.getName(),
+                            c.getEstimatedHoursToFinish(),
+                            c.isVisible() ? 1 : 0,
+                            c.getTargetAudience(),
+                            c.getInstructorName() != null ? c.getInstructorName().replace("'", "\\'")
+                                    : null,
+                            c.getSyllabus() != null ? c.getSyllabus().replace("'", "\\'") : null,
+                            c.getDevelopedAbilities() != null ?
+                                    c.getDevelopedAbilities().replace("'", "\\'") : null));
         });
 
         return aux.toString();

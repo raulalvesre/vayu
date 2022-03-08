@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -59,8 +58,7 @@ public class HtmlCreatorService {
                 });
 
         String newHtmlContent = htmlTemplateContent.replace("$body", newHtmlBodyContent);
-        Path newHtmlPath = Paths.get(htmlTemplatePath.getParent() +
-                String.format("/categories%s.html", LocalDateTime.now()));
+        Path newHtmlPath = Paths.get(htmlTemplatePath.getParent() + "/categories.html");
 
         Files.writeString(newHtmlPath, newHtmlContent, StandardCharsets.UTF_8);
     }
