@@ -32,6 +32,19 @@ public class CourseTest {
     }
 
     @Test
+    void should_create_course() {
+        new Course("code1",
+                "name1",
+                1,
+                true,
+                "targetAudience1",
+                "Instructor1",
+                "syllabus1",
+                "dev_abilities1",
+                subcategory);
+    }
+
+    @Test
     void should_throw_exception_if_code_is_null() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Course(null,

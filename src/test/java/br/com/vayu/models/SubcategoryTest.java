@@ -24,6 +24,17 @@ public class SubcategoryTest {
     }
 
     @Test
+    void should_create_subcategory() {
+        new Subcategory("code1",
+                "name1",
+                "desc1",
+                null,
+                true,
+                1,
+                category);
+    }
+
+    @Test
     void should_throw_exception_if_code_is_null() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Subcategory(null,

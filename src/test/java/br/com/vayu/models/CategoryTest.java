@@ -9,6 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CategoryTest {
 
     @Test
+    void should_create_category() {
+        new Category("code1",
+                "name1",
+                "desc1",
+                null,
+                true,
+                1,
+                "https://www.test.com.br/icon1.png",
+                "#000000");
+    }
+
+    @Test
     void should_throw_exception_if_code_is_null() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Category(null,
