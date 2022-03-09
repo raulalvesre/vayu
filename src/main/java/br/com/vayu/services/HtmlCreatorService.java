@@ -10,7 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -60,7 +59,7 @@ public class HtmlCreatorService {
                 });
 
         String newHtmlContent = htmlTemplateContent.replace("$body", newHtmlBodyContent);
-        Path newHtmlPath = Paths.get(htmlTemplatePath.getParent() + "/categories.html");
+        Path newHtmlPath = Path.of("src", "main", "resources", "categories.html");
 
         Files.writeString(newHtmlPath, newHtmlContent, StandardCharsets.UTF_8);
     }
