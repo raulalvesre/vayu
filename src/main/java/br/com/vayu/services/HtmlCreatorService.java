@@ -2,7 +2,7 @@ package br.com.vayu.services;
 
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
-import br.com.vayu.models.SubCategory;
+import br.com.vayu.models.Subcategory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,8 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -19,10 +17,10 @@ import java.util.List;
 public class HtmlCreatorService {
 
     public static void generateCategoriesHtml(Collection<Category> categories,
-                                              Collection<SubCategory> subCategories,
+                                              Collection<Subcategory> subCategories,
                                               Collection<Course> courses) throws URISyntaxException, IOException {
-        List<SubCategory> subCategoriesListOrdered = subCategories.stream()
-                .sorted(Comparator.comparingInt(SubCategory::getOrder))
+        List<Subcategory> subCategoriesListOrdered = subCategories.stream()
+                .sorted(Comparator.comparingInt(Subcategory::getOrder))
                 .toList();
 
         Path htmlTemplatePath = getHtmlTemplatePath();
@@ -34,7 +32,8 @@ public class HtmlCreatorService {
                 .sorted(Comparator.comparingInt(Category::getOrder))
                 .forEachOrdered(category -> {
                     long numberOfCoursesInCategory = getCoursesRegisteredInCategory(courses, category);
-                    long sumOfEstimatedHoursToFinish = getSumOfCoursesEstimatedHoursToFinishInCategory(courses, category);
+                    long sumOfEstimatedHoursToFinish =
+                            getSumOfCoursesEstimatedHoursToFinishInCategory(courses, category);
 
                     newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()))
                             .append(String.format("<p>%s</p>", category.getDescription()))
@@ -49,7 +48,8 @@ public class HtmlCreatorService {
                     subCategoriesListOrdered.stream()
                             .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
                             .forEachOrdered(sb -> {
-                                List<String> namesOfCoursesInThisSubcategory = getNamesOfCoursesInSubcategory(courses, sb);
+                                List<String> namesOfCoursesInThisSubcategory =
+                                        getNamesOfCoursesInSubcategory(courses, sb);
 
                                 newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()))
                                         .append(String.format("<p>%s</p>", sb.getDescription()))
@@ -59,8 +59,7 @@ public class HtmlCreatorService {
                 });
 
         String newHtmlContent = htmlTemplateContent.replace("$body", newHtmlBodyContent);
-        Path newHtmlPath = Paths.get(htmlTemplatePath.getParent() +
-                String.format("/categories%s.html", LocalDateTime.now()));
+        Path newHtmlPath = Path.of("src", "main", "resources", "categories.html");
 
         Files.writeString(newHtmlPath, newHtmlContent, StandardCharsets.UTF_8);
     }
@@ -77,14 +76,15 @@ public class HtmlCreatorService {
                 .count();
     }
 
-    private static long getSumOfCoursesEstimatedHoursToFinishInCategory(Collection<Course> courses, Category category) {
+    private static long getSumOfCoursesEstimatedHoursToFinishInCategory(Collection<Course> courses,
+                                                                        Category category) {
         return courses.stream()
                 .filter(course -> course.getSubCategory().getCategory().equals(category))
                 .mapToInt(Course::getEstimatedHoursToFinish)
                 .sum();
     }
 
-    private static List<String> getNamesOfCoursesInSubcategory(Collection<Course> courses, SubCategory subCategory) {
+    private static List<String> getNamesOfCoursesInSubcategory(Collection<Course> courses, Subcategory subCategory) {
         return courses.stream()
                 .filter(course -> course.getSubCategory().equals(subCategory))
                 .map(Course::getName)

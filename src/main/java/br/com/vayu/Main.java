@@ -2,24 +2,22 @@ package br.com.vayu;
 
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
-import br.com.vayu.models.SubCategory;
-import br.com.vayu.services.CsvParserService;
+import br.com.vayu.models.Subcategory;
+import br.com.vayu.services.CategoryService;
+import br.com.vayu.services.CourseService;
 import br.com.vayu.services.HtmlCreatorService;
+import br.com.vayu.services.SubcategoryService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static br.com.vayu.helpers.CategoryHelper.*;
-import static br.com.vayu.helpers.CourseHelper.*;
-import static br.com.vayu.helpers.SubCategoryHelper.*;
-
 public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<Category> categories = CsvParserService.getCategoriesListFromCsv();
-        List<SubCategory> subCategories = CsvParserService.getSubCategoriesListFromCsv(categories);
-        List<Course> courses = CsvParserService.getCoursesListFromCsv(subCategories);
+        List<Category> categories = CategoryService.getCategoriesListFromCsv("categories.csv");
+        List<Subcategory> subCategories = SubcategoryService.getSubcategoriesListFromCsv("subcategories.csv", categories);
+        List<Course> courses = CourseService.getCourseListFromCsv("courses.csv", subCategories);
 
         HtmlCreatorService.generateCategoriesHtml(
                 categories,
@@ -34,22 +32,22 @@ public class Main {
         courses.forEach(System.out::println);
 
         System.out.println();
-        printActiveCategories(categories);
+        CategoryService.printActiveCategories(categories);
 
         System.out.println();
-        printSubCategoriesWithNoDescription(subCategories);
+        SubcategoryService.printSubCategoriesWithNoDescription(subCategories);
 
         System.out.println();
-        printIfThereIsPrivateCourse(courses);
+        CourseService.printIfThereIsPrivateCourse(courses);
 
         System.out.println();
-        printInstructorNames(courses);
+        CourseService.printInstructorNames(courses);
 
         System.out.println();
-        printQuantityOfActiveSubCategoriesWithDescription(subCategories);
+        SubcategoryService.printQuantityOfActiveSubCategoriesWithDescription(subCategories);
 
         System.out.println();
-        printInstructorNameAndHowManyCoursesTheyHave(courses);
+        CourseService.printInstructorNameAndHowManyCoursesTheyHave(courses);
     }
 
 }

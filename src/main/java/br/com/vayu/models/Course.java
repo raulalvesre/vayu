@@ -1,5 +1,7 @@
 package br.com.vayu.models;
 
+import java.util.Objects;
+
 import static br.com.vayu.services.ValidationService.*;
 
 public class Course {
@@ -12,7 +14,7 @@ public class Course {
     private final String instructorName;
     private String syllabus;
     private String developedAbilities;
-    private final SubCategory subCategory;
+    private final Subcategory subCategory;
 
     public Course(String code,
                   String name,
@@ -22,7 +24,7 @@ public class Course {
                   String instructorName,
                   String syllabus,
                   String developedAbilities,
-                  SubCategory subCategory) {
+                  Subcategory subCategory) {
         this(code, name, estimatedHoursToFinish, instructorName, subCategory);
 
         this.visible = visible;
@@ -33,9 +35,9 @@ public class Course {
 
     public Course(String code,
                   String name,
-                  Integer estimatedHoursToFinish,
+                  int estimatedHoursToFinish,
                   String instructorName,
-                  SubCategory subCategory) {
+                  Subcategory subCategory) {
         validateIfItIsValidCode(code);
         validateIfIsBlankString("name", name);
         validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
@@ -47,6 +49,10 @@ public class Course {
         this.estimatedHoursToFinish = estimatedHoursToFinish;
         this.instructorName = instructorName;
         this.subCategory = subCategory;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getName() {
@@ -61,12 +67,44 @@ public class Course {
         return visible;
     }
 
+    public String getTargetAudience() {
+        return targetAudience;
+    }
+
     public String getInstructorName() {
         return instructorName;
     }
 
-    public SubCategory getSubCategory() {
+    public String getSyllabus() {
+        return syllabus;
+    }
+
+    public String getDevelopedAbilities() {
+        return developedAbilities;
+    }
+
+    public Subcategory getSubCategory() {
         return subCategory;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return estimatedHoursToFinish == course.estimatedHoursToFinish &&
+                visible == course.visible && code.equals(course.code) &&
+                name.equals(course.name) &&
+                Objects.equals(targetAudience, course.targetAudience) &&
+                instructorName.equals(course.instructorName) &&
+                Objects.equals(syllabus, course.syllabus) &&
+                Objects.equals(developedAbilities, course.developedAbilities) &&
+                subCategory.equals(course.subCategory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, name, estimatedHoursToFinish, visible, targetAudience, instructorName, syllabus, developedAbilities, subCategory);
     }
 
     @Override

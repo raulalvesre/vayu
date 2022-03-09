@@ -56,6 +56,10 @@ public class Category {
         return description;
     }
 
+    public String getStudyGuide() {
+        return studyGuide;
+    }
+
     public boolean isActive() {
         return active;
     }
@@ -77,12 +81,19 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(code, category.code);
+        return active == category.active &&
+                order == category.order &&
+                code.equals(category.code) &&
+                name.equals(category.name) &&
+                Objects.equals(description, category.description) &&
+                Objects.equals(studyGuide, category.studyGuide) &&
+                Objects.equals(iconPath, category.iconPath) &&
+                Objects.equals(colorCode, category.colorCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code);
+        return Objects.hash(code, name, description, studyGuide, active, order, iconPath, colorCode);
     }
 
     @Override
