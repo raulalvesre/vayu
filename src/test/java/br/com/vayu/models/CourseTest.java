@@ -5,10 +5,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CourseTest {
 
+    private static final String code = "code";
+    private static final String name = "name";
+    private static final int estimatedHoursToFinish = 1;
+    private static final boolean visible = true;
+    private static final String targetAudience = "audience";
+    private static final String instructorName = "Joao";
+    private static final String syllabus = "syllabus";
+    private static final String developedAbilities = "dev abilities";
     private static Subcategory subcategory;
 
     @BeforeAll
@@ -33,43 +42,43 @@ public class CourseTest {
 
     @Test
     void should_create_course() {
-        new Course("code1",
-                "name1",
-                1,
-                true,
-                "targetAudience1",
-                "Instructor1",
-                "syllabus1",
-                "dev_abilities1",
-                subcategory);
+        assertDoesNotThrow(() -> new Course(code,
+                name,
+                estimatedHoursToFinish,
+                visible,
+                targetAudience,
+                instructorName,
+                syllabus,
+                developedAbilities,
+                subcategory));
     }
 
     @Test
     void should_throw_exception_if_code_is_null() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Course(null,
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t"})
-    void should_throw_exception_if_code_is_blank(String code) {
+    void should_throw_exception_if_code_is_blank(String codeParam) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course(code,
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                () -> new Course(codeParam,
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
@@ -77,113 +86,113 @@ public class CourseTest {
     void should_throw_exception_if_code_is_invalid() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Course("INVALID",
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @Test
     void should_throw_exception_if_name_is_null() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
+                () -> new Course(code,
                         null,
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t"})
-    void should_throw_exception_if_name_is_blank(String name) {
+    void should_throw_exception_if_name_is_blank(String nameParam) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        name,
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                () -> new Course(code,
+                        nameParam,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @Test
     void should_throw_exception_if_estimated_hours_to_finish_is_less_than_one() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        "name1",
+                () -> new Course(code,
+                        name,
                         0,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @Test
     void should_throw_exception_if_estimated_hours_to_finish_is_bigger_than_twenty() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        "name1",
+                () -> new Course(code,
+                        name,
                         21,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @Test
     void should_throw_exception_if_instructor_name_is_null() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
+                () -> new Course(code,
                         null,
-                        "syllabus1",
-                        "dev_abilities1",
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t"})
-    void should_throw_exception_if_instructor_name_is_blank(String instructorName) {
+    void should_throw_exception_if_instructor_name_is_blank(String instructorNameParam) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
-                        instructorName,
-                        "syllabus1",
-                        "dev_abilities1",
+                () -> new Course(code,
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorNameParam,
+                        syllabus,
+                        developedAbilities,
                         subcategory));
     }
 
     @Test
     void should_throw_exception_if_subcategory_is_null() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Course("code1",
-                        "name1",
-                        1,
-                        true,
-                        "targetAudience1",
-                        "Instructor1",
-                        "syllabus1",
-                        "dev_abilities1",
+                () -> new Course(code,
+                        name,
+                        estimatedHoursToFinish,
+                        visible,
+                        targetAudience,
+                        instructorName,
+                        syllabus,
+                        developedAbilities,
                         null));
     }
 

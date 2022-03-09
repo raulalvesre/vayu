@@ -1,8 +1,8 @@
 package br.com.vayu.models;
 
-import br.com.vayu.services.ValidationService;
-
 import java.util.Objects;
+
+import static br.com.vayu.services.ValidationService.*;
 
 public class Subcategory {
 
@@ -32,9 +32,9 @@ public class Subcategory {
     public Subcategory(String code,
                        String name,
                        Category category) {
-        ValidationService.validateIfItIsValidCode(code);
-        ValidationService.validateIfIsBlankString("name", name);
-        ValidationService.validateIfItIsNull("category", category);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfItIsNull("category", category);
 
         this.code = code;
         this.name = name;

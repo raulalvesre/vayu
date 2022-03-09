@@ -1,7 +1,8 @@
 package br.com.vayu.models.activities;
 
 import br.com.vayu.models.Section;
-import br.com.vayu.services.ValidationService;
+
+import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 
 public class Explanation extends Activity {
 
@@ -13,7 +14,7 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        ValidationService.validateIfIsBlankString("text", text);
+        validateIfIsBlankString("text", text);
         this.text = text;
     }
 

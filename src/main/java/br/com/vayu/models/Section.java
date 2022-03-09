@@ -1,6 +1,6 @@
 package br.com.vayu.models;
 
-import br.com.vayu.services.ValidationService;
+import static br.com.vayu.services.ValidationService.*;
 
 public class Section {
 
@@ -14,9 +14,9 @@ public class Section {
     public Section(String code,
                    String name,
                    Course course) {
-        ValidationService.validateIfItIsValidCode(code);
-        ValidationService.validateIfIsBlankString("name", name);
-        ValidationService.validateIfItIsNull("course", course);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfItIsNull("course", course);
 
         this.code = code;
         this.name = name;

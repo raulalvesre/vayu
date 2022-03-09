@@ -1,8 +1,8 @@
 package br.com.vayu.models;
 
-import br.com.vayu.services.ValidationService;
-
 import java.util.Objects;
+
+import static br.com.vayu.services.ValidationService.*;
 
 public class Category {
 
@@ -25,7 +25,7 @@ public class Category {
                     String colorCode) {
         this(code, name);
 
-        ValidationService.validateIfIsValidHexColorCode("color code", colorCode);
+        validateIfIsValidHexColorCode("color code", colorCode);
 
         this.description = description;
         this.studyGuide = studyGuide;
@@ -37,8 +37,8 @@ public class Category {
 
     public Category(String code,
                     String name) {
-        ValidationService.validateIfItIsValidCode(code);
-        ValidationService.validateIfIsBlankString("name", name);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
 
         this.code = code;
         this.name = name;

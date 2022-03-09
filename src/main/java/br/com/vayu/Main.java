@@ -3,7 +3,10 @@ package br.com.vayu;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.Subcategory;
-import br.com.vayu.services.*;
+import br.com.vayu.services.CategoryService;
+import br.com.vayu.services.CourseService;
+import br.com.vayu.services.HtmlCreatorService;
+import br.com.vayu.services.SubcategoryService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -17,11 +20,6 @@ public class Main {
         List<Course> courses = CourseService.getCourseListFromCsv("courses.csv", subCategories);
 
         HtmlCreatorService.generateCategoriesHtml(
-                categories,
-                subCategories,
-                courses);
-
-        SqlCreatorService.createDataSqlFile(
                 categories,
                 subCategories,
                 courses);

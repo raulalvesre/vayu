@@ -1,8 +1,8 @@
 package br.com.vayu.models;
 
-import br.com.vayu.services.ValidationService;
-
 import java.util.Objects;
+
+import static br.com.vayu.services.ValidationService.*;
 
 public class Course {
 
@@ -38,11 +38,11 @@ public class Course {
                   int estimatedHoursToFinish,
                   String instructorName,
                   Subcategory subCategory) {
-        ValidationService.validateIfItIsValidCode(code);
-        ValidationService.validateIfIsBlankString("name", name);
-        ValidationService.validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
-        ValidationService.validateIfIsBlankString("instructor name", instructorName);
-        ValidationService.validateIfItIsNull("sub category", subCategory);
+        validateIfItIsValidCode(code);
+        validateIfIsBlankString("name", name);
+        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
+        validateIfIsBlankString("instructor name", instructorName);
+        validateIfItIsNull("sub category", subCategory);
 
         this.code = code;
         this.name = name;

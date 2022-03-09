@@ -1,7 +1,8 @@
 package br.com.vayu.models.activities;
 
-import br.com.vayu.services.ValidationService;
 import br.com.vayu.models.Section;
+
+import static br.com.vayu.services.ValidationService.validateIfItIsValidURL;
 
 public class Video extends Activity {
 
@@ -15,7 +16,7 @@ public class Video extends Activity {
                  String url) {
         super(code, title, section);
 
-        ValidationService.validateIfItIsValidURL("URL", url);
+        validateIfItIsValidURL("URL", url);
         this.url = url;
     }
 

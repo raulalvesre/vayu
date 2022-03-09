@@ -5,10 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SubcategoryTest {
 
+    private static final String code = "code";
+    private static final String name = "name";
+    private static final String desc = "dec";
+    private static final boolean active = true;
+    private static final int order = 1;
     private static Category category;
 
     @BeforeAll
@@ -25,37 +31,37 @@ public class SubcategoryTest {
 
     @Test
     void should_create_subcategory() {
-        new Subcategory("code1",
-                "name1",
-                "desc1",
+        assertDoesNotThrow(() -> new Subcategory(code,
+                name,
+                desc,
                 null,
-                true,
-                1,
-                category);
+                active,
+                order,
+                category));
     }
 
     @Test
     void should_throw_exception_if_code_is_null() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Subcategory(null,
-                        "name1",
-                        "desc1",
+                        name,
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         category));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t"})
-    void should_throw_exception_if_code_is_blank(String code) {
+    void should_throw_exception_if_code_is_blank(String codeParam) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Subcategory(code,
-                        "name1",
-                        "desc1",
+                () -> new Subcategory(null,
+                        name,
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         category));
     }
 
@@ -63,48 +69,48 @@ public class SubcategoryTest {
     void should_throw_exception_if_code_is_invalid() {
         assertThrows(IllegalArgumentException.class,
                 () -> new Subcategory("INVALID",
-                        "name1",
-                        "desc1",
+                        name,
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         category));
     }
 
     @Test
     void should_throw_exception_if_name_is_null() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Subcategory("code1",
+                () -> new Subcategory(code,
                         null,
-                        "desc1",
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         category));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t"})
-    void should_throw_exception_if_name_is_blank(String name) {
+    void should_throw_exception_if_name_is_blank(String nameParam) {
         assertThrows(IllegalArgumentException.class,
-                () -> new Subcategory("code1",
-                        name,
-                        "desc1",
+                () -> new Subcategory(code,
+                        nameParam,
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         category));
     }
 
     @Test
     void should_throw_exception_if_category_is_null() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Subcategory("code1",
-                        "name1",
-                        "desc1",
+                () -> new Subcategory(code,
+                        name,
+                        desc,
                         null,
-                        true,
-                        1,
+                        active,
+                        order,
                         null));
     }
 

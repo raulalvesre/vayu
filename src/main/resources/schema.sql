@@ -1,34 +1,39 @@
 CREATE TABLE IF NOT EXISTS category
 (
-    code        VARCHAR(255) PRIMARY KEY,
+    id          INT          NOT NULL AUTO_INCREMENT,
+    code        VARCHAR(255) NOT NULL,
     name        VARCHAR(255) NOT NULL,
     description VARCHAR(255),
     study_guide VARCHAR(1024),
     active      BIT,
     `order`     TINYINT,
     icon_path   VARCHAR(512),
-    color_code  VARCHAR(7)
+    color_code  VARCHAR(7),
+
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS subcategory
 (
-    code          VARCHAR(255) NOT NULL,
-    category_code VARCHAR(255) NOT NULL,
-    name          VARCHAR(255) NOT NULL,
-    description   VARCHAR(255),
-    study_guide   VARCHAR(1024),
-    active        BIT,
-    `order`       TINYINT,
+    id          INT          NOT NULL AUTO_INCREMENT,
+    category_id INT          NOT NULL,
+    code        VARCHAR(255) NOT NULL,
+    name        VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
+    study_guide VARCHAR(1024),
+    active      BIT,
+    `order`     TINYINT,
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (category_code)
-        REFERENCES category (code)
+    PRIMARY KEY (id),
+    FOREIGN KEY (category_id)
+        REFERENCES category (id)
 );
 
 CREATE TABLE IF NOT EXISTS course
 (
+    id                        INT          NOT NULL AUTO_INCREMENT,
+    subcategory_id            INT          NOT NULL,
     code                      VARCHAR(255) NOT NULL,
-    subcategory_code          VARCHAR(255) NOT NULL,
     name                      VARCHAR(255) NOT NULL,
     estimated_hours_to_finish TINYINT      NOT NULL,
     visible                   BIT,
@@ -37,43 +42,46 @@ CREATE TABLE IF NOT EXISTS course
     syllabus                  TEXT,
     developed_abilities       VARCHAR(512),
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (subcategory_code)
-        REFERENCES subcategory (code)
+    PRIMARY KEY (id),
+    FOREIGN KEY (subcategory_id)
+        REFERENCES subcategory (id)
 );
 
 CREATE TABLE IF NOT EXISTS section
 (
-    code        VARCHAR(255) NOT NULL,
-    course_code VARCHAR(255) NOT NULL,
-    name        VARCHAR(255) NOT NULL,
-    `order`     TINYINT,
-    active      BIT,
-    test        BIT,
+    id        INT          NOT NULL AUTO_INCREMENT,
+    course_id INT          NOT NULL,
+    code      VARCHAR(255) NOT NULL,
+    name      VARCHAR(255) NOT NULL,
+    `order`   TINYINT,
+    active    BIT,
+    test      BIT,
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (course_code)
-        REFERENCES course (code)
+    PRIMARY KEY (id),
+    FOREIGN KEY (course_id)
+        REFERENCES course (id)
 );
 
 CREATE TABLE IF NOT EXISTS explanation
 (
-    code         VARCHAR(255) NOT NULL,
-    section_code VARCHAR(255) NOT NULL,
-    title        VARCHAR(255) NOT NULL,
-    active       BIT,
-    `order`      TINYINT,
-    text         VARCHAR(255) NOT NULL,
+    id         INT          NOT NULL AUTO_INCREMENT,
+    section_id INT          NOT NULL,
+    code       VARCHAR(255) NOT NULL,
+    title      VARCHAR(255) NOT NULL,
+    active     BIT,
+    `order`    TINYINT,
+    text       VARCHAR(255) NOT NULL,
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (section_code)
-        REFERENCES section (code)
+    PRIMARY KEY (id),
+    FOREIGN KEY (section_id)
+        REFERENCES section (id)
 );
 
 CREATE TABLE IF NOT EXISTS video
 (
+    id                  INT          NOT NULL AUTO_INCREMENT,
+    section_id          INT          NOT NULL,
     code                VARCHAR(255) NOT NULL,
-    section_code        VARCHAR(255) NOT NULL,
     title               VARCHAR(255) NOT NULL,
     active              BIT,
     `order`             TINYINT,
@@ -81,32 +89,33 @@ CREATE TABLE IF NOT EXISTS video
     duration_in_minutes TINYINT,
     transcription       TEXT,
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (section_code)
-        REFERENCES section (code)
+    PRIMARY KEY (id),
+    FOREIGN KEY (section_id)
+        REFERENCES section (id)
 );
 
 CREATE TABLE IF NOT EXISTS question_type
 (
-    code TINYINT PRIMARY KEY,
+    id   TINYINT PRIMARY KEY,
     name VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS question
 (
+    id            INT          NOT NULL AUTO_INCREMENT,
+    section_id    INT          NOT NULL,
     code          VARCHAR(255) NOT NULL,
-    section_code  VARCHAR(255) NOT NULL,
     question_type TINYINT      NOT NULL,
     title         VARCHAR(255) NOT NULL,
     active        BIT,
     `order`       TINYINT,
     wording       VARCHAR(512) NOT NULL,
 
-    PRIMARY KEY (code),
-    FOREIGN KEY (section_code)
-        REFERENCES section (code),
+    PRIMARY KEY (id),
+    FOREIGN KEY (section_id)
+        REFERENCES section (id),
     FOREIGN KEY (question_type)
-        REFERENCES question_type (code)
+        REFERENCES question_type (id)
 );
 
 CREATE TABLE IF NOT EXISTS alternative
@@ -115,8 +124,8 @@ CREATE TABLE IF NOT EXISTS alternative
     `order`       TINYINT,
     correct       BIT,
     justification VARCHAR(512),
-    question_code VARCHAR(255),
+    question_id   INT,
 
-    FOREIGN KEY (question_code)
-        REFERENCES question (code)
+    FOREIGN KEY (question_id)
+        REFERENCES question (id)
 )

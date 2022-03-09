@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class SubcategoryService {
 
-    public static List<Subcategory> getSubcategoriesListFromCsv(String resourcesFolderPath, List<Category> categoryList) {
+    public static List<Subcategory> getSubcategoriesListFromCsv(String resourcesFolderPath,
+                                                                List<Category> categoryList) {
         List<Subcategory> subCategories = new ArrayList<>();
 
         InputStream subCategoriesInputStream = getInputStreamFromResources(resourcesFolderPath);

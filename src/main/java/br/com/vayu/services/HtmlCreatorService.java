@@ -33,7 +33,8 @@ public class HtmlCreatorService {
                 .sorted(Comparator.comparingInt(Category::getOrder))
                 .forEachOrdered(category -> {
                     long numberOfCoursesInCategory = getCoursesRegisteredInCategory(courses, category);
-                    long sumOfEstimatedHoursToFinish = getSumOfCoursesEstimatedHoursToFinishInCategory(courses, category);
+                    long sumOfEstimatedHoursToFinish =
+                            getSumOfCoursesEstimatedHoursToFinishInCategory(courses, category);
 
                     newHtmlBodyContent.append(String.format("<h2>%s</h2>", category.getName()))
                             .append(String.format("<p>%s</p>", category.getDescription()))
@@ -48,7 +49,8 @@ public class HtmlCreatorService {
                     subCategoriesListOrdered.stream()
                             .filter(sb -> sb.isActive() && sb.getCategory().equals(category))
                             .forEachOrdered(sb -> {
-                                List<String> namesOfCoursesInThisSubcategory = getNamesOfCoursesInSubcategory(courses, sb);
+                                List<String> namesOfCoursesInThisSubcategory =
+                                        getNamesOfCoursesInSubcategory(courses, sb);
 
                                 newHtmlBodyContent.append(String.format("<h4>%s</h4>", sb.getName()))
                                         .append(String.format("<p>%s</p>", sb.getDescription()))
@@ -75,7 +77,8 @@ public class HtmlCreatorService {
                 .count();
     }
 
-    private static long getSumOfCoursesEstimatedHoursToFinishInCategory(Collection<Course> courses, Category category) {
+    private static long getSumOfCoursesEstimatedHoursToFinishInCategory(Collection<Course> courses,
+                                                                        Category category) {
         return courses.stream()
                 .filter(course -> course.getSubCategory().getCategory().equals(category))
                 .mapToInt(Course::getEstimatedHoursToFinish)

@@ -25,7 +25,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void should_return_list_identical_to_csv_data() {
+    void getCourseListFromCsv__should_return_list_identical_to_csv_data() {
         List<Course> receivedList = CourseService.getCourseListFromCsv(
                 "course/valid_courses.csv",
                 subcategories);
@@ -68,7 +68,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void should_return_empty_list() {
+    void getCourseListFromCsv__should_return_empty_list() {
         List<Course> receivedList = CourseService.getCourseListFromCsv(
                 "course/empty_courses.csv",
                 subcategories);
@@ -78,59 +78,66 @@ public class CourseServiceTest {
     }
 
     @Test
-    void should_throw_exception_if_csv_does_not_exist() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_does_not_exist() {
         assertThrows(IllegalArgumentException.class,
                 () -> CourseService.getCourseListFromCsv("I dont exist", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_name() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_empty_name() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv("course/empty_name_course.csv", subcategories));
+                () -> CourseService
+                        .getCourseListFromCsv("course/empty_name_course.csv", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_code() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_empty_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv("course/empty_code_course.csv", subcategories));
+                () -> CourseService
+                        .getCourseListFromCsv("course/empty_code_course.csv", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_invalid_code() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_invalid_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv("course/invalid_code_course.csv", subcategories));
+                () -> CourseService
+                        .getCourseListFromCsv("course/invalid_code_course.csv", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_estimated_hours_to_finish_smaller_than_one() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_estimated_hours_to_finish_smaller_than_one() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv(
+                () -> CourseService
+                        .getCourseListFromCsv(
                         "course/course_with_estimated_hours_to_finish_smaller_than_one.csv",
                         subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_estimated_hours_to_finish_bigger_than_one() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_estimated_hours_to_finish_bigger_than_one() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv(
+                () -> CourseService
+                        .getCourseListFromCsv(
                         "course/course_with_estimated_hours_to_finish_bigger_than_one.csv", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_instructor_name() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_empty_instructor_name() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv(
+                () -> CourseService
+                        .getCourseListFromCsv(
                         "course/course_with_empty_instructor_name.csv", subcategories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_subcategory_code() {
+    void getCourseListFromCsv__should_throw_exception_if_csv_contains_empty_subcategory_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CourseService.getCourseListFromCsv("course/course_with_empty_subcategory_code.csv", subcategories));
+                () -> CourseService
+                        .getCourseListFromCsv("course/course_with_empty_subcategory_code.csv", subcategories));
     }
 
     @Test
-    void should_print_private_courses() {
+    void printIfThereIsPrivateCourse__should_print_private_courses() {
         List<Course> receivedList = CourseService.getCourseListFromCsv(
                 "course/valid_courses.csv",
                 subcategories);
@@ -149,7 +156,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void should_print_instructor_names_without_repetition() {
+    void printInstructorNames__should_print_instructor_names_without_repetition() {
         List<Course> receivedList = CourseService.getCourseListFromCsv(
                 "course/valid_courses.csv",
                 subcategories);
@@ -169,7 +176,7 @@ public class CourseServiceTest {
     }
 
     @Test
-    void should_print_instructor_name_and_how_many_courses_they_have() {
+    void printInstructorNameAndHowManyCoursesTheyHave__should_print_instructor_name_and_how_many_courses_they_have() {
         List<Course> receivedList = CourseService.getCourseListFromCsv(
                 "course/valid_courses.csv",
                 subcategories);

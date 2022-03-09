@@ -12,8 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CategoryServiceTest {
 
     @Test
-    void should_return_list_identical_to_csv_data() {
-        List<Category> receivedList = CategoryService.getCategoriesListFromCsv("category/valid_categories.csv");
+    void getCategoriesListFromCsv__should_return_list_identical_to_csv_data() {
+        List<Category> receivedList =
+                CategoryService.getCategoriesListFromCsv("category/valid_categories.csv");
 
         Category category1 = new Category("code1",
                 "name1",
@@ -41,52 +42,57 @@ public class CategoryServiceTest {
     }
 
     @Test
-    void should_return_empty_list() {
-        List<Category> receivedList = CategoryService.getCategoriesListFromCsv("category/empty_categories.csv");
+    void getCategoriesListFromCsv__should_return_empty_list() {
+        List<Category> receivedList =
+                CategoryService.getCategoriesListFromCsv("category/empty_categories.csv");
 
         assertNotNull(receivedList);
         assertEquals(receivedList.size(), 0);
     }
 
     @Test
-    void should_throw_exception_if_csv_does_not_exist() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_does_not_exist() {
         assertThrows(IllegalArgumentException.class,
                 () -> CategoryService.getCategoriesListFromCsv("I dont exist"));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_name() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_name() {
         assertThrows(IllegalArgumentException.class,
                 () -> CategoryService.getCategoriesListFromCsv("category/empty_name_category.csv"));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_code() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_code() {
         assertThrows(IllegalArgumentException.class,
                 () -> CategoryService.getCategoriesListFromCsv("category/empty_code_category.csv"));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_invalid_code() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_contains_invalid_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CategoryService.getCategoriesListFromCsv("category/invalid_code_category.csv"));
+                () -> CategoryService
+                        .getCategoriesListFromCsv("category/invalid_code_category.csv"));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_color_code() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_color_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CategoryService.getCategoriesListFromCsv("category/empty_color_code_category.csv"));
+                () -> CategoryService
+                        .getCategoriesListFromCsv("category/empty_color_code_category.csv"));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_invalid_color_code() {
+    void getCategoriesListFromCsv__should_throw_exception_if_csv_contains_invalid_color_code() {
         assertThrows(IllegalArgumentException.class,
-                () -> CategoryService.getCategoriesListFromCsv("category/invalid_color_code_category.csv"));
+                () -> CategoryService
+                        .getCategoriesListFromCsv("category/invalid_color_code_category.csv"));
     }
 
     @Test
-    void should_print_active_categories() {
-        List<Category> receivedList = CategoryService.getCategoriesListFromCsv("category/valid_categories.csv");
+    void printActiveCategories__should_print_active_categories() {
+        List<Category> receivedList =
+                CategoryService.getCategoriesListFromCsv("category/valid_categories.csv");
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));

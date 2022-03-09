@@ -21,7 +21,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_return_list_identical_to_csv_data() {
+    void getSubcategoriesListFromCsv__should_return_list_identical_to_csv_data() {
         List<Subcategory> receivedList = SubcategoryService.getSubcategoriesListFromCsv(
                 "subcategory/valid_subcategories.csv",
                 categories);
@@ -50,7 +50,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_return_empty_list() {
+    void getSubcategoriesListFromCsv__should_return_empty_list() {
         List<Subcategory> receivedList = SubcategoryService.getSubcategoriesListFromCsv(
                 "subcategory/empty_subcategories.csv",
                 categories);
@@ -60,20 +60,20 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_throw_exception_if_csv_does_not_exist() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_does_not_exist() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv("I dont exist", categories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_name() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_name() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv(
                         "subcategory/empty_name_subcategory.csv", categories));
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_code() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_code() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv(
                         "subcategory/empty_code_subcategory.csv", categories));
@@ -81,7 +81,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_invalid_code() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_contains_invalid_code() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv(
                         "subcategory/invalid_code_subcategory.csv", categories));
@@ -89,7 +89,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_empty_category_code() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_contains_empty_category_code() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv(
                         "subcategory/empty_category_code_subcategory.csv", categories));
@@ -97,7 +97,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_throw_exception_if_csv_contains_invalid_color_code() {
+    void getSubcategoriesListFromCsv__should_throw_exception_if_csv_contains_invalid_color_code() {
         assertThrows(IllegalArgumentException.class,
                 () -> SubcategoryService.getSubcategoriesListFromCsv(
                         "subcategory/invalid_category_code_subcategory.csv", categories));
@@ -105,7 +105,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_print_sub_categories_with_no_description() {
+    void printSubCategoriesWithNoDescription__should_print_sub_categories_with_no_description() {
         List<Subcategory> receivedList = SubcategoryService.getSubcategoriesListFromCsv(
                 "subcategory/valid_subcategories.csv", categories);
 
@@ -123,7 +123,7 @@ public class SubcategoryServiceTest {
     }
 
     @Test
-    void should_print_quantity_of_active_sub_categories_with_description() {
+    void printQuantityOfActiveSubCategoriesWithDescription__should_print_quantity_of_active_sub_categories_with_description() {
         List<Subcategory> receivedList = SubcategoryService.getSubcategoriesListFromCsv(
                 "subcategory/valid_subcategories.csv", categories);
 
