@@ -22,8 +22,8 @@ public class CourseDAO {
                 INNER JOIN subcategory sb on sb.id = c.subcategory_id
                 WHERE visible""";
 
-        try (Connection con = getConnection()) {
-            PreparedStatement pstm = con.prepareStatement(query);
+        try (Connection con = getConnection();
+             PreparedStatement pstm = con.prepareStatement(query)) {
             pstm.execute();
             ResultSet rst = pstm.getResultSet();
             return toCourseDTOList(rst);
@@ -59,8 +59,9 @@ public class CourseDAO {
                 INSERT INTO course
                 VALUES (DEFAULT, ?, ?, ?, ?, ?, ? ,? ,?, ?)""";
 
-        try (Connection con = getConnection()) {
-            PreparedStatement pstm = con.prepareStatement(query, RETURN_GENERATED_KEYS);
+        try (Connection con = getConnection();
+             PreparedStatement pstm = con.prepareStatement(query, RETURN_GENERATED_KEYS)) {
+
             pstm.setInt(1, courseDto.subcategoryId());
             pstm.setString(2, courseDto.code());
             pstm.setString(3, courseDto.name());
@@ -87,8 +88,8 @@ public class CourseDAO {
                 SET visible = true
                 WHERE visible = false""";
 
-        try (Connection con = getConnection()) {
-            PreparedStatement pstm = con.prepareStatement(query);
+        try (Connection con = getConnection();
+             PreparedStatement pstm = con.prepareStatement(query)) {
             pstm.execute();
             return pstm.getUpdateCount();
         } catch (SQLException e) {
@@ -101,8 +102,8 @@ public class CourseDAO {
                 DELETE FROM course
                 WHERE code LIKE ?""";
 
-        try (Connection con = getConnection()) {
-            PreparedStatement pstm = con.prepareStatement(query);
+        try (Connection con = getConnection();
+             PreparedStatement pstm = con.prepareStatement(query)) {
             pstm.setString(1, "%" + courseCode + "%");
             pstm.execute();
         } catch (SQLException e) {
