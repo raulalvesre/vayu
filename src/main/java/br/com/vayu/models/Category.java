@@ -6,6 +6,7 @@ import static br.com.vayu.services.ValidationService.*;
 
 public class Category {
 
+    private int id;
     private final String code;
     private final String name;
     private String description;
@@ -35,8 +36,7 @@ public class Category {
         this.colorCode = colorCode;
     }
 
-    public Category(String code,
-                    String name) {
+    public Category(String code, String name) {
         validateIfItIsValidCode(code);
         validateIfIsBlankString("name", name);
 

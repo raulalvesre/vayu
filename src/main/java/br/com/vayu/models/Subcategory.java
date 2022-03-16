@@ -8,11 +8,12 @@ public class Subcategory {
 
     private final String code;
     private final String name;
+    private final Category category;
+    private int id;
     private String description;
     private String studyGuide;
     private boolean active;
     private int order;
-    private final Category category;
 
     public Subcategory(String code,
                        String name,
@@ -39,6 +40,10 @@ public class Subcategory {
         this.code = code;
         this.name = name;
         this.category = category;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getCode() {
@@ -75,12 +80,12 @@ public class Subcategory {
         if (o == null || getClass() != o.getClass()) return false;
         Subcategory that = (Subcategory) o;
         return active == that.active &&
-                order == that.order &&
-                code.equals(that.code) &&
-                name.equals(that.name) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(studyGuide, that.studyGuide) &&
-                category.equals(that.category);
+               order == that.order &&
+               code.equals(that.code) &&
+               name.equals(that.name) &&
+               Objects.equals(description, that.description) &&
+               Objects.equals(studyGuide, that.studyGuide) &&
+               category.equals(that.category);
     }
 
     @Override
@@ -91,14 +96,14 @@ public class Subcategory {
     @Override
     public String toString() {
         return "SubCategory{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", studyGuide='" + studyGuide + '\'' +
-                ", active=" + active +
-                ", order=" + order +
-                ", category=" + category.getName() +
-                '}';
+               "code='" + code + '\'' +
+               ", name='" + name + '\'' +
+               ", description='" + description + '\'' +
+               ", studyGuide='" + studyGuide + '\'' +
+               ", active=" + active +
+               ", order=" + order +
+               ", category=" + category.getName() +
+               '}';
     }
 
 }
