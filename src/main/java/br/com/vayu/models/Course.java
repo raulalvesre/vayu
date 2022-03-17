@@ -6,6 +6,7 @@ import static br.com.vayu.services.ValidationService.*;
 
 public class Course {
 
+    private int id;
     private final String code;
     private final String name;
     private final int estimatedHoursToFinish;
@@ -49,6 +50,10 @@ public class Course {
         this.estimatedHoursToFinish = estimatedHoursToFinish;
         this.instructorName = instructorName;
         this.subCategory = subCategory;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getCode() {
@@ -104,7 +109,15 @@ public class Course {
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, name, estimatedHoursToFinish, visible, targetAudience, instructorName, syllabus, developedAbilities, subCategory);
+        return Objects.hash(code,
+                name,
+                estimatedHoursToFinish,
+                visible,
+                targetAudience,
+                instructorName,
+                syllabus,
+                developedAbilities,
+                subCategory);
     }
 
     @Override
