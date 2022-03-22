@@ -2,17 +2,31 @@ package br.com.vayu.models;
 
 import br.com.vayu.models.activities.Question;
 
+import javax.persistence.*;
+
 import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 import static br.com.vayu.services.ValidationService.validateIfItIsNull;
 
+@Entity
+@Table(name = "alternative")
 public class Alternative {
 
-    private final String text;
-    private int order;
-    private final boolean correct;
-    private String justification;
-    private final Question question;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "question_id", nullable = false)
+    private Question question;
+
+    @Column(nullable = false)
+    private String text;
+
+    @Column(columnDefinition = "TINYINT")
+    private int order;
+
+    private boolean correct;
+    private String justification;
 
     public Alternative(String text, boolean correct, Question question) {
         validateIfIsBlankString("text", text);
@@ -22,5 +36,8 @@ public class Alternative {
         this.correct = correct;
         this.question = question;
     }
+
+    @Deprecated
+    public Alternative() {}
 
 }

@@ -2,11 +2,18 @@ package br.com.vayu.models.activities;
 
 import br.com.vayu.models.Section;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 
+@Entity
+@Table(name = "explanation")
 public class Explanation extends Activity {
 
-    private final String text;
+    @Column(nullable = false)
+    private String text;
 
     public Explanation(String code,
                        String title,
@@ -16,6 +23,11 @@ public class Explanation extends Activity {
 
         validateIfIsBlankString("text", text);
         this.text = text;
+    }
+
+    @Deprecated
+    public Explanation() {
+        super();
     }
 
 }

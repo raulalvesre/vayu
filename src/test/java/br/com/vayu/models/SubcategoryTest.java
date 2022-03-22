@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SubcategoryTest {
 
-    private static final String code = "code";
-    private static final String name = "name";
-    private static final String desc = "dec";
-    private static final boolean active = true;
-    private static final int order = 1;
+    private final String code = "code";
+    private final String name = "name";
+    private final String desc = "dec";
+    private final boolean active = true;
+    private final int order = 1;
     private static Category category;
 
     @BeforeAll
