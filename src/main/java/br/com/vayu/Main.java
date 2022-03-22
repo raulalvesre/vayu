@@ -20,7 +20,6 @@ public class Main {
         CourseDAO courseDAO = new CourseDAO(em);
 
         HtmlCreatorService.generateCoursesHtml(categoryDAO, subcategoryDAO, courseDAO);
-        em.getTransaction().begin();
 
         Subcategory subcategory = subcategoryDAO.findByIdJoinFetchCategory(5);
 
