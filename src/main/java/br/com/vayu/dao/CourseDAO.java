@@ -24,22 +24,61 @@ public class CourseDAO {
                 .getResultList();
     }
 
-    public void createCourse(Course course) {
-        entityManager.persist(course);
+    public void create(Course course) {
+        entityManager.getTransaction().begin();
+
+        try {
+            entityManager.persist(course);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
-    public int makeAllCoursesVisible() {
+    public int makeAllVisible() {
+        entityManager.getTransaction().begin();
+
         String jpql = """
                 UPDATE Course
                 SET visible = true
                 WHERE visible = false""";
 
-        return entityManager.createQuery(jpql).executeUpdate();
+        try {
+            int affectedRows = entityManager.createQuery(jpql).executeUpdate();
+            entityManager.getTransaction().commit();
+            return affectedRows;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
-    public void deleteCourse(Course course) {
-        course = entityManager.merge(course);
-        entityManager.remove(course);
+    public void delete(Course course) {
+        entityManager.getTransaction().begin();
+
+        try {
+            course = entityManager.merge(course);
+            entityManager.remove(course);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int deleteAll() {
+        entityManager.getTransaction().begin();
+        String jpql = "DELETE FROM Course";
+
+        try {
+            int affectedRows = entityManager.createQuery(jpql).executeUpdate();
+            entityManager.getTransaction().commit();
+            return affectedRows;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
     }
 
 }

@@ -5,32 +5,33 @@ import br.com.vayu.builders.CategoryBuilder;
 import br.com.vayu.builders.SubcategoryBuilder;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Subcategory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SubcategoryDAOTest {
 
-    private EntityManager entityManager;
-    private SubcategoryDAO subcategoryDAO;
-    private Category category;
+    private static CategoryDAO categoryDAO;
+    private static SubcategoryDAO subcategoryDAO;
+    private static Category category;
 
-    private final String code = "code";
-    private final String name = "name";
-    private final String description = "desc";
-    private final String studyGuide = "study guide";
+    private static final String code = "code";
+    private static final String name = "name";
+    private static final String description = "desc";
+    private static final String studyGuide = "study guide";
 
-    @BeforeEach
-    void beforeEach() {
-        entityManager = TestJPAUtil.getEntityManager();
+    @BeforeAll
+    static void beforeAll() {
+        EntityManager entityManager = TestJPAUtil.getEntityManager();
         subcategoryDAO = new SubcategoryDAO(entityManager);
-        entityManager.getTransaction().begin();
+        categoryDAO = new CategoryDAO(entityManager);
 
         category = new CategoryBuilder()
                 .code(code)
@@ -43,16 +44,21 @@ public class SubcategoryDAOTest {
                 .colorCode("#FFFFFF")
                 .build();
 
-        entityManager.persist(category);
+        categoryDAO.create(category);
     }
 
     @AfterEach
     void afterEach() {
-        entityManager.getTransaction().rollback();
+        subcategoryDAO.deleteAll();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        categoryDAO.deleteAll();
     }
 
     @Test
-    void findByIdIncludeCategory_should_return_subcategory_with_category() {
+    void findByIdJoinFetchCategory__should_return_subcategory_with_category() {
         Subcategory subcategory = new SubcategoryBuilder()
                 .code(code)
                 .name(name)
@@ -63,7 +69,7 @@ public class SubcategoryDAOTest {
                 .category(category)
                 .build();
 
-        entityManager.persist(subcategory);
+        subcategoryDAO.create(subcategory);
 
         Subcategory bdSubcategory = subcategoryDAO.findByIdJoinFetchCategory(subcategory.getId());
 
@@ -72,7 +78,13 @@ public class SubcategoryDAOTest {
     }
 
     @Test
-    void findAllByActiveTrueInOrder_should_return_active_subcategories_in_order() {
+    void findByIdJoinFetchCategory__should_throw_exception() {
+        assertThrows(NoResultException.class,
+                () -> subcategoryDAO.findByIdJoinFetchCategory(1));
+    }
+
+    @Test
+    void findAllByActiveTrueInOrder__should_return_active_subcategories_in_order() {
         Subcategory subcategory1 = new SubcategoryBuilder()
                 .code(code)
                 .name(name)
@@ -103,16 +115,24 @@ public class SubcategoryDAOTest {
                 .category(category)
                 .build();
 
-        entityManager.persist(subcategory1);
-        entityManager.persist(subcategory2);
-        entityManager.persist(subcategory3);
+        subcategoryDAO.create(subcategory1);
+        subcategoryDAO.create(subcategory2);
+        subcategoryDAO.create(subcategory3);
 
         List<Subcategory> receivedList = subcategoryDAO.findAllByActiveTrueInOrder();
 
         assertNotNull(receivedList);
-        assertEquals(receivedList.size(), 2);
+        assertEquals(2, receivedList.size());
         assertEquals(receivedList.get(0), subcategory1);
         assertEquals(receivedList.get(1), subcategory2);
+    }
+
+    @Test
+    void findAllByActiveTrueInOrder__should_return_empty_list() {
+        List<Subcategory> receivedList = subcategoryDAO.findAllByActiveTrueInOrder();
+
+        assertNotNull(receivedList);
+        assertEquals(0, receivedList.size());
     }
 
 }

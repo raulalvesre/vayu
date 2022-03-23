@@ -3,13 +3,13 @@ package br.com.vayu.models.activities;
 import br.com.vayu.models.Section;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
 
 @Entity
-@Table(name = "explanation")
+@DiscriminatorValue("explanation")
 public class Explanation extends Activity {
 
     @Column(nullable = false)

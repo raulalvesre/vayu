@@ -33,17 +33,13 @@ public class Main {
                 "raullogia",
                 subcategory);
 
-        em.getTransaction().begin();
-
-        courseDAO.createCourse(newCourse);
+        courseDAO.create(newCourse);
         System.out.println("ID curso criado: " + newCourse.getId());
 
-        courseDAO.deleteCourse(newCourse);
-
-        int updatedRows = courseDAO.makeAllCoursesVisible();
+        int updatedRows = courseDAO.makeAllVisible();
         System.out.println("UPDATE ROWS: " + updatedRows);
 
-        em.getTransaction().commit();
+        courseDAO.delete(newCourse);
     }
 
 }

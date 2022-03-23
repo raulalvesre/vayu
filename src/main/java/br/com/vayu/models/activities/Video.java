@@ -3,13 +3,13 @@ package br.com.vayu.models.activities;
 import br.com.vayu.models.Section;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import static br.com.vayu.services.ValidationService.validateIfItIsValidURL;
 
 @Entity
-@Table(name = "video")
+@DiscriminatorValue("video")
 public class Video extends Activity {
 
     @Column(nullable = false)

@@ -1,4 +1,4 @@
-package br.com.vayu.models;
+package br.com.vayu.models.activities.questions;
 
 import br.com.vayu.models.activities.Question;
 

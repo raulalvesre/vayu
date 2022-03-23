@@ -8,7 +8,7 @@ import javax.persistence.*;
 import static br.com.vayu.services.ValidationService.validateIfItIsNull;
 
 @Entity
-@Table(name = "question")
+@DiscriminatorValue("question")
 public class Question extends Activity {
 
     @Column(nullable = false)
@@ -16,7 +16,7 @@ public class Question extends Activity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private QuestionType type;
+    private QuestionType question_type;
 
     public Question(String code,
                     String title,
@@ -29,7 +29,7 @@ public class Question extends Activity {
         validateIfItIsNull("type", type);
 
         this.wording = wording;
-        this.type = type;
+        this.question_type = type;
     }
 
     @Deprecated

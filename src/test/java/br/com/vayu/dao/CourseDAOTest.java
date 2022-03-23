@@ -7,8 +7,9 @@ import br.com.vayu.builders.SubcategoryBuilder;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.Subcategory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -19,22 +20,24 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CourseDAOTest {
 
-    private EntityManager entityManager;
-    private CourseDAO courseDAO;
-    private Subcategory subcategory;
+    private static CategoryDAO categoryDAO;
+    private static SubcategoryDAO subcategoryDAO;
+    private static CourseDAO courseDAO;
+    private static Subcategory subcategory;
 
-    private final String code = "code";
-    private final String name = "name";
+    private static final String code = "code";
+    private static final String name = "name";
     private final String targetAudience = "targetAudience";
     private final String instructorName = "raul";
     private final String syllabus = "syllabus";
     private final String developedAbilities = "dev abilities";
 
-    @BeforeEach
-    public void beforeEach() {
-        entityManager = TestJPAUtil.getEntityManager();
+    @BeforeAll
+    static void beforeAll() {
+        EntityManager entityManager = TestJPAUtil.getEntityManager();
+        categoryDAO = new CategoryDAO(entityManager);
+        subcategoryDAO = new SubcategoryDAO(entityManager);
         courseDAO = new CourseDAO(entityManager);
-        entityManager.getTransaction().begin();
 
         String studyGuide = "study guide";
         String description = "desc";
@@ -50,7 +53,7 @@ public class CourseDAOTest {
                 .colorCode("#FFFFFF")
                 .build();
 
-        entityManager.persist(category);
+        categoryDAO.create(category);
 
         subcategory = new SubcategoryBuilder()
                 .code(code)
@@ -62,16 +65,22 @@ public class CourseDAOTest {
                 .category(category)
                 .build();
 
-        entityManager.persist(subcategory);
+        subcategoryDAO.create(subcategory);
     }
 
     @AfterEach
-    public void afterEach() {
-        entityManager.getTransaction().rollback();
+    void afterEach() {
+        courseDAO.deleteAll();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        subcategoryDAO.deleteAll();
+        categoryDAO.deleteAll();
     }
 
     @Test
-    void findAllByVisibleTrue_should_return_active_courses() {
+    void findAllByVisibleTrue__should_return_active_courses() {
         Course course1 = new CourseBuilder()
                 .code(code)
                 .name(name)
@@ -96,8 +105,8 @@ public class CourseDAOTest {
                 .subcategory(subcategory)
                 .build();
 
-        entityManager.persist(course1);
-        entityManager.persist(course2);
+        courseDAO.create(course1);
+        courseDAO.create(course2);
 
         List<Course> receivedList = courseDAO.findAllByVisibleTrue();
 
@@ -107,7 +116,15 @@ public class CourseDAOTest {
     }
 
     @Test
-    void makeAllCoursesVisible_should_make_all_courses_visible() {
+    void findAllByVisibleTrue__should_return_empty_list() {
+        List<Course> receivedList = courseDAO.findAllByVisibleTrue();
+
+        assertNotNull(receivedList);
+        assertEquals(0 , receivedList.size());
+    }
+
+    @Test
+    void makeAllCoursesVisible__should_make_two_courses_visible() {
         Course course1 = new CourseBuilder()
                 .code(code)
                 .name(name)
@@ -132,12 +149,19 @@ public class CourseDAOTest {
                 .subcategory(subcategory)
                 .build();
 
-        entityManager.persist(course1);
-        entityManager.persist(course2);
+        courseDAO.create(course1);
+        courseDAO.create(course2);
 
-        int affectedRows = courseDAO.makeAllCoursesVisible();
+        int affectedRows = courseDAO.makeAllVisible();
 
         assertEquals(affectedRows, 2);
+    }
+
+    @Test
+    void makeAllCoursesVisible__should_make_zero_courses_visible() {
+        int affectedRows = courseDAO.makeAllVisible();
+
+        assertEquals(0, affectedRows);
     }
 
 }

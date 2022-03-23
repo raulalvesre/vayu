@@ -29,4 +29,30 @@ public class CategoryDAO {
                 .getResultList();
     }
 
+    public void create(Category category) {
+        entityManager.getTransaction().begin();
+
+        try {
+            entityManager.persist(category);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+           entityManager.getTransaction().rollback();
+           throw new RuntimeException(e);
+        }
+    }
+
+    public int deleteAll() {
+        entityManager.getTransaction().begin();
+        String jpql = "DELETE FROM Category";
+
+        try {
+            int affectedRows = entityManager.createQuery(jpql).executeUpdate();
+            entityManager.getTransaction().commit();
+            return affectedRows;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -6,7 +6,10 @@ import javax.persistence.*;
 
 import static br.com.vayu.services.ValidationService.*;
 
-@MappedSuperclass
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Entity
+@Table(name = "activity")
+@DiscriminatorColumn(name="activity_type", discriminatorType=DiscriminatorType.STRING)
 public abstract class Activity {
 
     @Id

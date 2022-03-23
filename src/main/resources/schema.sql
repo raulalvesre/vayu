@@ -64,48 +64,21 @@ CREATE TABLE IF NOT EXISTS section
         REFERENCES course (id)
 );
 
-CREATE TABLE IF NOT EXISTS explanation
-(
-    id         INT          NOT NULL AUTO_INCREMENT,
-    section_id INT          NOT NULL,
-    code       VARCHAR(255) NOT NULL,
-    title      VARCHAR(255) NOT NULL,
-    active     BIT,
-    `order`    TINYINT,
-    text       VARCHAR(255) NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (section_id)
-        REFERENCES section (id)
-);
-
-CREATE TABLE IF NOT EXISTS video
+CREATE TABLE IF NOT EXISTS activity
 (
     id                  INT          NOT NULL AUTO_INCREMENT,
+    activity_type       VARCHAR(255) NOT NULL,
     section_id          INT          NOT NULL,
     code                VARCHAR(255) NOT NULL,
     title               VARCHAR(255) NOT NULL,
     active              BIT,
     `order`             TINYINT,
+    text                VARCHAR(255) NOT NULL,
     url                 VARCHAR(512) NOT NULL,
     duration_in_minutes TINYINT,
     transcription       TEXT,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (section_id)
-        REFERENCES section (id)
-);
-
-CREATE TABLE IF NOT EXISTS question
-(
-    id         INT          NOT NULL AUTO_INCREMENT,
-    section_id INT          NOT NULL,
-    type       VARCHAR(255) NOT NULL,
-    code       VARCHAR(255) NOT NULL,
-    title      VARCHAR(255) NOT NULL,
-    active     BIT,
-    `order`    TINYINT,
-    wording    VARCHAR(512) NOT NULL,
+    wording             VARCHAR(512) NOT NULL,
+    question_type       VARCHAR(255) NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (section_id)
@@ -123,5 +96,5 @@ CREATE TABLE IF NOT EXISTS alternative
 
     PRIMARY KEY (id),
     FOREIGN KEY (question_id)
-        REFERENCES question (id)
-)
+        REFERENCES activity (id)
+);

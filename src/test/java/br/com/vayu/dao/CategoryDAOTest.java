@@ -4,7 +4,7 @@ import br.com.vayu.TestJPAUtil;
 import br.com.vayu.builders.CategoryBuilder;
 import br.com.vayu.models.Category;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
@@ -15,8 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class CategoryDAOTest {
 
-    private EntityManager entityManager;
-    private CategoryDAO categoryDAO;
+    private static CategoryDAO categoryDAO;
 
     private final String code = "code";
     private final String name = "name";
@@ -25,20 +24,19 @@ public class CategoryDAOTest {
     private final String iconPath = "icon path";
     private final String colorCode = "#FFFFFF";
 
-    @BeforeEach
-    public void beforeEach() {
-        entityManager = TestJPAUtil.getEntityManager();
+    @BeforeAll
+    static void beforeAll() {
+        EntityManager entityManager = TestJPAUtil.getEntityManager();
         categoryDAO = new CategoryDAO(entityManager);
-        entityManager.getTransaction().begin();
     }
 
     @AfterEach
-    public void afterEach() {
-        entityManager.getTransaction().rollback();
+    void afterEach() {
+        categoryDAO.deleteAll();
     }
 
     @Test
-    void findAllByActiveTrueInOrder_should_return_active_categories_in_order() {
+    void findAllByActiveTrueInOrder__should_return_active_categories_in_order() {
         Category category1 = new CategoryBuilder()
                 .code(code)
                 .name(name)
@@ -72,9 +70,9 @@ public class CategoryDAOTest {
                 .colorCode(colorCode)
                 .build();
 
-        entityManager.persist(category1);
-        entityManager.persist(category2);
-        entityManager.persist(category3);
+        categoryDAO.create(category1);
+        categoryDAO.create(category2);
+        categoryDAO.create(category3);
 
         List<Category> expectedList = List.of(category1, category2);
         List<Category> receivedList = categoryDAO.findAllByActiveTrueInOrder();
