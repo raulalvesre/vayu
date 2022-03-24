@@ -1,19 +1,38 @@
 package br.com.vayu.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 import static br.com.vayu.services.ValidationService.*;
 
+@Entity
+@Table(name = "category")
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private final String code;
-    private final String name;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
     private String description;
+
+    @Column(name = "study_guide")
     private String studyGuide;
+
     private boolean active;
+
+    @Column(columnDefinition = "TINYINT")
     private int order;
+
+    @Column(name = "icon_path")
     private String iconPath;
+
+    @Column(name = "color_code")
     private String colorCode;
 
     public Category(String code,
@@ -42,6 +61,15 @@ public class Category {
 
         this.code = code;
         this.name = name;
+    }
+
+    @Deprecated
+    public Category() {
+
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getCode() {

@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CategoryTest {
 
-    private static final String code = "code";
-    private static final String name = "name";
-    private static final String description = "desc";
-    private static final boolean active = true;
-    private static final int order = 1;
-    private static final String iconPath = "https://www.test.com.br/icon.png";
-    private static final String colorCode = "#FFFFFF";
+    private final String code = "code";
+    private final String name = "name";
+    private final String description = "desc";
+    private final boolean active = true;
+    private final int order = 1;
+    private final String iconPath = "https://www.test.com.br/icon.png";
+    private final String colorCode = "#FFFFFF";
 
     @Test
     void should_create_category() {

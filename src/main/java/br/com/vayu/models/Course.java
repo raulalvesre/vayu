@@ -1,21 +1,49 @@
 package br.com.vayu.models;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 import static br.com.vayu.services.ValidationService.*;
 
+@Entity
+@Table(name = "course")
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private final String code;
-    private final String name;
-    private final int estimatedHoursToFinish;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @JoinColumn(referencedColumnName = "id", name = "subcategory_id", nullable = false)
+    private Subcategory subcategory;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false, name = "estimated_hours_to_finish", columnDefinition = "TINYINT")
+    private int estimatedHoursToFinish;
+
     private boolean visible;
+
+    @Column(name = "target_audience")
     private String targetAudience;
-    private final String instructorName;
+
+    @Column(name = "instructor_name")
+    private  String instructorName;
+
+    @Type(type="text")
     private String syllabus;
+
+    @Column(name = "developed_abilities")
     private String developedAbilities;
-    private final Subcategory subCategory;
 
     public Course(String code,
                   String name,
@@ -25,8 +53,8 @@ public class Course {
                   String instructorName,
                   String syllabus,
                   String developedAbilities,
-                  Subcategory subCategory) {
-        this(code, name, estimatedHoursToFinish, instructorName, subCategory);
+                  Subcategory subcategory) {
+        this(code, name, estimatedHoursToFinish, instructorName, subcategory);
 
         this.visible = visible;
         this.targetAudience = targetAudience;
@@ -38,18 +66,23 @@ public class Course {
                   String name,
                   int estimatedHoursToFinish,
                   String instructorName,
-                  Subcategory subCategory) {
+                  Subcategory subcategory) {
         validateIfItIsValidCode(code);
         validateIfIsBlankString("name", name);
         validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
         validateIfIsBlankString("instructor name", instructorName);
-        validateIfItIsNull("sub category", subCategory);
+        validateIfItIsNull("sub category", subcategory);
 
         this.code = code;
         this.name = name;
         this.estimatedHoursToFinish = estimatedHoursToFinish;
         this.instructorName = instructorName;
-        this.subCategory = subCategory;
+        this.subcategory = subcategory;
+    }
+
+    @Deprecated
+    public Course() {
+
     }
 
     public int getId() {
@@ -88,8 +121,8 @@ public class Course {
         return developedAbilities;
     }
 
-    public Subcategory getSubCategory() {
-        return subCategory;
+    public Subcategory getSubcategory() {
+        return subcategory;
     }
 
     @Override
@@ -99,12 +132,12 @@ public class Course {
         Course course = (Course) o;
         return estimatedHoursToFinish == course.estimatedHoursToFinish &&
                 visible == course.visible && code.equals(course.code) &&
-                name.equals(course.name) &&
-                Objects.equals(targetAudience, course.targetAudience) &&
-                instructorName.equals(course.instructorName) &&
-                Objects.equals(syllabus, course.syllabus) &&
-                Objects.equals(developedAbilities, course.developedAbilities) &&
-                subCategory.equals(course.subCategory);
+               name.equals(course.name) &&
+               Objects.equals(targetAudience, course.targetAudience) &&
+               instructorName.equals(course.instructorName) &&
+               Objects.equals(syllabus, course.syllabus) &&
+               Objects.equals(developedAbilities, course.developedAbilities) &&
+               subcategory.equals(course.subcategory);
     }
 
     @Override
@@ -117,22 +150,22 @@ public class Course {
                 instructorName,
                 syllabus,
                 developedAbilities,
-                subCategory);
+                subcategory);
     }
 
     @Override
     public String toString() {
         return "Course{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", estimatedHoursToFinish=" + estimatedHoursToFinish +
-                ", visible=" + visible +
-                ", targetAudience='" + targetAudience + '\'' +
-                ", instructorName='" + instructorName + '\'' +
-                ", syllabus='" + syllabus + '\'' +
-                ", developedAbilities='" + developedAbilities + '\'' +
-                ", subCategory=" + subCategory.getName() +
-                '}';
+               "code='" + code + '\'' +
+               ", name='" + name + '\'' +
+               ", estimatedHoursToFinish=" + estimatedHoursToFinish +
+               ", visible=" + visible +
+               ", targetAudience='" + targetAudience + '\'' +
+               ", instructorName='" + instructorName + '\'' +
+               ", syllabus='" + syllabus + '\'' +
+               ", developedAbilities='" + developedAbilities + '\'' +
+               ", subCategory=" + subcategory.getName() +
+               '}';
     }
 
 }

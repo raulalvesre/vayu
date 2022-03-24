@@ -2,15 +2,34 @@ package br.com.vayu.models.activities;
 
 import br.com.vayu.models.Section;
 
+import javax.persistence.*;
+
 import static br.com.vayu.services.ValidationService.*;
 
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Entity
+@Table(name = "activity")
+@DiscriminatorColumn(name="activity_type", discriminatorType=DiscriminatorType.STRING)
 public abstract class Activity {
 
-    private final String code;
-    private final String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "section_id", nullable = false)
+    private Section section;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String title;
+
     private boolean active;
+
+    @Column(columnDefinition = "TINYINT")
     private int order;
-    private final Section section;
 
     public Activity(String code,
                     String title,
@@ -23,5 +42,8 @@ public abstract class Activity {
         this.title = title;
         this.section = section;
     }
+
+    @Deprecated
+    public Activity() {}
 
 }

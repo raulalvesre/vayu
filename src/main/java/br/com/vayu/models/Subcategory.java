@@ -1,18 +1,40 @@
 package br.com.vayu.models;
 
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 import static br.com.vayu.services.ValidationService.*;
 
+@Entity
+@Table(name = "subcategory")
 public class Subcategory {
 
-    private final String code;
-    private final String name;
-    private final Category category;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @LazyToOne(LazyToOneOption.NO_PROXY)
+    @JoinColumn(referencedColumnName = "id", name = "category_id", nullable = false)
+    private Category category;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
     private String description;
+
+    @Column(name = "study_guide")
     private String studyGuide;
+
     private boolean active;
+
+    @Column(columnDefinition = "TINYINT")
     private int order;
 
     public Subcategory(String code,
@@ -40,6 +62,11 @@ public class Subcategory {
         this.code = code;
         this.name = name;
         this.category = category;
+    }
+
+    @Deprecated
+    public Subcategory() {
+
     }
 
     public int getId() {

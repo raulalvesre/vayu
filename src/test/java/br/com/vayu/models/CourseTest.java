@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CourseTest {
 
-    private static final String code = "code";
-    private static final String name = "name";
-    private static final int estimatedHoursToFinish = 1;
-    private static final boolean visible = true;
-    private static final String targetAudience = "audience";
-    private static final String instructorName = "Joao";
-    private static final String syllabus = "syllabus";
-    private static final String developedAbilities = "dev abilities";
+    private final String code = "code";
+    private final String name = "name";
+    private final int estimatedHoursToFinish = 1;
+    private final boolean visible = true;
+    private final String targetAudience = "audience";
+    private final String instructorName = "Joao";
+    private final String syllabus = "syllabus";
+    private final String developedAbilities = "dev abilities";
     private static Subcategory subcategory;
 
     @BeforeAll

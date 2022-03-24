@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS vayu;
+CREATE SCHEMA IF NOT EXISTS vayu_test;
 
 CREATE TABLE IF NOT EXISTS category
 (
@@ -98,3 +98,4 @@ CREATE TABLE IF NOT EXISTS alternative
     FOREIGN KEY (question_id)
         REFERENCES activity (id)
 );
+

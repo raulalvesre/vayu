@@ -1,15 +1,32 @@
 package br.com.vayu.models;
 
+import javax.persistence.*;
+
 import static br.com.vayu.services.ValidationService.*;
 
+@Entity
+@Table(name = "section")
 public class Section {
 
-    private final String code;
-    private final String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id", name = "course_id", nullable = false)
+    private Course course;
+
+    @Column(nullable = false)
+    private String code;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(columnDefinition = "TINYINT")
     private int order;
+
     private boolean active;
     private boolean test;
-    private final Course course;
 
     public Section(String code,
                    String name,
@@ -24,4 +41,6 @@ public class Section {
         this.course = course;
     }
 
+    @Deprecated
+    public Section() {}
 }
