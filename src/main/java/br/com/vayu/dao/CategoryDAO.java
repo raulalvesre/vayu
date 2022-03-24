@@ -17,6 +17,17 @@ public class CategoryDAO {
         return entityManager.find(Category.class, id);
     }
 
+    public List<Category> findAll() {
+        String jpql = """
+                SELECT ct
+                FROM Category ct
+                ORDER BY ct.order""";
+
+        return entityManager
+                .createQuery(jpql, Category.class)
+                .getResultList();
+    }
+
     public List<Category> findAllByActiveTrueInOrder() {
         String jpql = """
                 SELECT ct
