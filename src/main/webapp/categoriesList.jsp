@@ -1,27 +1,19 @@
-<%@ page import="br.com.vayu.models.Category" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
     <title>Lista Categorias</title>
 </head>
 <body>
-
     <h1>Categorias</h1>
 
-    <%
-        List<Category> categories = (List<Category>) request.getAttribute("categories");
-        for (Category ct : categories) {
-    %>
-
-        <h2 style="background-color:<%= ct.getColorCode() %>; max-width: 200px"><%= ct.getName() %></h2>
-        <img src="<%= ct.getIconPath() %>" style="max-height: 250px"><br/>
-        <p><%= ct.getDescription() %></p>
-        <p><%= ct.getStudyGuide() != null ? ct.getStudyGuide() : "" %></p>
-
-    <%
-        }
-    %>
+    <c:forEach items="${categories}" var="ct">
+        <h2 style="background-color:${ct.colorCode}; max-width: 200px">${ct.name}</h2>
+        <img src="${ct.iconPath}" style="max-height: 250px"><br/>
+        <p>${ct.description}</p>
+        <p>${ct.studyGuide}</p>
+    </c:forEach>
 
 </body>
 </html>
