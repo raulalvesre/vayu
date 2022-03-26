@@ -52,6 +52,18 @@ public class CategoryDAO {
         }
     }
 
+    public void update(Category category) {
+        entityManager.getTransaction().begin();
+
+        try {
+            entityManager.merge(category);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
     public int deleteAll() {
         entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Category";

@@ -14,20 +14,65 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/listaCategorias")
+@WebServlet("/categorias")
 public class CategoryServlet extends HttpServlet {
+
+    private final CategoryDAO categoryDAO;
+
+    public CategoryServlet() {
+        EntityManager em = JPAUtil.getEntityManager();
+        categoryDAO = new CategoryDAO(em);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        EntityManager em = JPAUtil.getEntityManager();
-        CategoryDAO categoryDAO = new CategoryDAO(em);
-
         List<Category> categories = categoryDAO.findAll();
 
-        RequestDispatcher rd = request.getRequestDispatcher("/categoriesList.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/categoryList.jsp");
         request.setAttribute("categories", categories);
         rd.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req,
+                          HttpServletResponse resp) throws ServletException, IOException {
+        String idStr = req.getParameter("id");
+        String code = req.getParameter("code");
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+        String studyGuide = req.getParameter("studyGuide");
+        String activeStr = req.getParameter("active");
+        String orderStr = req.getParameter("order");
+        String iconPath = req.getParameter("iconPath");
+        String colorCode = req.getParameter("colorCode");
+
+        boolean active = Boolean.parseBoolean(activeStr);
+        int order = Integer.parseInt(orderStr);
+        int id = !idStr.isBlank() ? Integer.parseInt(idStr) : 0;
+
+        Category category = new Category(id,
+                code,
+                name,
+                description,
+                studyGuide,
+                active,
+                order,
+                iconPath,
+                colorCode);
+
+        if (id == 0)
+            categoryDAO.create(category);
+        else
+            categoryDAO.update(category);
+
+        resp.sendRedirect("categorias");
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req,
+                            HttpServletResponse resp) throws ServletException, IOException {
+
     }
 
 }
