@@ -42,12 +42,12 @@ public class CategoryServlet extends HttpServlet {
         String name = req.getParameter("name");
         String description = req.getParameter("description");
         String studyGuide = req.getParameter("studyGuide");
-        String activeStr = req.getParameter("active");
+        String activeSwitchValue = req.getParameter("active");
         String orderStr = req.getParameter("order");
         String iconPath = req.getParameter("iconPath");
         String colorCode = req.getParameter("colorCode");
 
-        boolean active = Boolean.parseBoolean(activeStr);
+        boolean active = activeSwitchValue != null;
         int order = Integer.parseInt(orderStr);
         int id = !idStr.isBlank() ? Integer.parseInt(idStr) : 0;
 
@@ -67,12 +67,6 @@ public class CategoryServlet extends HttpServlet {
             categoryDAO.update(category);
 
         resp.sendRedirect("categorias");
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req,
-                            HttpServletResponse resp) throws ServletException, IOException {
-
     }
 
 }

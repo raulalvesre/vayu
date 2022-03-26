@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>${formObjective} CATEGORIA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/categoryForm.css" rel="stylesheet"/>
 </head>
 <body>
@@ -51,8 +51,9 @@
             </div>
 
             <div class="form-check form-switch col-2" id="activeFormGroup">
-                <label class="form-check-label" for="active">ATIVA</label>
-                <input class="form-check-input" type="checkbox" id="active" checked>
+                <label class="form-check-label" for="factive">ATIVA</label>
+                <input class="form-check-input" type="checkbox" id="factive" name="active"
+                       <c:if test="${category.active}">checked</c:if>>
             </div>
 
             <div class="form-group col-2" id="orderFormGroup">

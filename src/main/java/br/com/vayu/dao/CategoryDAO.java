@@ -64,6 +64,21 @@ public class CategoryDAO {
         }
     }
 
+    public void deactivateCategory(int categoryId) {
+        entityManager.getTransaction().begin();
+
+        try {
+            Category category = entityManager.find(Category.class, categoryId);
+            category.setActive(!category.isActive());
+
+            entityManager.merge(category);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
     public int deleteAll() {
         entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Category";
