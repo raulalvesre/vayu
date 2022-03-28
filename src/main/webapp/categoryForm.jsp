@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>${formObjective} CATEGORIA</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/categoryForm.css" rel="stylesheet"/>
 </head>
@@ -59,7 +59,8 @@
 
             <div class="form-group col-2" id="orderFormGroup">
                 <label for="forder">Ordem: </label>
-                <input type="number" class="form-control" id="forder" name="order" value="${category.order}">
+                <input type="number" class="form-control" id="forder" name="order"
+                       value="${category.order == null ? 0 : category.order}">
             </div>
         </div>
 
