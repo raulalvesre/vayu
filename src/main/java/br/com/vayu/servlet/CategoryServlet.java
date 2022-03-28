@@ -37,6 +37,8 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req,
                           HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
         String idStr = req.getParameter("id");
         String code = req.getParameter("code");
         String name = req.getParameter("name");
@@ -48,7 +50,7 @@ public class CategoryServlet extends HttpServlet {
         String colorCode = req.getParameter("colorCode");
 
         boolean active = activeSwitchValue != null;
-        int order = Integer.parseInt(orderStr);
+        int order = !orderStr.isBlank() ? Integer.parseInt(orderStr) : 0;
         int id = !idStr.isBlank() ? Integer.parseInt(idStr) : 0;
 
         Category category = new Category(id,

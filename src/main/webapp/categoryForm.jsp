@@ -1,11 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url value="/categorias" var="linkCategoryServlet"/>
 <c:set var="formObjective" value="${category == null ? \"ADICIONAR\" : \"EDITAR\" }"/>
 <html>
 <head>
     <title>${formObjective} CATEGORIA</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="${pageContext.request.contextPath}/css/categoryForm.css" rel="stylesheet"/>
 </head>
 <body>

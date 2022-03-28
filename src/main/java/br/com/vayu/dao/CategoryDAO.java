@@ -47,8 +47,8 @@ public class CategoryDAO {
             entityManager.persist(category);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-           entityManager.getTransaction().rollback();
-           throw new RuntimeException(e);
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
         }
     }
 
@@ -64,14 +64,18 @@ public class CategoryDAO {
         }
     }
 
-    public void deactivateCategory(int categoryId) {
+    public void deactivateCategory(int id) {
         entityManager.getTransaction().begin();
+        String jpql = """
+                UPDATE Category
+                SET active = 0
+                WHERE id = :id""";
 
         try {
-            Category category = entityManager.find(Category.class, categoryId);
-            category.setActive(!category.isActive());
+            entityManager.createQuery(jpql)
+                    .setParameter("id", id)
+                    .executeUpdate();
 
-            entityManager.merge(category);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
