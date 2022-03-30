@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/categorias" var="linkCategoryServlet"/>
 <c:set var="formObjective" value="${category == null ? \"ADICIONAR\" : \"EDITAR\" }"/>
 <html>
 <head>
@@ -15,7 +14,7 @@
 <hr>
 
 <div id="formWrapper">
-    <form action="/categorias" method="post">
+    <form action="${pageContext.request.contextPath}" method="post">
         <input type="hidden" name="id" value="${category.id}">
 
         <div class="form-group">
