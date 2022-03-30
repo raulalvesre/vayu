@@ -38,9 +38,8 @@ public class SubcategoryDAO {
     }
 
     public void create(Subcategory subcategory) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(subcategory);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -50,10 +49,10 @@ public class SubcategoryDAO {
     }
 
     public int deleteAll() {
-        entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Subcategory ";
 
         try {
+            entityManager.getTransaction().begin();
             int affectedRows = entityManager.createQuery(jpql).executeUpdate();
             entityManager.getTransaction().commit();
             return affectedRows;

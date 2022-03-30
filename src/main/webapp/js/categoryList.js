@@ -6,7 +6,7 @@ function deactivateCategory(event, element) {
     const xhr = new XMLHttpRequest();
     xhr.open("DELETE", `http://localhost:8080/categorias/desativar/${id}`);
 
-    xhr.addEventListener("load", function () {
+    xhr.addEventListener("load", function() {
         if (xhr.status === 204) {
             const td = element.closest("tr").getElementsByClassName("active")[0];
             td.textContent = "INATIVA";

@@ -45,9 +45,8 @@ public class CategoryDAO {
     }
 
     public void create(Category category) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(category);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -57,9 +56,8 @@ public class CategoryDAO {
     }
 
     public void update(Category category) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             entityManager.merge(category);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -69,13 +67,13 @@ public class CategoryDAO {
     }
 
     public void deactivateCategory(int id) {
-        entityManager.getTransaction().begin();
         String jpql = """
                 UPDATE Category
                 SET active = 0
                 WHERE id = :id""";
 
         try {
+            entityManager.getTransaction().begin();
             entityManager.createQuery(jpql)
                     .setParameter("id", id)
                     .executeUpdate();
@@ -88,10 +86,10 @@ public class CategoryDAO {
     }
 
     public int deleteAll() {
-        entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Category";
 
         try {
+            entityManager.getTransaction().begin();
             int affectedRows = entityManager.createQuery(jpql).executeUpdate();
             entityManager.getTransaction().commit();
             return affectedRows;

@@ -25,9 +25,8 @@ public class CourseDAO {
     }
 
     public void create(Course course) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(course);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
@@ -37,14 +36,13 @@ public class CourseDAO {
     }
 
     public int makeAllVisible() {
-        entityManager.getTransaction().begin();
-
         String jpql = """
                 UPDATE Course
                 SET visible = true
                 WHERE visible = false""";
 
         try {
+            entityManager.getTransaction().begin();
             int affectedRows = entityManager.createQuery(jpql).executeUpdate();
             entityManager.getTransaction().commit();
             return affectedRows;
@@ -55,9 +53,8 @@ public class CourseDAO {
     }
 
     public void delete(Course course) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             course = entityManager.merge(course);
             entityManager.remove(course);
             entityManager.getTransaction().commit();
@@ -68,10 +65,10 @@ public class CourseDAO {
     }
 
     public int deleteAll() {
-        entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Course";
 
         try {
+            entityManager.getTransaction().begin();
             int affectedRows = entityManager.createQuery(jpql).executeUpdate();
             entityManager.getTransaction().commit();
             return affectedRows;
