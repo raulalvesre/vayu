@@ -27,7 +27,7 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        List<Category> categories = categoryDAO.findAll();
+        List<Category> categories = categoryDAO.findAllInOrder();
 
         RequestDispatcher rd = request.getRequestDispatcher("/categoryList.jsp");
         request.setAttribute("categories", categories);

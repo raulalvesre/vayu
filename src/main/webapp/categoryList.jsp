@@ -36,7 +36,7 @@
                 <td><img src="${ct.iconPath}" class="image"/></td>
                 <td><span style="background-color: ${ct.colorCode}">⠀⠀⠀⠀</span></td>
                 <td class="description">${ct.description}</td>
-                <td class="active" id="active${ct.id}">${ct.active ? "ATIVA" : "INATIVA"}</td>
+                <td class="active">${ct.active ? "ATIVA" : "INATIVA"}</td>
                 <td><a href="${linkCategoryServlet}/formulario/${ct.id}"><i
                         class="material-icons delete-button">edit</i></a></td>
                 <td>

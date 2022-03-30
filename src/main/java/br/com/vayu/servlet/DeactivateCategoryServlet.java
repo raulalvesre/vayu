@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/categorias/deletar/*")
-public class DeleteCategoryServlet extends HttpServlet {
+@WebServlet("/categorias/desativar/*")
+public class DeactivateCategoryServlet extends HttpServlet {
 
     private final CategoryDAO categoryDAO;
 
-    public DeleteCategoryServlet() {
+    public DeactivateCategoryServlet() {
         EntityManager em = JPAUtil.getEntityManager();
         categoryDAO = new CategoryDAO(em);
     }

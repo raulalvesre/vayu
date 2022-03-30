@@ -14,14 +14,18 @@ public class CategoryDAO {
     }
 
     public Category findById(int id) {
+        entityManager.clear();
+
         return entityManager.find(Category.class, id);
     }
 
-    public List<Category> findAll() {
+    public List<Category> findAllInOrder() {
         String jpql = """
                 SELECT ct
                 FROM Category ct
                 ORDER BY ct.order""";
+
+        entityManager.clear();
 
         return entityManager
                 .createQuery(jpql, Category.class)
