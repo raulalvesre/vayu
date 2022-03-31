@@ -3,9 +3,10 @@ package br.com.vayu.services;
 import br.com.vayu.dto.CompleteCategoryDTO;
 import br.com.vayu.dto.CourseDTO;
 import br.com.vayu.dto.SubcategoryDTO;
+import br.com.vayu.models.Category;
+import br.com.vayu.models.Course;
+import br.com.vayu.models.Subcategory;
 import br.com.vayu.repositories.CategoryRepository;
-import br.com.vayu.repositories.CourseRepository;
-import br.com.vayu.repositories.SubcategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +15,9 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final SubcategoryRepository subcategoryRepository;
-    private final CourseRepository courseRepository;
 
-    public CategoryService(CategoryRepository categoryRepository,
-                           SubcategoryRepository subcategoryRepository,
-                           CourseRepository courseRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.subcategoryRepository = subcategoryRepository;
-        this.courseRepository = courseRepository;
     }
 
     public List<CompleteCategoryDTO> getCompleteActiveCategoryDtoList() {
@@ -30,11 +25,12 @@ public class CategoryService {
 
         return activeCategories.stream()
                 .map(ct -> {
-                    var subcategories = subcategoryRepository.findAllByCategoryId(ct.getId());
+                    var subcategories = ct.getSubcategories();
 
                     var courseDtos = subcategories.stream()
-                            .map(sb -> courseRepository.findAllBySubcategoryId(sb.getId()))
+                            .map(Subcategory::getCourses)
                             .flatMap(List::stream)
+                            .filter(Course::isVisible)
                             .map(CourseDTO::new)
                             .toList();
 

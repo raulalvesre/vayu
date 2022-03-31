@@ -1,6 +1,8 @@
 package br.com.vayu.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,19 +34,12 @@ public class Category {
     @Column
     private String colorCode;
 
-    public Category(int id,
-                    String code,
-                    String name,
-                    String description,
-                    String studyGuide,
-                    boolean active,
-                    int order,
-                    String iconPath,
-                    String colorCode) {
-        this(code, name, description, studyGuide, active, order, iconPath, colorCode);
-
-        this.id = id;
-    }
+    @OneToMany(
+            mappedBy = "category",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    List<Subcategory> subcategories = new ArrayList<>();
 
     public Category(String code,
                     String name,
@@ -111,6 +106,10 @@ public class Category {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Subcategory> getSubcategories() {
+        return subcategories;
     }
 
     @Override

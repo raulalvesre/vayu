@@ -4,6 +4,8 @@ import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +34,13 @@ public class Subcategory {
 
     @Column(columnDefinition = "TINYINT")
     private int order;
+
+    @OneToMany(
+            mappedBy = "subcategory",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    List<Course> courses = new ArrayList<>();
 
     public Subcategory(String code,
                        String name,
@@ -91,6 +100,10 @@ public class Subcategory {
 
     public Category getCategory() {
         return category;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 
     @Override
