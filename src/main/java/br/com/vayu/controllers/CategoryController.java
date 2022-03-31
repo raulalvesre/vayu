@@ -2,6 +2,7 @@ package br.com.vayu.controllers;
 
 import br.com.vayu.dto.CompleteCategoryDTO;
 import br.com.vayu.services.CategoryService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    @GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<CompleteCategoryDTO>> getCompleteCategoryList() {
         return ResponseEntity.ok(categoryService.getCompleteActiveCategoryDtoList());
     }

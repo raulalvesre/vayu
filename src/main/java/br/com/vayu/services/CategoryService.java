@@ -3,7 +3,6 @@ package br.com.vayu.services;
 import br.com.vayu.dto.CompleteCategoryDTO;
 import br.com.vayu.dto.CourseDTO;
 import br.com.vayu.dto.SubcategoryDTO;
-import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.Subcategory;
 import br.com.vayu.repositories.CategoryRepository;
