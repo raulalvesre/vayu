@@ -4,9 +4,6 @@ import br.com.vayu.models.activities.Question;
 
 import javax.persistence.*;
 
-import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
-import static br.com.vayu.services.ValidationService.validateIfItIsNull;
-
 @Entity
 @Table(name = "alternative")
 public class Alternative {
@@ -29,9 +26,6 @@ public class Alternative {
     private String justification;
 
     public Alternative(String text, boolean correct, Question question) {
-        validateIfIsBlankString("text", text);
-        validateIfItIsNull("question", question);
-
         this.text = text;
         this.correct = correct;
         this.question = question;

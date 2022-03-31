@@ -2,10 +2,7 @@ package br.com.vayu.models;
 
 import javax.persistence.*;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
-@Table(name = "section")
 public class Section {
 
     @Id
@@ -31,10 +28,6 @@ public class Section {
     public Section(String code,
                    String name,
                    Course course) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-        validateIfItIsNull("course", course);
-
         this.code = code;
         this.name = name;
         this.order = 0;

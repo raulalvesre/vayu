@@ -5,8 +5,6 @@ import br.com.vayu.models.Section;
 
 import javax.persistence.*;
 
-import static br.com.vayu.services.ValidationService.validateIfItIsNull;
-
 @Entity
 @DiscriminatorValue("question")
 public class Question extends Activity {
@@ -24,9 +22,6 @@ public class Question extends Activity {
                     String wording,
                     QuestionType type) {
         super(code, title, section);
-
-        validateIfItIsNull("wording", wording);
-        validateIfItIsNull("type", type);
 
         this.wording = wording;
         this.question_type = type;

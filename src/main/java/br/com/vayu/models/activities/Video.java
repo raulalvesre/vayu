@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import static br.com.vayu.services.ValidationService.validateIfItIsValidURL;
-
 @Entity
 @DiscriminatorValue("video")
 public class Video extends Activity {
@@ -15,7 +13,7 @@ public class Video extends Activity {
     @Column(nullable = false)
     private String url;
 
-    @Column(name = "duration_in_minutes", columnDefinition = "TINYINT")
+    @Column(columnDefinition = "TINYINT")
     private int durationInMinutes;
 
     @Column(columnDefinition = "TEXT")
@@ -27,7 +25,6 @@ public class Video extends Activity {
                  String url) {
         super(code, title, section);
 
-        validateIfItIsValidURL("URL", url);
         this.url = url;
     }
 

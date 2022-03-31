@@ -6,10 +6,7 @@ import org.hibernate.annotations.LazyToOneOption;
 import javax.persistence.*;
 import java.util.Objects;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
-@Table(name = "subcategory")
 public class Subcategory {
 
     @Id
@@ -29,7 +26,6 @@ public class Subcategory {
 
     private String description;
 
-    @Column(name = "study_guide")
     private String studyGuide;
 
     private boolean active;
@@ -55,10 +51,6 @@ public class Subcategory {
     public Subcategory(String code,
                        String name,
                        Category category) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-        validateIfItIsNull("category", category);
-
         this.code = code;
         this.name = name;
         this.category = category;

@@ -4,11 +4,8 @@ import br.com.vayu.models.Section;
 
 import javax.persistence.*;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Entity
-@Table(name = "activity")
 @DiscriminatorColumn(name="activity_type", discriminatorType=DiscriminatorType.STRING)
 public abstract class Activity {
 
@@ -34,10 +31,6 @@ public abstract class Activity {
     public Activity(String code,
                     String title,
                     Section section) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("title", title);
-        validateIfItIsNull("section", section);
-
         this.code = code;
         this.title = title;
         this.section = section;

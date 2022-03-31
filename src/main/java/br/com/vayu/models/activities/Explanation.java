@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import static br.com.vayu.services.ValidationService.validateIfIsBlankString;
-
 @Entity
 @DiscriminatorValue("explanation")
 public class Explanation extends Activity {
@@ -21,7 +19,6 @@ public class Explanation extends Activity {
                        String text) {
         super(code, title, section);
 
-        validateIfIsBlankString("text", text);
         this.text = text;
     }
 

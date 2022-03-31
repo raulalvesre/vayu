@@ -3,10 +3,7 @@ package br.com.vayu.models;
 import javax.persistence.*;
 import java.util.Objects;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
-@Table(name = "category")
 public class Category {
 
     @Id
@@ -21,7 +18,7 @@ public class Category {
 
     private String description;
 
-    @Column(name = "study_guide")
+    @Column
     private String studyGuide;
 
     private boolean active;
@@ -29,10 +26,10 @@ public class Category {
     @Column(columnDefinition = "TINYINT")
     private int order;
 
-    @Column(name = "icon_path")
+    @Column
     private String iconPath;
 
-    @Column(name = "color_code")
+    @Column
     private String colorCode;
 
     public Category(int id,
@@ -58,9 +55,6 @@ public class Category {
                     String iconPath,
                     String colorCode) {
         this(code, name);
-
-        validateIfIsValidHexColorCode("color code", colorCode);
-
         this.description = description;
         this.studyGuide = studyGuide;
         this.active = active;
@@ -70,9 +64,6 @@ public class Category {
     }
 
     public Category(String code, String name) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-
         this.code = code;
         this.name = name;
     }
