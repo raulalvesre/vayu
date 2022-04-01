@@ -1,5 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS vayu;
 
+use vayu;
+
 CREATE TABLE IF NOT EXISTS category
 (
     id          INT          NOT NULL AUTO_INCREMENT,

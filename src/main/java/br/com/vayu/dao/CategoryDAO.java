@@ -14,7 +14,22 @@ public class CategoryDAO {
     }
 
     public Category findById(int id) {
+        entityManager.clear();
+
         return entityManager.find(Category.class, id);
+    }
+
+    public List<Category> findAllInOrder() {
+        String jpql = """
+                SELECT ct
+                FROM Category ct
+                ORDER BY ct.order""";
+
+        entityManager.clear();
+
+        return entityManager
+                .createQuery(jpql, Category.class)
+                .getResultList();
     }
 
     public List<Category> findAllByActiveTrueInOrder() {
@@ -30,22 +45,51 @@ public class CategoryDAO {
     }
 
     public void create(Category category) {
-        entityManager.getTransaction().begin();
-
         try {
+            entityManager.getTransaction().begin();
             entityManager.persist(category);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
-           entityManager.getTransaction().rollback();
-           throw new RuntimeException(e);
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Category category) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(category);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deactivateCategory(int id) {
+        String jpql = """
+                UPDATE Category
+                SET active = 0
+                WHERE id = :id""";
+
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.createQuery(jpql)
+                    .setParameter("id", id)
+                    .executeUpdate();
+
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException(e);
         }
     }
 
     public int deleteAll() {
-        entityManager.getTransaction().begin();
         String jpql = "DELETE FROM Category";
 
         try {
+            entityManager.getTransaction().begin();
             int affectedRows = entityManager.createQuery(jpql).executeUpdate();
             entityManager.getTransaction().commit();
             return affectedRows;

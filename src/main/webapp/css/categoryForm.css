@@ -1,0 +1,45 @@
+.form-check {
+    margin-top: 10px;
+}
+
+#header {
+    text-align: center;
+    margin-top: 10px;
+}
+
+hr {
+    width: 62vw;
+    margin: auto auto 10px;
+}
+
+
+#formWrapper {
+    width: 60vw;
+    margin: auto;
+}
+
+
+#smallFormsWrapper {
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#colorFormGroup, #activeFormGroup, #orderFormGroup {
+    overflow:auto;
+}
+
+#fcolor {
+    width: 50px;
+    height: 30px;
+}
+
+
+#forder {
+    width: 80px;
+}
+
+#submitButton {
+    float: right;
+    margin: 15px 0 10px 10px;
+}

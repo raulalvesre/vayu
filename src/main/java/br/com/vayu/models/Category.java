@@ -35,6 +35,20 @@ public class Category {
     @Column(name = "color_code")
     private String colorCode;
 
+    public Category(int id,
+                    String code,
+                    String name,
+                    String description,
+                    String studyGuide,
+                    boolean active,
+                    int order,
+                    String iconPath,
+                    String colorCode) {
+        this(code, name, description, studyGuide, active, order, iconPath, colorCode);
+
+        this.id = id;
+    }
+
     public Category(String code,
                     String name,
                     String description,
@@ -102,6 +116,10 @@ public class Category {
 
     public String getColorCode() {
         return colorCode;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override
