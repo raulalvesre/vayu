@@ -14,3 +14,11 @@ td {
 .subcategories, .editCategory {
     width: 5%;
 }
+
+.btn-default {
+    background-color: #c2ced8 !important;
+}
+
+.subcategories-link {
+    text-decoration: underline;
+}

@@ -40,10 +40,10 @@
                     <td class="name">${ct.name()}</td>
                     <td class="code">${ct.code()}</td>
                     <td class="categoryActive">${ct.active() ? "ATIVA" : "INATIVA"}</td>
-                    <td class="subcategories"><a href="subcategories/${ct.code()}">Subcategorias</a></td>
+                    <td class="subcategories"><a href="subcategories/${ct.code()}" class="subcategories-link">Subcategorias</a></td>
                     <td class="editCategory">
-                        <a href="categories/${ct.code()}">
-                            <button type="button" class="btn btn-light">Editar</button>
+                        <a href="categories/${ct.code()}" class="btn btn-default">
+                            Editar
                         </a>
                     </td>
                 </tr>

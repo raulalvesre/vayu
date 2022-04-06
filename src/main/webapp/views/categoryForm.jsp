@@ -2,11 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<c:set var="formObjective" value="${categoryFormDTO.id == 0 ? \"Nova\" : \"Editar\" }"/>
-<c:set var="postUrl" value="${categoryFormDTO.id == 0 ? '/admin/categories' : '/admin/categories/'.concat(categoryFormDTO.code) }" />
+
 <html>
 <head>
-    <title>${formObjective} categoria</title>
+    <title>${formIsCreate ? "Nova" : "Editar"} categoria</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link href="${pageContext.request.contextPath}/css/categoryForm.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
@@ -15,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-    <h1 id="header">${formObjective} categoria</h1>
+    <h1 id="header">${formIsCreate ? "Nova" : "Editar"} categoria</h1>
 
     <%--@elvariable id="categoryFormDTO" type="br.com.vayu.dto.CategoryFormDTO"--%>
     <form:form modelAttribute="categoryFormDTO" action="${postUrl}" method="POST">

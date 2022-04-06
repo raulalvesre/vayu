@@ -3,18 +3,15 @@ package br.com.vayu.dto;
 import br.com.vayu.models.Category;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public final class CategoryFormDTO {
 
     private int id;
 
-    @NotNull(message = "{name.notnull}")
     @NotBlank(message = "{name.notblank}")
     private String name;
 
-    @NotNull(message = "{code.notnull")
     @NotBlank(message = "{code.notblank}")
     @Pattern(regexp = "^[a-z0-9-]+$", message = "{code.invalid}")
     private String code;
