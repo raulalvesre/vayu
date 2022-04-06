@@ -1,59 +1,58 @@
-<%@ page contentType="text/html;charset=UTF-8"  pageEncoding="utf-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/categorias" var="linkCategoryServlet"/>
+<c:url value="admin/categories" var="linkCategoryServlet"/>
 
 <html>
 <head>
     <title>Categorias</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <link rel="stylesheet" href="../css/categoryList.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <link href="${pageContext.request.contextPath}/src/main/webapp/css/categoryList.css" rel="stylesheet"/>
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="${pageContext.request.contextPath}/src/main/webapp/css/categoryList.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
-<h1 class="title">CATEGORIAS</h1><br>
-<div id="table-wrapper">
-    <table class="table" id="table">
-        <thead>
-        <tr>
-            <th scope="col">CODIGO</th>
-            <th scope="col">NOME</th>
-            <th scope="col">ICONE</th>
-            <th scope="col">COR</th>
-            <th scope="col">DESCRIÇÃO</th>
-            <th scope="col">STATUS</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
+<div class="container">
 
-        <tbody>
-        <c:forEach items="${categories}" var="ct">
-            <tr id="category${ct.id}">
-                <td class="code">${ct.code}</td>
-                <td class="name">${ct.name}</td>
-                <td><img src="${ct.iconPath}" class="image"/></td>
-                <td><span style="background-color: ${ct.colorCode}">⠀⠀⠀⠀</span></td>
-                <td class="description">${ct.description}</td>
-                <td class="active">${ct.active ? "ATIVA" : "INATIVA"}</td>
-                <td><a href="${linkCategoryServlet}/formulario/${ct.id}"><i
-                        class="material-icons delete-button">edit</i></a></td>
-                <td>
-                    <a href="#" <c:if test="${!ct.active}">hidden</c:if>>
-                        <i class="material-icons delete-icn" id="deleteIcon${ct.id}" onclick="deactivateCategory(event ,this)">
-                            delete
-                        </i>
-                    </a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <h1 class="title">Categorias</h1>
 
-    <a href="${linkCategoryServlet}/formulario">
-        <button type="button" class="btn btn-primary" id="btn-add">ADICIONAR</button>
+    <a href="categories/new">
+        <button type="button" class="btn btn-primary" id="btn-add">Nova categoria</button>
     </a>
+
+    <div>
+        <table class="table table-bordered" id="categoryTable">
+            <thead>
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Código</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <c:forEach items="${categories}" var="ct">
+                <tr>
+                    <td class="name">${ct.name()}</td>
+                    <td class="code">${ct.code()}</td>
+                    <td class="categoryActive">${ct.active() ? "ATIVA" : "INATIVA"}</td>
+                    <td class="subcategories"><a href="subcategories/${ct.code()}">Subcategorias</a></td>
+                    <td class="editCategory">
+                        <a href="categories/${ct.code()}">
+                            <button type="button" class="btn btn-light">Editar</button>
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
 
 <footer>

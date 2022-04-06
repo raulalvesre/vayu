@@ -1,5 +1,7 @@
 package br.com.vayu.models;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class Section {
     private String name;
 
     @Column(columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
     private boolean active;

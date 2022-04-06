@@ -1,6 +1,6 @@
 package br.com.vayu.controllers;
 
-import br.com.vayu.dto.CompleteCategoryDTO;
+import br.com.vayu.dto.CategoryDTO;
 import br.com.vayu.services.CategoryService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,9 +20,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<CompleteCategoryDTO>> getCompleteCategoryList() {
-        return ResponseEntity.ok(categoryService.getCompleteActiveCategoryDtoList());
+    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+    public ResponseEntity<List<CategoryDTO>> getCompleteCategoryList() {
+        return ResponseEntity.ok(categoryService.getActiveCategoryDtoList());
     }
 
 }

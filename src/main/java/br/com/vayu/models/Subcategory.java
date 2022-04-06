@@ -2,6 +2,7 @@ package br.com.vayu.models;
 
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class Subcategory {
     private boolean active;
 
     @Column(columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
     @OneToMany(

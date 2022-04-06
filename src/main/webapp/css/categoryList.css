@@ -1,26 +1,16 @@
-.image {
-    max-height: 100px;
-}
-
-.description {
-    max-width: 500px;
-}
-
-.title {
-    text-align: center;
-    margin-top: 10px;
-}
-
 #btn-add {
-    float: right;
-    margin: 10px 0 10px 10px;
+    float: left;
+    margin: 0 20px 20px 0;
 }
 
-#table {
-    max-width: 100vw;
+td {
+    vertical-align: middle !important;
 }
 
-#table-wrapper {
-    margin: auto;
-    width: 90%;
+#categoryTable, td, th {
+    border-width: 2px !important;
+}
+
+.subcategories, .editCategory {
+    width: 5%;
 }

@@ -1,6 +1,7 @@
 package br.com.vayu.models.activities;
 
 import br.com.vayu.models.Section;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -13,10 +14,9 @@ public class Video extends Activity {
     @Column(nullable = false)
     private String url;
 
-    @Column(columnDefinition = "TINYINT")
     private int durationInMinutes;
 
-    @Column(columnDefinition = "TEXT")
+    @Type(type = "text")
     private String transcription;
 
     public Video(String code,

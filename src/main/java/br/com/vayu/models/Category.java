@@ -1,5 +1,8 @@
 package br.com.vayu.models;
 
+import br.com.vayu.dto.CategoryFormDTO;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class Category {
     private boolean active;
 
     @Column(columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
     @Column
@@ -61,6 +65,30 @@ public class Category {
     public Category(String code, String name) {
         this.code = code;
         this.name = name;
+    }
+
+    public Category(int id, CategoryFormDTO categoryDTO) {
+        this(categoryDTO.getCode(),
+                categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                categoryDTO.getStudyGuide(),
+                categoryDTO.isActive(),
+                categoryDTO.getOrder(),
+                categoryDTO.getIconPath(),
+                categoryDTO.getColorCode());
+
+        this.id = id;
+    }
+
+    public Category(CategoryFormDTO categoryDTO) {
+        this(categoryDTO.getCode(),
+                categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                categoryDTO.getStudyGuide(),
+                categoryDTO.isActive(),
+                categoryDTO.getOrder(),
+                categoryDTO.getIconPath(),
+                categoryDTO.getColorCode());
     }
 
     @Deprecated

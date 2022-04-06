@@ -1,13 +1,13 @@
 package br.com.vayu.services;
 
-import br.com.vayu.dto.CompleteCategoryDTO;
-import br.com.vayu.dto.CourseDTO;
-import br.com.vayu.dto.SubcategoryDTO;
-import br.com.vayu.models.Course;
-import br.com.vayu.models.Subcategory;
+import br.com.vayu.dto.CategoryDTO;
+import br.com.vayu.dto.CategoryFormDTO;
+import br.com.vayu.dto.CategoryManagementDTO;
+import br.com.vayu.models.Category;
 import br.com.vayu.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -19,27 +19,43 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CompleteCategoryDTO> getCompleteActiveCategoryDtoList() {
+    public List<CategoryDTO> getActiveCategoryDtoList() {
         var activeCategories = categoryRepository.findAllByActiveTrue();
 
         return activeCategories.stream()
-                .map(ct -> {
-                    var subcategories = ct.getSubcategories();
-
-                    var courseDtos = subcategories.stream()
-                            .map(Subcategory::getCourses)
-                            .flatMap(List::stream)
-                            .filter(Course::isVisible)
-                            .map(CourseDTO::new)
-                            .toList();
-
-                    var subcategoryDtos = subcategories.stream()
-                            .map(SubcategoryDTO::new)
-                            .toList();
-
-                    return new CompleteCategoryDTO(ct, subcategoryDtos, courseDtos);
-                })
+                .map(CategoryDTO::new)
                 .toList();
+    }
+
+    public List<CategoryManagementDTO> getCategoryManagementDtoListInOrder() {
+        return categoryRepository.findAllByOrderByOrder().stream()
+                .map(CategoryManagementDTO::new)
+                .toList();
+    }
+
+    public CategoryFormDTO getByCode(String categoryCode) {
+        var categoryModel = categoryRepository.findByCode(categoryCode);
+        return new CategoryFormDTO(categoryModel);
+    }
+
+    @Transactional
+    public CategoryManagementDTO createCategory(CategoryFormDTO categoryFormDTO) {
+        var categoryModel = new Category(categoryFormDTO);
+        categoryRepository.save(categoryModel);
+
+        return new CategoryManagementDTO(categoryModel);
+    }
+
+    @Transactional
+    public CategoryManagementDTO updateCategory(CategoryFormDTO categoryFormDTO) throws Exception {
+        if (!categoryRepository.existsById(categoryFormDTO.getId()))
+            throw new Exception();
+
+        var updatedCategory = new Category(categoryFormDTO.getId(), categoryFormDTO);
+
+        categoryRepository.save(updatedCategory);
+
+        return new CategoryManagementDTO(updatedCategory);
     }
 
 }

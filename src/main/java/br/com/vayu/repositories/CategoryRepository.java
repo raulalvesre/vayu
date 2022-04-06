@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
+    List<Category> findAllByOrderByOrder();
     List<Category> findAllByActiveTrue();
+
+    Category findByCode(String code);
 
 }

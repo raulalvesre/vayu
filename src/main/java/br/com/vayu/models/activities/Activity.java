@@ -25,7 +25,6 @@ public abstract class Activity {
 
     private boolean active;
 
-    @Column(columnDefinition = "TINYINT")
     private int order;
 
     public Activity(String code,

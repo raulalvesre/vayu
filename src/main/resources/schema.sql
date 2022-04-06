@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS category
     description VARCHAR(255),
     study_guide VARCHAR(1024),
     active      BIT,
-    `order`     TINYINT,
+    `order`     INT,
     icon_path   VARCHAR(512),
     color_code  VARCHAR(7),
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS subcategory
     description VARCHAR(255),
     study_guide VARCHAR(1024),
     active      BIT,
-    `order`     TINYINT,
+    `order`     INT,
 
     PRIMARY KEY (id),
     FOREIGN KEY (category_id)
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS course
     subcategory_id            INT          NOT NULL,
     code                      VARCHAR(255) NOT NULL,
     name                      VARCHAR(255) NOT NULL,
-    estimated_hours_to_finish TINYINT      NOT NULL,
+    estimated_hours_to_finish INT      NOT NULL,
     visible                   BIT,
     target_audience           VARCHAR(256),
     instructor_name           VARCHAR(256),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS section
     course_id INT          NOT NULL,
     code      VARCHAR(255) NOT NULL,
     name      VARCHAR(255) NOT NULL,
-    `order`   TINYINT,
+    `order`   INT,
     active    BIT,
     test      BIT,
 
@@ -74,10 +74,10 @@ CREATE TABLE IF NOT EXISTS activity
     code                VARCHAR(255) NOT NULL,
     title               VARCHAR(255) NOT NULL,
     active              BIT,
-    `order`             TINYINT,
+    `order`             INT,
     text                VARCHAR(255) NOT NULL,
     url                 VARCHAR(512) NOT NULL,
-    duration_in_minutes TINYINT,
+    duration_in_minutes INT,
     transcription       TEXT,
     wording             VARCHAR(512) NOT NULL,
     question_type       VARCHAR(255) NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS alternative
 (
     id            INT          NOT NULL AUTO_INCREMENT,
     text          VARCHAR(512) NOT NULL,
-    `order`       TINYINT,
+    `order`       INT,
     correct       BIT,
     justification VARCHAR(512),
     question_id   INT,
