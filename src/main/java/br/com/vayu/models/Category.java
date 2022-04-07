@@ -1,12 +1,14 @@
 package br.com.vayu.models;
 
+import br.com.vayu.dto.CategoryFormDTO;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
-@Table(name = "category")
 public class Category {
 
     @Id
@@ -21,33 +23,24 @@ public class Category {
 
     private String description;
 
-    @Column(name = "study_guide")
     private String studyGuide;
 
     private boolean active;
 
     @Column(columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
-    @Column(name = "icon_path")
     private String iconPath;
 
-    @Column(name = "color_code")
     private String colorCode;
 
-    public Category(int id,
-                    String code,
-                    String name,
-                    String description,
-                    String studyGuide,
-                    boolean active,
-                    int order,
-                    String iconPath,
-                    String colorCode) {
-        this(code, name, description, studyGuide, active, order, iconPath, colorCode);
-
-        this.id = id;
-    }
+    @OneToMany(
+            mappedBy = "category",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    List<Subcategory> subcategories = new ArrayList<>();
 
     public Category(String code,
                     String name,
@@ -58,9 +51,6 @@ public class Category {
                     String iconPath,
                     String colorCode) {
         this(code, name);
-
-        validateIfIsValidHexColorCode("color code", colorCode);
-
         this.description = description;
         this.studyGuide = studyGuide;
         this.active = active;
@@ -70,11 +60,32 @@ public class Category {
     }
 
     public Category(String code, String name) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-
         this.code = code;
         this.name = name;
+    }
+
+    public Category(int id, CategoryFormDTO categoryDTO) {
+        this(categoryDTO.getCode(),
+                categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                categoryDTO.getStudyGuide(),
+                categoryDTO.isActive(),
+                categoryDTO.getOrder(),
+                categoryDTO.getIconPath(),
+                categoryDTO.getColorCode());
+
+        this.id = id;
+    }
+
+    public Category(CategoryFormDTO categoryDTO) {
+        this(categoryDTO.getCode(),
+                categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                categoryDTO.getStudyGuide(),
+                categoryDTO.isActive(),
+                categoryDTO.getOrder(),
+                categoryDTO.getIconPath(),
+                categoryDTO.getColorCode());
     }
 
     @Deprecated
@@ -120,6 +131,10 @@ public class Category {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Subcategory> getSubcategories() {
+        return subcategories;
     }
 
     @Override

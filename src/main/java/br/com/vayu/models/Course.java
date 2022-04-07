@@ -7,8 +7,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.Objects;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
 @Table(name = "course")
 public class Course {
@@ -28,21 +26,18 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, name = "estimated_hours_to_finish", columnDefinition = "TINYINT")
+    @Column(nullable = false)
     private int estimatedHoursToFinish;
 
     private boolean visible;
 
-    @Column(name = "target_audience")
     private String targetAudience;
 
-    @Column(name = "instructor_name")
     private  String instructorName;
 
     @Type(type="text")
     private String syllabus;
 
-    @Column(name = "developed_abilities")
     private String developedAbilities;
 
     public Course(String code,
@@ -67,12 +62,6 @@ public class Course {
                   int estimatedHoursToFinish,
                   String instructorName,
                   Subcategory subcategory) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-        validateIfIntIsWithinRange("estimated hours to finish", estimatedHoursToFinish, 1, 20);
-        validateIfIsBlankString("instructor name", instructorName);
-        validateIfItIsNull("sub category", subcategory);
-
         this.code = code;
         this.name = name;
         this.estimatedHoursToFinish = estimatedHoursToFinish;

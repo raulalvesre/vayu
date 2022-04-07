@@ -1,11 +1,10 @@
 package br.com.vayu.models;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
-import static br.com.vayu.services.ValidationService.*;
-
 @Entity
-@Table(name = "section")
 public class Section {
 
     @Id
@@ -23,6 +22,7 @@ public class Section {
     private String name;
 
     @Column(columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
     private boolean active;
@@ -31,10 +31,6 @@ public class Section {
     public Section(String code,
                    String name,
                    Course course) {
-        validateIfItIsValidCode(code);
-        validateIfIsBlankString("name", name);
-        validateIfItIsNull("course", course);
-
         this.code = code;
         this.name = name;
         this.order = 0;
