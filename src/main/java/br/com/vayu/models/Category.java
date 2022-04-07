@@ -23,7 +23,6 @@ public class Category {
 
     private String description;
 
-    @Column
     private String studyGuide;
 
     private boolean active;
@@ -32,10 +31,8 @@ public class Category {
     @Type(type = "org.hibernate.type.IntegerType")
     private int order;
 
-    @Column
     private String iconPath;
 
-    @Column
     private String colorCode;
 
     @OneToMany(

@@ -26,11 +26,11 @@
         <table class="table table-bordered" id="categoryTable">
             <thead>
             <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Código</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th>Nome</th>
+                <th>Código</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
 
