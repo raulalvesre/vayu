@@ -57,14 +57,4 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
             WHERE ct.id = :ctId""")
     void deactivate(@Param("ctId") int id);
 
-
-////
-////    @Query(value = """
-////                    SELECT *
-////                    FROM category ct
-////                             INNER JOIN subcategory sb ON sb.category_id = ct.id
-////                    WHERE ct.code = :ctCode""",
-////            nativeQuery = true)
-//    List<CategoryApiProjection> findAllByCode(String ctCode);
-
 }
