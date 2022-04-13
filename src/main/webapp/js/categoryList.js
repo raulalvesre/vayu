@@ -2,7 +2,6 @@ $(document).ready(function () {
     $('.deactivate-btn').click(function() {
         const button = $(this);
         const activeTd = button.parent().siblings('.activeTd');
-        console.log(activeTd);
         const ctId = button.data("ctId");
 
         $.ajax({
