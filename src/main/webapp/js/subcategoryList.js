@@ -2,12 +2,11 @@ $(document).ready(function () {
     $('.deactivate-btn').click(function() {
         const button = $(this);
         const activeTd = button.parent().siblings('.activeTd');
-        console.log(activeTd);
-        const ctId = button.data("ctId");
+        const sbId = button.data("sbId");
 
         $.ajax({
-            url: `/api/categories/deactivate/${ctId}`,
-            type: "PATCH",
+            url: `/api/subcategories/deactivate/${sbId}`,
+            type: 'PATCH',
             success: function() {
                 activeTd.text("INATIVA");
                 button.fadeOut({
@@ -15,7 +14,7 @@ $(document).ready(function () {
                 });
             },
             error: function() {
-                alert("Não foi possível desativar a categoria, tente novamente!");
+                alert("Não foi possível desativar a subcategoria, tente novamente!");
             }
         });
     })

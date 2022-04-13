@@ -1,9 +1,11 @@
 package br.com.vayu.services;
 
-import br.com.vayu.dto.CategoryDTO;
+import br.com.vayu.dto.CategoryApiDTO;
 import br.com.vayu.dto.CategoryFormDTO;
-import br.com.vayu.dto.CategoryManagementDTO;
+import br.com.vayu.exceptions.NotFoundException;
 import br.com.vayu.models.Category;
+import br.com.vayu.projections.CategoryMinifiedProjection;
+import br.com.vayu.projections.DashboardCategoryProjection;
 import br.com.vayu.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,43 +21,49 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryDTO> getActiveCategoryDtoList() {
-        var activeCategories = categoryRepository.findAllByActiveTrue();
-
-        return activeCategories.stream()
-                .map(CategoryDTO::new)
-                .toList();
+    public CategoryMinifiedProjection getByCodeMinified(String categoryCode) {
+        return categoryRepository.findByCodeMinified(categoryCode)
+                .orElseThrow(() -> new NotFoundException("Category not found!"));
     }
 
-    public List<CategoryManagementDTO> getCategoryManagementDtoListInOrder() {
+    public CategoryFormDTO getByCodeAsFormDto(String categoryCode) {
+        return categoryRepository.findByCodeAsFormDto(categoryCode)
+                .orElseThrow(() -> new NotFoundException("Category not found!"));
+    }
+
+    public List<CategoryApiDTO> getAllActiveCategoryAsApiDtoList() {
         return categoryRepository.findAllByOrderByOrder().stream()
-                .map(CategoryManagementDTO::new)
+                .map(CategoryApiDTO::new)
                 .toList();
     }
 
-    public CategoryFormDTO getByCode(String categoryCode) {
-        var categoryModel = categoryRepository.findByCode(categoryCode);
-        return new CategoryFormDTO(categoryModel);
+    public List<CategoryMinifiedProjection> getMinifiedListInOrder() {
+        return categoryRepository.findAllMinifiedInOrder();
+    }
+
+    public List<DashboardCategoryProjection> getDashboardProjectionListOrderedDesc() {
+        return categoryRepository.findAllOrderedDescAsDashboardCategoryView();
     }
 
     @Transactional
-    public CategoryManagementDTO createCategory(CategoryFormDTO categoryFormDTO) {
-        var categoryModel = new Category(categoryFormDTO);
+    public void create(CategoryFormDTO categoryFormDTO) {
+        Category categoryModel = new Category(categoryFormDTO);
         categoryRepository.save(categoryModel);
-
-        return new CategoryManagementDTO(categoryModel);
     }
 
     @Transactional
-    public CategoryManagementDTO updateCategory(CategoryFormDTO categoryFormDTO) throws Exception {
-        if (!categoryRepository.existsById(categoryFormDTO.getId()))
-            throw new Exception();
+    public void update(CategoryFormDTO categoryFormDTO) throws Exception {
+        Category bdCategory = categoryRepository.findById(categoryFormDTO.getId())
+                .orElseThrow(() -> new NotFoundException("Category not found!"));
 
-        var updatedCategory = new Category(categoryFormDTO.getId(), categoryFormDTO);
+        bdCategory.merge(categoryFormDTO);
 
-        categoryRepository.save(updatedCategory);
+        categoryRepository.save(bdCategory);
+    }
 
-        return new CategoryManagementDTO(updatedCategory);
+    @Transactional
+    public void deactivate(int id) {
+        categoryRepository.deactivate(id);
     }
 
 }

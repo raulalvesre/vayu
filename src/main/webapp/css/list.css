@@ -7,11 +7,11 @@ td {
     vertical-align: middle !important;
 }
 
-#categoryTable, td, th {
+.table, td, th {
     border-width: 2px !important;
 }
 
-.subcategories, .editCategory {
+.child, .edit, .deactivation-button-td {
     width: 5%;
 }
 
@@ -19,6 +19,6 @@ td {
     background-color: #c2ced8 !important;
 }
 
-.subcategories-link {
+.underlined-text {
     text-decoration: underline;
 }

@@ -1,5 +1,6 @@
 package br.com.vayu.models;
 
+import br.com.vayu.dto.SubcategoryFormDTO;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.annotations.Type;
@@ -67,6 +68,17 @@ public class Subcategory {
         this.category = category;
     }
 
+    public Subcategory(SubcategoryFormDTO subcategoryFormDTO, Category category) {
+        this.id = subcategoryFormDTO.getId();
+        this.code = subcategoryFormDTO.getCode();
+        this.name = subcategoryFormDTO.getName();
+        this.description = subcategoryFormDTO.getDescription();
+        this.studyGuide = subcategoryFormDTO.getStudyGuide();
+        this.active = subcategoryFormDTO.isActive();
+        this.order = subcategoryFormDTO.getOrder();
+        this.category = category;
+    }
+
     @Deprecated
     public Subcategory() {
 
@@ -106,6 +118,16 @@ public class Subcategory {
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public void merge(SubcategoryFormDTO form, Category category) {
+        this.code = form.getCode();
+        this.name = form.getName();
+        this.description = form.getDescription();
+        this.studyGuide = form.getStudyGuide();
+        this.active = form.isActive();
+        this.order = form.getOrder();
+        this.category = category;
     }
 
     @Override

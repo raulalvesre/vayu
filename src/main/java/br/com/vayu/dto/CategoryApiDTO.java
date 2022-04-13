@@ -7,7 +7,7 @@ import br.com.vayu.models.Subcategory;
 import java.util.List;
 import java.util.Objects;
 
-public final class CategoryDTO {
+public final class CategoryApiDTO {
 
     private String name;
     private String code;
@@ -15,15 +15,15 @@ public final class CategoryDTO {
     private String colorCode;
     private String studyGuide;
     private int totalOfCourses;
-    private List<SubcategoryDTO> subcategories;
-    private List<CourseDTO> courses;
+    private List<SubcategoryApiDTO> subcategories;
+    private List<CourseApiDTO> courses;
 
     @Deprecated
-    public CategoryDTO() {
+    public CategoryApiDTO() {
 
     }
 
-    public CategoryDTO(Category category) {
+    public CategoryApiDTO(Category category) {
         this.name = category.getName();
         this.code = category.getCode();
         this.order = category.getOrder();
@@ -36,14 +36,14 @@ public final class CategoryDTO {
                 .map(Subcategory::getCourses)
                 .flatMap(List::stream)
                 .filter(Course::isVisible)
-                .map(CourseDTO::new)
+                .map(CourseApiDTO::new)
                 .toList();
 
         this.totalOfCourses = courses.size();
 
         this.subcategories = subcategories.stream()
                 .filter(Subcategory::isActive)
-                .map(SubcategoryDTO::new)
+                .map(SubcategoryApiDTO::new)
                 .toList();
 
     }
@@ -96,19 +96,19 @@ public final class CategoryDTO {
         this.totalOfCourses = totalOfCourses;
     }
 
-    public List<SubcategoryDTO> getSubcategories() {
+    public List<SubcategoryApiDTO> getSubcategories() {
         return subcategories;
     }
 
-    public void setSubcategories(List<SubcategoryDTO> subcategories) {
+    public void setSubcategories(List<SubcategoryApiDTO> subcategories) {
         this.subcategories = subcategories;
     }
 
-    public List<CourseDTO> getCourses() {
+    public List<CourseApiDTO> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<CourseDTO> courses) {
+    public void setCourses(List<CourseApiDTO> courses) {
         this.courses = courses;
     }
 
@@ -116,7 +116,7 @@ public final class CategoryDTO {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (CategoryDTO) obj;
+        var that = (CategoryApiDTO) obj;
         return Objects.equals(this.name, that.name) &&
                Objects.equals(this.code, that.code) &&
                this.order == that.order &&

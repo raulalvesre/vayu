@@ -6,10 +6,9 @@
 <head>
     <title>Categorias</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-    <link rel="stylesheet" href="../css/categoryList.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/list.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="${pageContext.request.contextPath}/src/main/webapp/css/categoryList.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -23,12 +22,13 @@
     </a>
 
     <div>
-        <table class="table table-bordered" id="categoryTable">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th>Nome</th>
                 <th>Código</th>
                 <th>Status</th>
+                <th></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -37,14 +37,19 @@
             <tbody>
             <c:forEach items="${categories}" var="ct">
                 <tr>
-                    <td class="name">${ct.name()}</td>
-                    <td class="code">${ct.code()}</td>
-                    <td class="categoryActive">${ct.active() ? "ATIVA" : "INATIVA"}</td>
-                    <td class="subcategories"><a href="subcategories/${ct.code()}" class="subcategories-link">Subcategorias</a></td>
-                    <td class="editCategory">
-                        <a href="categories/${ct.code()}" class="btn btn-default">
+                    <td class="name">${ct.name}</td>
+                    <td class="code">${ct.code}</td>
+                    <td class="activeTd">${ct.active ? "ATIVA" : "INATIVA"}</td>
+                    <td class="child"><a href="subcategories/${ct.code}" class="underlined-text">Subcategorias</a></td>
+                    <td class="edit">
+                        <a href="categories/${ct.code}" class="btn btn-default">
                             Editar
                         </a>
+                    </td>
+                    <td class="deactivation-button-td">
+                        <button class="btn btn-default deactivate-btn ${!ct.active ? 'hidden' : ''}" data-ct-id="${ct.id}">
+                            Desativar
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
@@ -56,7 +61,8 @@
 </div>
 
 <footer>
-    <script src="js/categoryList.js"></script>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/categoryList.js"></script>
 </footer>
 </body>
 </html>

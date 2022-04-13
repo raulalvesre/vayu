@@ -64,28 +64,16 @@ public class Category {
         this.name = name;
     }
 
-    public Category(int id, CategoryFormDTO categoryDTO) {
-        this(categoryDTO.getCode(),
-                categoryDTO.getName(),
-                categoryDTO.getDescription(),
-                categoryDTO.getStudyGuide(),
-                categoryDTO.isActive(),
-                categoryDTO.getOrder(),
-                categoryDTO.getIconPath(),
-                categoryDTO.getColorCode());
-
-        this.id = id;
-    }
-
     public Category(CategoryFormDTO categoryDTO) {
-        this(categoryDTO.getCode(),
-                categoryDTO.getName(),
-                categoryDTO.getDescription(),
-                categoryDTO.getStudyGuide(),
-                categoryDTO.isActive(),
-                categoryDTO.getOrder(),
-                categoryDTO.getIconPath(),
-                categoryDTO.getColorCode());
+        this.id = categoryDTO.getId();
+        this.code = categoryDTO.getCode();
+        this.name = categoryDTO.getName();
+        this.description = categoryDTO.getDescription();
+        this.studyGuide = categoryDTO.getStudyGuide();
+        this.active = categoryDTO.isActive();
+        this.order = categoryDTO.getOrder();
+        this.iconPath = categoryDTO.getIconPath();
+        this.colorCode = categoryDTO.getColorCode();
     }
 
     @Deprecated
@@ -135,6 +123,17 @@ public class Category {
 
     public List<Subcategory> getSubcategories() {
         return subcategories;
+    }
+
+    public void merge(CategoryFormDTO form) {
+        this.code = form.getCode();
+        this.name = form.getName();
+        this.description = form.getDescription();
+        this.studyGuide = form.getStudyGuide();
+        this.active = form.isActive();
+        this.order = form.getOrder();
+        this.iconPath = form.getIconPath();
+        this.colorCode = form.getColorCode();
     }
 
     @Override
