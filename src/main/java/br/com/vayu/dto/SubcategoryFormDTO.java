@@ -3,7 +3,7 @@ package br.com.vayu.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public final class CategoryFormDTO {
+public class SubcategoryFormDTO {
 
     private int id;
 
@@ -18,20 +18,16 @@ public final class CategoryFormDTO {
     private String studyGuide;
     private boolean active;
     private int order;
-    private String iconPath;
+    private String categoryCode;
 
-    @Pattern(regexp = "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", message = "{colorcode.invalid}")
-    private String colorCode;
-
-    public CategoryFormDTO(int id,
-                           String name,
-                           String code,
-                           String description,
-                           String studyGuide,
-                           boolean active,
-                           int order,
-                           String iconPath,
-                           String colorCode) {
+    public SubcategoryFormDTO(int id,
+                              String name,
+                              String code,
+                              String description,
+                              String studyGuide,
+                              boolean active,
+                              int order,
+                              String categoryId) {
         this.id = id;
         this.name = name;
         this.code = code;
@@ -39,12 +35,11 @@ public final class CategoryFormDTO {
         this.studyGuide = studyGuide;
         this.active = active;
         this.order = order;
-        this.iconPath = iconPath;
-        this.colorCode = colorCode;
+        this.categoryCode = categoryId;
     }
 
     @Deprecated
-    public CategoryFormDTO() {}
+    public SubcategoryFormDTO() {}
 
     public int getId() {
         return id;
@@ -102,20 +97,13 @@ public final class CategoryFormDTO {
         this.order = order;
     }
 
-    public String getIconPath() {
-        return iconPath;
+    public String getCategoryCode() {
+        return categoryCode;
     }
 
-    public void setIconPath(String iconPath) {
-        this.iconPath = iconPath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
+    public void setCategoryCode(String categoryCode) {
+        this.categoryCode = categoryCode;
     }
 
 }
+

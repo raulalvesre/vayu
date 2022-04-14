@@ -7,17 +7,16 @@
 <head>
     <title>${formIsCreate ? "Nova" : "Editar"} categoria</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-    <link href="${pageContext.request.contextPath}/css/categoryForm.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/form.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="${pageContext.request.contextPath}/src/main/webapp/css/categoryForm.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
     <h1 id="header">${formIsCreate ? "Nova" : "Editar"} categoria</h1>
 
     <%--@elvariable id="categoryFormDTO" type="br.com.vayu.dto.CategoryFormDTO"--%>
-    <form:form modelAttribute="categoryFormDTO" action="${postUrl}" method="POST">
+    <form:form modelAttribute="categoryFormDTO" action="${postURL}" method="POST">
         <input type="hidden" name="id" value="${categoryFormDTO.id}">
 
         <spring:bind path="name">
