@@ -46,7 +46,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public void create(CategoryFormDTO categoryFormDTO) {
+    public void save(CategoryFormDTO categoryFormDTO) {
         Category categoryModel = new Category(categoryFormDTO);
         categoryRepository.save(categoryModel);
     }

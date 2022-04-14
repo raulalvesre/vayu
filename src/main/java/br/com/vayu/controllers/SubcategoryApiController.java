@@ -1,11 +1,8 @@
 package br.com.vayu.controllers;
 
 import br.com.vayu.services.SubcategoryService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/subcategories")
@@ -18,9 +15,9 @@ public class SubcategoryApiController {
     }
 
     @PatchMapping("deactivate/{id}")
-    public ResponseEntity<?> deactive(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactive(@PathVariable int id) {
         subcategoryService.deactivate(id);
-        return ResponseEntity.noContent().build();
     }
 
 }

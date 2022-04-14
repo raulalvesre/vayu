@@ -45,14 +45,14 @@ public class CategoryController {
     }
 
     @PostMapping
-    public String createCategory(@Valid CategoryFormDTO createCategoryDTO,
-                                 BindingResult bindingResult,
-                                 Model model) {
+    public String create(@Valid CategoryFormDTO createCategoryDTO,
+                         BindingResult bindingResult,
+                         Model model) {
         if (bindingResult.hasErrors()) {
             return getCreateForm(createCategoryDTO, model);
         }
 
-        categoryService.create(createCategoryDTO);
+        categoryService.save(createCategoryDTO);
         return "redirect:/admin/categories";
     }
 
@@ -68,8 +68,8 @@ public class CategoryController {
     }
 
     @PostMapping("{categoryCode}")
-    public String updateCategory(@Valid CategoryFormDTO categoryFormDTO,
-                                 BindingResult bindingResult) throws Exception {
+    public String edit(@Valid CategoryFormDTO categoryFormDTO,
+                       BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "category/categoryForm";
         }

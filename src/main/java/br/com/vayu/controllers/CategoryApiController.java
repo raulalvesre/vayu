@@ -2,6 +2,7 @@ package br.com.vayu.controllers;
 
 import br.com.vayu.dto.CategoryApiDTO;
 import br.com.vayu.services.CategoryService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +25,9 @@ public class CategoryApiController {
     }
 
     @PatchMapping("deactivate/{id}")
-    public ResponseEntity<?> deactivate(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deactivate(@PathVariable int id) {
         categoryService.deactivate(id);
-        return ResponseEntity.noContent().build();
     }
 
 }

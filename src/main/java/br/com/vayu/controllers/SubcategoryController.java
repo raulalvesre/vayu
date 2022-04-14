@@ -55,7 +55,7 @@ public class SubcategoryController {
             return getCreateForm(subcategoryFormDTO, model);
         }
 
-        subcategoryService.create(subcategoryFormDTO);
+        subcategoryService.save(subcategoryFormDTO);
         return "redirect:/admin/subcategories/" + subcategoryFormDTO.getCategoryCode();
     }
 
@@ -75,10 +75,10 @@ public class SubcategoryController {
     }
 
     @PostMapping("{categoryCode}/{subcategoryCode}")
-    public String update(@PathVariable String categoryCode,
-                         @PathVariable String subcategoryCode,
-                         @Valid SubcategoryFormDTO subcategoryFormDTO,
-                         BindingResult bindingResult) throws Exception {
+    public String edit(@PathVariable String categoryCode,
+                       @PathVariable String subcategoryCode,
+                       @Valid SubcategoryFormDTO subcategoryFormDTO,
+                       BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "subcategory/subcategoryForm";
         }

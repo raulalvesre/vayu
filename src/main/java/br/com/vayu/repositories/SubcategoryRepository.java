@@ -19,7 +19,8 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
             SELECT new br.com.vayu.dto.SubcategoryFormDTO(sb.id, sb.name, sb.code, sb.description, sb.studyGuide, sb.active, sb.order, sb.category.code)
             FROM Subcategory sb
             WHERE sb.code = :sbCode AND sb.category.code = :ctCode""")
-    Optional<SubcategoryFormDTO> findByCodeAndCategoryCodeAsFormDto(@Param("sbCode") String sbCode, @Param("ctCode") String ctCode);
+    Optional<SubcategoryFormDTO> findByCodeAndCategoryCodeAsFormDto(@Param("sbCode") String subcategoryCode, 
+                                                                    @Param("ctCode") String categoryCode);
 
     @Query(value = """
             SELECT sb.id, sb.name, sb.code, sb.active
@@ -27,8 +28,8 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
                 INNER JOIN category ct ON sb.category_id = ct.id
             WHERE sb.code = :sbCode AND ct.code = :ctCode""",
             nativeQuery = true)
-    Optional<SubcategoryMinifiedProjection> findByCodeAndCategoryCodeMinified(@Param("sbCode") String sbCode,
-                                                                      @Param("ctCode") String ctCode);
+    Optional<SubcategoryMinifiedProjection> findByCodeAndCategoryCodeMinified(@Param("sbCode") String subcategoryCode,
+                                                                      @Param("ctCode") String categoryCode);
 
     @Query(value = """
             SELECT sb.id, sb.name, sb.code, sb.active
@@ -36,7 +37,7 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
                 INNER JOIN category ct ON sb.category_id = ct.id
             WHERE ct.code = :ctCode""",
             nativeQuery = true)
-    List<SubcategoryMinifiedProjection> findAllMinifiedByCategoryCode(@Param("ctCode") String ctCode);
+    List<SubcategoryMinifiedProjection> findAllMinifiedByCategoryCode(@Param("ctCode") String categoryCode);
 
     @Modifying
     @Query("""

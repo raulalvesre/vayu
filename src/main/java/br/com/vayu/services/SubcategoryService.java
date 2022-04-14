@@ -42,7 +42,7 @@ public class SubcategoryService {
     }
 
     @Transactional
-    public void create(SubcategoryFormDTO subcategoryFormDTO) {
+    public void save(SubcategoryFormDTO subcategoryFormDTO) {
         Category category = categoryRepository.findByCode(subcategoryFormDTO.getCategoryCode())
                 .orElseThrow(() -> new NotFoundException("Category not found!"));
 
