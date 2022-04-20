@@ -31,7 +31,7 @@ public class CategoryController {
     @GetMapping("/category/{categoryCode}")
     public String getCategoryPublicPage(@PathVariable String categoryCode,
                                         Model model) {
-        CategoryPublicPageDTO category = categoryService.getAllAsPublicPageDto(categoryCode);
+        CategoryPublicPageDTO category = categoryService.getAllForCategoryPublicPage(categoryCode);
 
         model.addAttribute("category", category);
 

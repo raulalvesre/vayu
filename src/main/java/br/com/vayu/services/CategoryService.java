@@ -45,7 +45,7 @@ public class CategoryService {
                 .orElseThrow(() -> new NotFoundException("Category not found!"));
     }
 
-    public List<CategoryApiDTO> getAllAsCategoryAsApiDtoList() {
+    public List<CategoryApiDTO> getAllForCategoryApi() {
         List<Course> courses = courseRepository
                 .findAllForCategoryApi();
 
@@ -79,7 +79,7 @@ public class CategoryService {
         return categoryRepository.findAllOrderedDescAsDashboardCategoryView();
     }
 
-    public List<CategoryLoginPageDTO> getAllAsLoginPageCategories() {
+    public List<CategoryLoginPageDTO> getAllForLoginPage() {
         List<Subcategory> subcategories = subcategoryRepository
                 .findDistinctForLoginPage();
 
@@ -98,7 +98,7 @@ public class CategoryService {
     }
 
 
-    public CategoryPublicPageDTO getAllAsPublicPageDto(String categoryCode) {
+    public CategoryPublicPageDTO getAllForCategoryPublicPage(String categoryCode) {
         List<Course> courses = courseRepository
                 .findAllForCategoryPublicPage(categoryCode);
 

@@ -16,7 +16,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        model.addAttribute("categories", categoryService.getAllAsLoginPageCategories());
+        model.addAttribute("categories", categoryService.getAllForLoginPage());
 
         return "login";
     }

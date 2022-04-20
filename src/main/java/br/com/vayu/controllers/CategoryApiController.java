@@ -23,7 +23,7 @@ public class CategoryApiController {
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @Cacheable("categoryApiList")
     public ResponseEntity<List<CategoryApiDTO>> getCategoryApiDtoList() {
-        return ResponseEntity.ok(categoryService.getAllAsCategoryAsApiDtoList());
+        return ResponseEntity.ok(categoryService.getAllForCategoryApi());
     }
 
     @PatchMapping("deactivate/{id}")
