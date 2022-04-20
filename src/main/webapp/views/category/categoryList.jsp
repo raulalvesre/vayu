@@ -35,19 +35,19 @@
             </thead>
 
             <tbody>
-            <c:forEach items="${categories}" var="ct">
+            <c:forEach items="${categories}" var="sb">
                 <tr>
-                    <td class="name">${ct.name}</td>
-                    <td class="code">${ct.code}</td>
-                    <td class="activeTd">${ct.active ? "ATIVA" : "INATIVA"}</td>
-                    <td class="child"><a href="subcategories/${ct.code}" class="underlined-text">Subcategorias</a></td>
+                    <td class="name">${sb.name}</td>
+                    <td class="code">${sb.code}</td>
+                    <td class="activeTd">${sb.active ? "ATIVA" : "INATIVA"}</td>
+                    <td class="child"><a href="subcategories/${sb.code}" class="underlined-text">Subcategorias</a></td>
                     <td class="edit">
-                        <a href="categories/${ct.code}" class="btn btn-default">
+                        <a href="categories/${sb.code}" class="btn btn-default">
                             Editar
                         </a>
                     </td>
                     <td class="deactivation-button-td">
-                        <button class="btn btn-default deactivate-btn ${!ct.active ? 'hidden' : ''}" data-ct-id="${ct.id}">
+                        <button class="btn btn-default deactivate-btn ${!sb.active ? 'hidden' : ''}" data-ct-id="${sb.id}">
                             Desativar
                         </button>
                     </td>

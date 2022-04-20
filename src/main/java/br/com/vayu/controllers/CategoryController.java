@@ -1,6 +1,7 @@
 package br.com.vayu.controllers;
 
 import br.com.vayu.dto.CategoryFormDTO;
+import br.com.vayu.dto.CategoryPublicPageDTO;
 import br.com.vayu.projections.CategoryMinifiedProjection;
 import br.com.vayu.repositories.CategoryRepository;
 import br.com.vayu.services.CategoryService;
@@ -16,7 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/categories")
+@RequestMapping
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -27,16 +28,26 @@ public class CategoryController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping
+    @GetMapping("/category/{categoryCode}")
+    public String getCategoryPublicPage(@PathVariable String categoryCode,
+                                        Model model) {
+        CategoryPublicPageDTO category = categoryService.getAllAsPublicPageDto(categoryCode);
+
+        model.addAttribute("category", category);
+
+        return "category/categoryPage";
+    }
+
+    @GetMapping("/admin/categories")
     public String getCategories(Model model) {
-        List<CategoryMinifiedProjection> categories = categoryService.getMinifiedListInOrder();
+        List<CategoryMinifiedProjection> categories = categoryService.getAllMinifiedInOrder();
 
         model.addAttribute("categories", categories);
 
         return "category/categoryList";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/admin/categories/new")
     public String getCreateForm(CategoryFormDTO categoryFormDTO, Model model) {
         model.addAttribute("formIsCreate", true);
         model.addAttribute("postURL", "/admin/categories");
@@ -44,7 +55,7 @@ public class CategoryController {
         return "category/categoryForm";
     }
 
-    @PostMapping
+    @PostMapping("/admin/categories")
     public String create(@Valid CategoryFormDTO createCategoryDTO,
                          BindingResult bindingResult,
                          Model model) {
@@ -56,7 +67,7 @@ public class CategoryController {
         return "redirect:/admin/categories";
     }
 
-    @GetMapping("{categoryCode}")
+    @GetMapping("/admin/categories/{categoryCode}")
     public String getUpdateForm(@PathVariable String categoryCode, Model model) {
         CategoryFormDTO categoryFormDTO = categoryService.getByCodeAsFormDto(categoryCode);
 
@@ -67,7 +78,7 @@ public class CategoryController {
         return "category/categoryForm";
     }
 
-    @PostMapping("{categoryCode}")
+    @PostMapping("/admin/categories/{categoryCode}")
     public String edit(@Valid CategoryFormDTO categoryFormDTO,
                        BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {

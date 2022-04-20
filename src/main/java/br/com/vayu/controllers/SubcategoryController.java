@@ -41,7 +41,7 @@ public class SubcategoryController {
     @GetMapping("/new")
     public String getCreateForm(SubcategoryFormDTO subcategoryFormDTO, Model model) {
         model.addAttribute("formIsCreate", true);
-        model.addAttribute("categories", categoryService.getMinifiedListInOrder());
+        model.addAttribute("categories", categoryService.getAllMinifiedInOrder());
         model.addAttribute("postURL", "/admin/subcategories");
 
         return "subcategory/subcategoryForm";
@@ -67,7 +67,7 @@ public class SubcategoryController {
                 subcategoryService.getByCodeAndCategoryCodeAsFormDto(categoryCode, subcategoryCode);
 
         model.addAttribute("subcategoryFormDTO", subcategoryFormDTO);
-        model.addAttribute("categories", categoryService.getMinifiedListInOrder());
+        model.addAttribute("categories", categoryService.getAllMinifiedInOrder());
         model.addAttribute("postURL", "/admin/subcategories/" + categoryCode + "/" + subcategoryCode);
         model.addAttribute("formIsCreate", false);
 

@@ -25,6 +25,14 @@ public class SubcategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    public List<SubcategoryMinifiedProjection> getAllMinified() {
+        return subcategoryRepository.findAllMinified();
+    }
+
+    public List<SubcategoryMinifiedProjection> getAllMinifiedInAlphabeticOrder() {
+        return subcategoryRepository.findAllMinifiedInAlphabeticOrder();
+    }
+
     public List<SubcategoryMinifiedProjection> getAllMinifiedByCategoryCode(String categoryCode) {
         return subcategoryRepository.findAllMinifiedByCategoryCode(categoryCode);
     }
