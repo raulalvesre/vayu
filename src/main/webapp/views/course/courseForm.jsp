@@ -85,8 +85,8 @@
         <div class="form-group">
             <form:label path="subcategoryCode" cssClass="control-label">Subcategoria</form:label>
             <form:select path="subcategoryCode" cssClass="form-control" id="categorySelect">
-                <c:forEach items="${subcategories}" var="sb">
-                    <form:option value="${sb.code}">${sb.name}</form:option>
+                <c:forEach items="${subcategories}" var="subcategory">
+                    <form:option value="${subcategory.code}">${subcategory.name}</form:option>
                 </c:forEach>
             </form:select>
         </div>

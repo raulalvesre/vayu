@@ -41,12 +41,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/css/**")
                 .antMatchers("/js/**")
-                .antMatchers("/v2/api-docs",
-                                "/configuration/ui",
-                                "/swagger-resources/**",
-                                "/configuration/security",
-                                "/swagger-ui.html",
-                                "/webjars/**");
+                .antMatchers("/swagger-ui/**",
+                        "/v2/api-docs",
+                        "/webjars/**",
+                        "/configuration/**",
+                        "/swagger-resources/**");
     }
 
     @Bean

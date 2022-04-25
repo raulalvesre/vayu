@@ -30,18 +30,18 @@
             <h2 class="signup__title">Ainda não estuda com a gente?</h2>
             <p class="signup__text">São mais de mil cursos nas seguintes áreas</p>
             <ul class="categories">
-                <c:forEach items="${categories}" var="ct">
+                <c:forEach items="${categories}" var="category">
                     <li class="category-card">
-                        <a href="category/${ct.code}" class="category-card__link">
+                        <a href="category/${category.code}" class="category-card__link">
                             <span class="category-card__icon">
-                                <img src="${ct.iconPath}">
+                                <img src="${category.iconPath}">
                             </span>
-                            <h3 class="category-card__title">${ct.name}</h3>
+                            <h3 class="category-card__title">${category.name}</h3>
                             <p class="category-card__details">
-                                <c:forEach items="${ct.subcategoriesNames}" var="sbName" varStatus="loop">
+                                <c:forEach items="${category.subcategoriesNames}" var="subcategoryName" varStatus="loop">
                                     <c:choose>
                                         <c:when test="${loop.count < 3}">
-                                            ${sbName}<c:if test="${!loop.last}">, </c:if>
+                                            ${subcategoryName}<c:if test="${!loop.last}">, </c:if>
                                         </c:when>
                                         <c:when test="${loop.count == 3}">
                                             e mais...

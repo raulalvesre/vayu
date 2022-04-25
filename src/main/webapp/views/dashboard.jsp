@@ -26,10 +26,10 @@
             </thead>
 
             <tbody>
-            <c:forEach items="${categories}" var="sb">
+            <c:forEach items="${categories}" var="subcategory">
                 <tr>
-                    <td class="name">${sb.name}</td>
-                    <td>${sb.totalCourses}</td>
+                    <td class="name">${subcategory.name}</td>
+                    <td>${subcategory.totalCourses}</td>
                 </tr>
             </c:forEach>
             </tbody>

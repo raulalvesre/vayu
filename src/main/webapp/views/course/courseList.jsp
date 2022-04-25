@@ -28,13 +28,13 @@
             </thead>
 
             <tbody>
-                <c:forEach items="${coursePage.content}" var="crs">
+                <c:forEach items="${coursePage.content}" var="course">
                     <tr>
-                        <td>${crs.name}</td>
-                        <td>${crs.code}</td>
-                        <td>${crs.visible ? "ATIVA" : "INATIVA"}</td>
+                        <td>${course.name}</td>
+                        <td>${course.code}</td>
+                        <td>${course.visible ? "ATIVA" : "INATIVA"}</td>
                         <td>
-                            <a href="/admin/courses/${categoryCode}/${subcategoryDto.code}/${crs.code}" class="btn btn-default">
+                            <a href="/admin/courses/${categoryCode}/${subcategoryDto.code}/${course.code}" class="btn btn-default">
                                 Editar
                             </a>
                         </td>

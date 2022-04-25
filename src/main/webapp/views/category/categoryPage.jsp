@@ -21,20 +21,20 @@
     <div class="subcategories">
         <p class="subcategories__label">O que você quer aprender?</p>
         <ul class="subcategories__list">
-            <c:forEach items="${category.subcategories}" var="sb">
+            <c:forEach items="${category.subcategories}" var="subcategory">
                 <li class="subcategories__item">
-                    <a href="#${sb.code}" class="subcategories__link">
-                        <span class="subcategories__name">${sb.name}</span>
+                    <a href="#${subcategory.code}" class="subcategories__link">
+                        <span class="subcategories__name">${subcategory.name}</span>
                     </a>
                 </li>
             </c:forEach>
         </ul>
     </div>
-    <c:forEach items="${category.subcategories}" var="sb">
+    <c:forEach items="${category.subcategories}" var="subcategory">
         <div class="subcategory">
-            <h2 id="${sb.code}" class="subcategory__name">${sb.name}</h2>
+            <h2 id="${subcategory.code}" class="subcategory__name">${subcategory.name}</h2>
             <ul class="courses__list">
-                <c:forEach items="${sb.courses}" var="crs">
+                <c:forEach items="${subcategory.courses}" var="crs">
                     <li class="course-card">
                         <h3 class="course-card__name">${crs.name}</h3>
                         <p class="course-card__hours">${crs.estimatedHoursToFinish}h</p>
