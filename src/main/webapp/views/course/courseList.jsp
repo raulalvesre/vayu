@@ -11,6 +11,7 @@
     <h4 id="categoryName">${subcategoryDto.name}</h4>
     <h1 style="margin-top: 10px">Cursos</h1>
     <a href="/admin/courses/new">
+
         <button type="button" class="btn btn-primary" id="btn-add">Novo curso</button>
     </a>
 
@@ -27,13 +28,13 @@
             </thead>
 
             <tbody>
-                <c:forEach items="${coursePage.content}" var="crs">
+                <c:forEach items="${coursePage.content}" var="course">
                     <tr>
-                        <td>${crs.name}</td>
-                        <td>${crs.code}</td>
-                        <td>${crs.visible ? "ATIVA" : "INATIVA"}</td>
+                        <td>${course.name}</td>
+                        <td>${course.code}</td>
+                        <td>${course.visible ? "ATIVA" : "INATIVA"}</td>
                         <td>
-                            <a href="/admin/courses/${categoryName}/${subcategoryDto.code}/${crs.code}" class="btn btn-default">
+                            <a href="/admin/courses/${categoryCode}/${subcategoryDto.code}/${course.code}" class="btn btn-default">
                                 Editar
                             </a>
                         </td>

@@ -19,14 +19,12 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     Optional<Category> findByCode(String code);
 
     @Query(value = """
-                    SELECT ct.id, ct.name, ct.code, ct.active
-                    FROM category ct
-                    ORDER BY ct.order""",
+            SELECT ct.id, ct.name, ct.code, ct.active
+            FROM category ct
+            ORDER BY ct.order""",
             nativeQuery = true)
     List<CategoryMinifiedProjection> findAllMinifiedInOrder();
-
-    List<Category> findAllByOrderByOrder();
-
+    
     @Query(value = """
             SELECT ct.id, ct.name, ct.code, ct.active
             FROM category ct

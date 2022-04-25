@@ -18,6 +18,8 @@ public class SubcategoryFormDTO {
     private String studyGuide;
     private boolean active;
     private int order;
+
+    @NotBlank(message = "{categorycode.notblank}")
     private String categoryCode;
 
     public SubcategoryFormDTO(int id,

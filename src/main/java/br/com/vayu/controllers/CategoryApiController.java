@@ -2,9 +2,9 @@ package br.com.vayu.controllers;
 
 import br.com.vayu.dto.CategoryApiDTO;
 import br.com.vayu.services.CategoryService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +20,9 @@ public class CategoryApiController {
     }
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<List<CategoryApiDTO>> getCompleteCategoryList() {
-        return ResponseEntity.ok(categoryService.getAllActiveCategoryAsApiDtoList());
+    @Cacheable("categoryApiList")
+    public List<CategoryApiDTO> getCategoryApiDtoList() {
+        return categoryService.getAllForCategoryApi();
     }
 
     @PatchMapping("deactivate/{id}")

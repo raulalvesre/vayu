@@ -1,8 +1,6 @@
 package br.com.vayu.dto;
 
 import br.com.vayu.models.Category;
-import br.com.vayu.models.Course;
-import br.com.vayu.models.Subcategory;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,35 +14,18 @@ public final class CategoryApiDTO {
     private String studyGuide;
     private int totalOfCourses;
     private List<SubcategoryApiDTO> subcategories;
-    private List<CourseApiDTO> courses;
 
-    @Deprecated
-    public CategoryApiDTO() {
-
-    }
-
-    public CategoryApiDTO(Category category) {
+    public CategoryApiDTO(Category category, List<SubcategoryApiDTO> subcategories) {
         this.name = category.getName();
         this.code = category.getCode();
         this.order = category.getOrder();
         this.colorCode = category.getColorCode();
         this.studyGuide = category.getStudyGuide();
+        this.subcategories = subcategories;
+    }
 
-        var subcategories = category.getSubcategories();
-
-        this.courses = subcategories.stream()
-                .map(Subcategory::getCourses)
-                .flatMap(List::stream)
-                .filter(Course::isVisible)
-                .map(CourseApiDTO::new)
-                .toList();
-
-        this.totalOfCourses = courses.size();
-
-        this.subcategories = subcategories.stream()
-                .filter(Subcategory::isActive)
-                .map(SubcategoryApiDTO::new)
-                .toList();
+    @Deprecated
+    public CategoryApiDTO() {
 
     }
 
@@ -104,14 +85,6 @@ public final class CategoryApiDTO {
         this.subcategories = subcategories;
     }
 
-    public List<CourseApiDTO> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<CourseApiDTO> courses) {
-        this.courses = courses;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
@@ -123,26 +96,12 @@ public final class CategoryApiDTO {
                Objects.equals(this.colorCode, that.colorCode) &&
                Objects.equals(this.studyGuide, that.studyGuide) &&
                this.totalOfCourses == that.totalOfCourses &&
-               Objects.equals(this.subcategories, that.subcategories) &&
-               Objects.equals(this.courses, that.courses);
+               Objects.equals(this.subcategories, that.subcategories);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, code, order, colorCode, studyGuide, totalOfCourses, subcategories, courses);
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryDTO[" +
-               "name=" + name + ", " +
-               "code=" + code + ", " +
-               "order=" + order + ", " +
-               "colorCode=" + colorCode + ", " +
-               "studyGuide=" + studyGuide + ", " +
-               "totalOfCourses=" + totalOfCourses + ", " +
-               "subcategories=" + subcategories + ", " +
-               "courses=" + courses + ']';
+        return Objects.hash(name, code, order, colorCode, studyGuide, totalOfCourses, subcategories);
     }
 
 }

@@ -28,7 +28,7 @@ public class DashboardController {
 
     @GetMapping("/admin/dashboard")
     public String getDashboard(Model model) {
-        List<DashboardCategoryProjection> categories = categoryService.getDashboardProjectionListOrderedDesc();
+        List<DashboardCategoryProjection> categories = categoryService.getAllAsDashboardProjectionOrderedDesc();
         DashboardInstructorProjection instructor = courseService.getDashboardInstructorProjection();
 
         model.addAttribute("categories", categories);

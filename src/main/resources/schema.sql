@@ -2,6 +2,18 @@ CREATE SCHEMA IF NOT EXISTS vayu;
 
 use vayu;
 
+CREATE TABLE IF NOT EXISTS user
+(
+    id       INT          NOT NULL AUTO_INCREMENT,
+    name     VARCHAR(200) NOT NULL,
+    email    VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(16)  NOT NULL UNIQUE,
+    password VARCHAR(500) NOT NULL,
+    active   BIT          NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS category
 (
     id          INT          NOT NULL AUTO_INCREMENT,
@@ -39,7 +51,7 @@ CREATE TABLE IF NOT EXISTS course
     subcategory_id            INT          NOT NULL,
     code                      VARCHAR(255) NOT NULL,
     name                      VARCHAR(255) NOT NULL,
-    estimated_hours_to_finish INT      NOT NULL,
+    estimated_hours_to_finish INT          NOT NULL,
     visible                   BIT,
     target_audience           VARCHAR(256),
     instructor_name           VARCHAR(256),

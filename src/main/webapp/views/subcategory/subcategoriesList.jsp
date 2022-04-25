@@ -30,19 +30,19 @@
             </thead>
 
             <tbody>
-            <c:forEach items="${subcategories}" var="sb">
+            <c:forEach items="${subcategories}" var="subcategory">
                 <tr>
-                    <td class="name">${sb.name}</td>
-                    <td class="code">${sb.code}</td>
-                    <td class="activeTd">${sb.active ? "ATIVA" : "INATIVA"}</td>
-                    <td class="child"><a href="/admin/courses/${categoryDto.code}/${sb.code}" class="underlined-text">Cursos</a></td>
+                    <td class="name">${subcategory.name}</td>
+                    <td class="code">${subcategory.code}</td>
+                    <td class="activeTd">${subcategory.active ? "ATIVA" : "INATIVA"}</td>
+                    <td class="child"><a href="/admin/courses/${categoryDto.code}/${subcategory.code}" class="underlined-text">Cursos</a></td>
                     <td class="edit">
-                        <a href="/admin/subcategories/${categoryDto.code}/${sb.code}" class="btn btn-default">
+                        <a href="/admin/subcategories/${categoryDto.code}/${subcategory.code}" class="btn btn-default">
                             Editar
                         </a>
                     </td>
                     <td class="deactivation-button-td">
-                        <button class="btn btn-default deactivate-btn ${!sb.active ? 'hidden' : ''}" data-sb-id="${sb.id}">
+                        <button class="btn btn-default deactivate-btn ${!subcategory.active ? 'hidden' : ''}" data-sb-id="${subcategory.id}">
                             Desativar
                         </button>
                     </td>

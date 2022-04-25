@@ -1,5 +1,6 @@
 package br.com.vayu.models;
 
+import br.com.vayu.dto.CourseFormDTO;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.annotations.Type;
@@ -69,11 +70,21 @@ public class Course {
         this.subcategory = subcategory;
     }
 
-    @Deprecated
-    public Course() {
-
+    public Course(CourseFormDTO form, Subcategory subcategory) {
+        this.id = form.getId();
+        this.name = form.getName();
+        this.code = form.getCode();
+        this.estimatedHoursToFinish = form.getEstimatedHoursToFinish();
+        this.instructorName = form.getInstructorName();
+        this.visible = form.isVisible();
+        this.targetAudience = form.getTargetAudience();
+        this.syllabus = form.getSyllabus();
+        this.developedAbilities = form.getDevelopedAbilities();
+        this.subcategory = subcategory;
     }
 
+    @Deprecated
+    public Course() {}
     public int getId() {
         return id;
     }
@@ -112,6 +123,18 @@ public class Course {
 
     public Subcategory getSubcategory() {
         return subcategory;
+    }
+
+    public void merge(CourseFormDTO form, Subcategory subcategory) {
+        this.code = form.getCode();
+        this.name = form.getName();
+        this.estimatedHoursToFinish = form.getEstimatedHoursToFinish();
+        this.visible = form.isVisible();
+        this.targetAudience = form.getTargetAudience();
+        this.instructorName = form.getInstructorName();
+        this.syllabus = form.getSyllabus();
+        this.developedAbilities = form.getDevelopedAbilities();
+        this.subcategory = subcategory;
     }
 
     @Override

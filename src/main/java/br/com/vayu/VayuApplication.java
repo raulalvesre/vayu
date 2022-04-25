@@ -8,11 +8,11 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @SpringBootApplication
-public class VayuApplication  {
+public class VayuApplication {
 
 	@Bean
 	public MessageSource messageSource() {
-		var messageSource = new ReloadableResourceBundleMessageSource();
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.setBasename("classpath:validation-messages");
 		messageSource.setDefaultEncoding("UTF-8");
 
@@ -21,7 +21,7 @@ public class VayuApplication  {
 
 	@Bean
 	public LocalValidatorFactoryBean getValidator() {
-		var bean = new LocalValidatorFactoryBean();
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(messageSource());
 
 		return bean;
