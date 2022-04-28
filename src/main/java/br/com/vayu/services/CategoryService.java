@@ -46,8 +46,7 @@ public class CategoryService {
     }
 
     public List<CategoryApiDTO> getAllForCategoryApi() {
-        List<Course> courses = courseRepository
-                .findAllForCategoryApi();
+        List<Course> courses = courseRepository.findAllForCategoryApi();
 
         if (courses.isEmpty()) {
             return new ArrayList<>();

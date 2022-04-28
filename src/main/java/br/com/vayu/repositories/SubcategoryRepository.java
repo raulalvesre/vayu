@@ -54,13 +54,6 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
             nativeQuery = true)
     List<SubcategoryMinifiedProjection> findAllMinifiedByCategoryCode(@Param("ctCode") String categoryCode);
 
-    @Modifying
-    @Query("""
-            UPDATE Subcategory sb
-            SET sb.active = false
-            WHERE sb.id = :sbId""")
-    void deactivate(@Param("sbId") int id);
-
     @Query("""
             SELECT DISTINCT s
             FROM Subcategory s
@@ -69,5 +62,12 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
             WHERE ct.active = true AND s.active = true AND courses.visible = true
             ORDER BY ct.order ASC, s.order ASC""")
     List<Subcategory> findDistinctForLoginPage();
+
+    @Modifying
+    @Query("""
+            UPDATE Subcategory sb
+            SET sb.active = false
+            WHERE sb.id = :sbId""")
+    void deactivate(@Param("sbId") int id);
 
 }

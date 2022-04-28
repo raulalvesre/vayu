@@ -1,17 +1,24 @@
-CREATE SCHEMA IF NOT EXISTS vayu;
+CREATE TABLE IF NOT EXISTS user_role
+(
+    id   INT         NOT NULL,
+    name VARCHAR(50) NOT NULL,
 
-use vayu;
+    PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS user
 (
     id       INT          NOT NULL AUTO_INCREMENT,
+    role_id  INT          NOT NULL,
     name     VARCHAR(200) NOT NULL,
     email    VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(16)  NOT NULL UNIQUE,
     password VARCHAR(500) NOT NULL,
     active   BIT          NOT NULL,
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (role_id)
+        REFERENCES user_role (id)
 );
 
 CREATE TABLE IF NOT EXISTS category
