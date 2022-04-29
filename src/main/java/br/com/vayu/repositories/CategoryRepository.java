@@ -48,7 +48,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
             nativeQuery = true)
     List<DashboardCategoryProjection> findAllOrderedDescAsDashboardCategoryView();
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("""
             UPDATE Category ct
             SET ct.active = false

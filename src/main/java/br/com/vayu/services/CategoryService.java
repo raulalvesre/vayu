@@ -141,6 +141,10 @@ public class CategoryService {
     @Modifying
     @Transactional
     public void deactivate(int id) {
+        if (!categoryRepository.existsById(id)) {
+            throw new NotFoundException("Category not found!");
+        }
+
         categoryRepository.deactivate(id);
     }
 

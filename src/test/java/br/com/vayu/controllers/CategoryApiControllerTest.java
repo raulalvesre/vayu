@@ -9,27 +9,30 @@ import br.com.vayu.models.Subcategory;
 import br.com.vayu.repositories.CategoryRepository;
 import br.com.vayu.repositories.CourseRepository;
 import br.com.vayu.repositories.SubcategoryRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.transaction.Transactional;
 import java.net.URI;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@AutoConfigureTestEntityManager
+@Transactional
 @ActiveProfiles("test")
 class CategoryApiControllerTest {
 
@@ -52,11 +55,6 @@ class CategoryApiControllerTest {
     private final String iconPath = "iconPath";
     private final String colorCode = "#FFF";
 
-    @AfterEach
-    void afterEach() {
-        categoryRepository.deleteAll();
-    }
-
     @Test
     void getCategoryApiDtoList__should_return_200() throws Exception {
         mockMvc
@@ -67,18 +65,7 @@ class CategoryApiControllerTest {
 
     @Test
     void getCategoryApiDtoList__should_return_correct_content() throws Exception {
-        Category category = new CategoryBuilder()
-                .code(code)
-                .name(name)
-                .description(description)
-                .studyGuide(studyGuide)
-                .active(true)
-                .order(0)
-                .iconPath(iconPath)
-                .colorCode(colorCode)
-                .build();
-
-        categoryRepository.save(category);
+        Category category = createAndSaveCategory();
 
         Subcategory subcategory = new SubcategoryBuilder()
                 .code(code)
@@ -129,10 +116,55 @@ class CategoryApiControllerTest {
 
     @Test
     void getCategoryApiDtoList__should_return_empty_array() throws Exception {
-                mockMvc
+        mockMvc
                 .perform(get(new URI("/api/categories"))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0)));
+    }
+
+
+    @Test
+    void deactivate__should_return_204() throws Exception {
+        Category category = createAndSaveCategory();
+
+        mockMvc
+                .perform(patch(new URI("/api/categories/deactivate/" + category.getId())))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    @Transactional
+    void deactivate__should_deactivate_category() throws Exception {
+        Category category = createAndSaveCategory();
+
+        mockMvc
+                .perform(patch(new URI("/api/categories/deactivate/" + category.getId())));
+
+        Category bdCategory = categoryRepository.getById(category.getId());
+
+        assertFalse(bdCategory.isActive());
+    }
+
+    @Test
+    void deactivate__should_return_404_with_inexistent_category() throws Exception {
+        mockMvc
+                .perform(patch(new URI("/api/categories/deactivate/" + 999999)))
+                        .andExpect(status().isNotFound());
+    }
+
+    private Category createAndSaveCategory() {
+        Category category = new CategoryBuilder()
+                .code(code)
+                .name(name)
+                .description(description)
+                .studyGuide(studyGuide)
+                .active(true)
+                .order(0)
+                .iconPath(iconPath)
+                .colorCode(colorCode)
+                .build();
+
+        return categoryRepository.save(category);
     }
 
 }
