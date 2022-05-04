@@ -50,9 +50,6 @@ class SubcategoryRepositoryTest {
     void findByCodeAndCategoryCodeAsFormDto__should_return_as_form_dto_by_code_and_category_code() {
         createAndSaveSubcategory();
 
-        em.flush();
-        em.clear();
-
         Optional<SubcategoryFormDTO> bdSubcategoryOptional = subcategoryRepository
                 .findByCodeAndCategoryCodeAsFormDto("code", "code");
         assertTrue(bdSubcategoryOptional.isPresent());
@@ -72,9 +69,6 @@ class SubcategoryRepositoryTest {
     void findByCodeAndCategoryCodeMinified__should_return_minified_by_code_and_category_code() {
         createAndSaveSubcategory();
 
-        em.flush();
-        em.clear();
-
         Optional<SubcategoryMinifiedProjection> bdSubcategoryOptional = subcategoryRepository
                 .findByCodeAndCategoryCodeMinified("code", "code");
         assertTrue(bdSubcategoryOptional.isPresent());
@@ -90,9 +84,6 @@ class SubcategoryRepositoryTest {
     void findAllMinified_should_return_all_minified() {
         createAndSaveSubcategory();
         createAndSaveSubcategory();
-
-        em.flush();
-        em.clear();
 
         List<SubcategoryMinifiedProjection> bdSubcategories = subcategoryRepository.findAllMinified();
 
@@ -110,9 +101,6 @@ class SubcategoryRepositoryTest {
         createAndSaveSubcategory("name2");
         createAndSaveSubcategory("name1");
 
-        em.flush();
-        em.clear();
-
         List<SubcategoryMinifiedProjection> bdSubcategories = subcategoryRepository.findAllMinifiedInAlphabeticOrder();
 
         assertEquals(2, bdSubcategories.size());
@@ -128,9 +116,6 @@ class SubcategoryRepositoryTest {
     void findAllMinifiedByCategoryCode__should_return_all_minified_by_category_code() {
         createAndSaveSubcategory();
         createAndSaveSubcategory();
-
-        em.flush();
-        em.clear();
 
         List<SubcategoryMinifiedProjection> bdSubcategories =
                 subcategoryRepository.findAllMinifiedByCategoryCode("code");
@@ -161,9 +146,6 @@ class SubcategoryRepositoryTest {
 
         createAndSaveSubcategory(category2);
 
-        em.flush();
-        em.clear();
-
         List<SubcategoryMinifiedProjection> bdSubcategories =
                 subcategoryRepository.findAllMinifiedByCategoryCode("code");
 
@@ -176,9 +158,6 @@ class SubcategoryRepositoryTest {
         Subcategory subcategory2 = createAndSaveSubcategory(activeCategory);
         createAndSaveCourse(subcategory1);
         createAndSaveCourse(subcategory2);
-
-        em.flush();
-        em.clear();
 
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
 
@@ -228,9 +207,6 @@ class SubcategoryRepositoryTest {
         createAndSaveCourse(subcategory99);
         createAndSaveCourse(subcategory0);
 
-        em.flush();
-        em.clear();
-
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
 
         assertEquals(2, bdSubcategories.size());
@@ -266,9 +242,6 @@ class SubcategoryRepositoryTest {
         createAndSaveCourse(subcategory99);
         createAndSaveCourse(subcategory0);
 
-        em.flush();
-        em.clear();
-
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
 
         assertEquals(2, bdSubcategories.size());
@@ -281,9 +254,6 @@ class SubcategoryRepositoryTest {
         Category inactiveCategory = createAndSaveCategory(false);
         Subcategory subcategory = createAndSaveSubcategory(inactiveCategory);
         createAndSaveCourse(subcategory);
-
-        em.flush();
-        em.clear();
 
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
         assertTrue(bdSubcategories.isEmpty());
@@ -304,9 +274,6 @@ class SubcategoryRepositoryTest {
         em.persist(subcategory);
 
         createAndSaveCourse(subcategory);
-
-        em.flush();
-        em.clear();
 
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
         assertTrue(bdSubcategories.isEmpty());
@@ -330,8 +297,6 @@ class SubcategoryRepositoryTest {
 
         em.persist(course);
 
-        em.flush();
-
         List<Subcategory> bdSubcategories = subcategoryRepository.findDistinctForLoginPage();
         assertTrue(bdSubcategories.isEmpty());
     }
@@ -349,7 +314,6 @@ class SubcategoryRepositoryTest {
                 .build();
 
         em.persist(subcategory);
-        em.clear();
 
         subcategoryRepository.deactivate(subcategory.getId());
 

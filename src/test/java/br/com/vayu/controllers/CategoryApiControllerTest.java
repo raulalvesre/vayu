@@ -54,14 +54,6 @@ class CategoryApiControllerTest {
     private final String colorCode = "#FFF";
 
     @Test
-    void getCategoryApiDtoList__should_return_200() throws Exception {
-        mockMvc
-                .perform(get(new URI("/api/categories"))
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     void getCategoryApiDtoList__should_return_correct_content() throws Exception {
         Category category = createAndSaveCategory();
 
@@ -119,17 +111,7 @@ class CategoryApiControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0)));
     }
-
-
-    @Test
-    void deactivate__should_return_204() throws Exception {
-        Category category = createAndSaveCategory();
-
-        mockMvc
-                .perform(patch(new URI("/api/categories/deactivate/" + category.getId())))
-                .andExpect(status().isNoContent());
-    }
-
+    
     @Test
     void deactivate__should_deactivate_category() throws Exception {
         Category category = createAndSaveCategory();

@@ -39,9 +39,6 @@ class CategoryRepositoryTest {
     void findByCodeMinified__should_return_category_as_minified_projection() {
         createAndSaveCategory();
 
-        em.flush();
-        em.clear();
-
         Optional<CategoryMinifiedProjection> bdCategoryOptional = categoryRepository.findByCodeMinified("code");
         assertTrue(bdCategoryOptional.isPresent());
 
@@ -56,11 +53,7 @@ class CategoryRepositoryTest {
     void findByCodeAsFormDto__should_return_category_as_form_dto() {
         createAndSaveCategory();
 
-        em.flush();
-        em.clear();
-
         Optional<CategoryFormDTO> bdCategoryOptional = categoryRepository.findByCodeAsFormDto("code");
-
         assertTrue(bdCategoryOptional.isPresent());
 
         CategoryFormDTO bdCategory = bdCategoryOptional.get();
@@ -80,9 +73,6 @@ class CategoryRepositoryTest {
         createAndSaveCategory("name2", 2);
         createAndSaveCategory("name1", 1);
 
-        em.flush();
-        em.clear();
-
         List<CategoryMinifiedProjection> bdCategories = categoryRepository.findAllMinifiedInOrder();
 
         assertEquals(2, bdCategories.size());
@@ -98,9 +88,6 @@ class CategoryRepositoryTest {
     void findAllOrderedDescAsDashboardCategoryView__should_return_all_as_dashboard_category_view() {
         createAndSaveCategory();
 
-        em.flush();
-        em.clear();
-
         List<DashboardCategoryProjection> bdCategories = categoryRepository.findAllOrderedDescAsDashboardCategoryView();
 
         assertEquals(1, bdCategories.size());
@@ -111,8 +98,6 @@ class CategoryRepositoryTest {
     @Test
     void deactivate__should_deactivate_category() {
         Category category = createAndSaveCategory();
-
-        em.clear();
 
         categoryRepository.deactivate(category.getId());
 

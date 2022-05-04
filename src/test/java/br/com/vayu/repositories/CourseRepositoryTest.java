@@ -59,8 +59,6 @@ class CourseRepositoryTest {
     void findByCodeAsFormDto__should_return_as_form_dto_by_code() {
         createAndSaveCourse();
 
-        em.clear();
-
         Optional<CourseFormDTO> bdCourseOptional = courseRepository
                 .findByCodeAsFormDto("code");
         assertTrue(bdCourseOptional.isPresent());
@@ -82,9 +80,6 @@ class CourseRepositoryTest {
         Course course1 = createAndSaveCourse();
         Course course2 = createAndSaveCourse();
 
-        em.flush();
-        em.clear();
-
         List<Course> bdCourses = courseRepository.findAllForCategoryApi();
 
         assertEquals(2, bdCourses.size());
@@ -97,9 +92,6 @@ class CourseRepositoryTest {
         Subcategory inactiveSubcategory = createAndSaveSubcategory(false);
         createAndSaveCourse(inactiveSubcategory);
         createAndSaveCourse(inactiveSubcategory);
-
-        em.flush();
-        em.clear();
 
         List<Course> bdCourses = courseRepository.findAllForCategoryApi();
 
@@ -121,15 +113,9 @@ class CourseRepositoryTest {
                 .build();
 
         em.persist(subcategory);
-        ;
-
-        em.persist(subcategory);
 
         createAndSaveCourse(subcategory);
         createAndSaveCourse(subcategory);
-
-        em.flush();
-        em.clear();
 
         List<Course> bdCourses = courseRepository.findAllForCategoryApi();
 
@@ -139,9 +125,6 @@ class CourseRepositoryTest {
     @Test
     void getDashboardInstructorView__should_return_correct_projection() {
         createAndSaveCourse();
-
-        em.flush();
-        em.clear();
 
         DashboardInstructorProjection dashboardInstructorView = courseRepository.getDashboardInstructorView();
 
@@ -161,9 +144,6 @@ class CourseRepositoryTest {
         createAndSaveCourse();
         createAndSaveCourse();
 
-        em.flush();
-        em.clear();
-
         List<CourseMinifiedProjection> bdCourses = courseRepository.findAllMinifiedBySubcategoryCode("code");
 
         assertEquals(2, bdCourses.size());
@@ -181,9 +161,6 @@ class CourseRepositoryTest {
     void findAllMinifiedBySubcategoryCode__should_return_empty_list_when_subcategory_code_incorrect() {
         createAndSaveCourse();
 
-        em.flush();
-        em.clear();
-
         List<CourseMinifiedProjection> bdCourses = courseRepository.findAllMinifiedBySubcategoryCode("idontexist");
 
         assertTrue(bdCourses.isEmpty());
@@ -193,10 +170,6 @@ class CourseRepositoryTest {
     void findAllForCategoryPublicPage__should_return_visible_courses_with_active_subcategory_by_category_code_including_category_and_subcategory() {
         Course course1 = createAndSaveCourse();
         Course course2 = createAndSaveCourse();
-        ;
-
-        em.flush();
-        em.clear();
 
         List<Course> bdCourses = courseRepository.findAllForCategoryPublicPage(code);
 
@@ -209,9 +182,6 @@ class CourseRepositoryTest {
     void findAllForCategoryPublicPage__should_return_empty_list_when_category_code_incorrect() {
         createAndSaveCourse();
 
-        em.flush();
-        em.clear();
-
         List<Course> bdCourses = courseRepository.findAllForCategoryPublicPage("idontexist");
 
         assertTrue(bdCourses.isEmpty());
@@ -221,9 +191,6 @@ class CourseRepositoryTest {
     void findAllForCategoryPublicPage__should_return_empty_list_when_subcategory_inactive() {
         Subcategory inactiveSubcategory = createAndSaveSubcategory(false);
         createAndSaveCourse(inactiveSubcategory);
-
-        em.flush();
-        em.clear();
 
         List<Course> bdCourses = courseRepository.findAllForCategoryPublicPage("code");
 
@@ -245,8 +212,6 @@ class CourseRepositoryTest {
                 .build();
 
         em.persist(course);
-        em.flush();
-        em.clear();
 
         List<Course> bdCourses = courseRepository.findAllForCategoryPublicPage("code");
 
@@ -257,9 +222,6 @@ class CourseRepositoryTest {
     void findPageMinifiedBySubcategoryCode__should_return_minified_course_list_by_subcategory_code_in_content() {
         createAndSaveCourse();
         createAndSaveCourse();
-
-        em.flush();
-        em.clear();
 
         PageRequest pageRequest = PageRequest.of(0, 2);
         Page<CourseMinifiedProjection> coursePage =
@@ -280,9 +242,6 @@ class CourseRepositoryTest {
     @Test
     void findPageMinifiedBySubcategoryCode__should_return_empty_list_when_subcategory_code_incorrect() {
         createAndSaveCourse();
-
-        em.flush();
-        em.clear();
 
         PageRequest pageRequest = PageRequest.of(0, 2);
         Page<CourseMinifiedProjection> coursePage =

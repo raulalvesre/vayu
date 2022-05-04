@@ -63,7 +63,7 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
             ORDER BY ct.order ASC, s.order ASC""")
     List<Subcategory> findDistinctForLoginPage();
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("""
             UPDATE Subcategory sb
             SET sb.active = false

@@ -41,8 +41,6 @@ class UserRepositoryTest {
                 .build();
 
         em.persist(user);
-        em.flush();
-        em.clear();
 
         Optional<User> bdUserOptional = userRepository.findByEmailIncludingRole("rar@gmail.com");
         assertTrue(bdUserOptional.isPresent());
