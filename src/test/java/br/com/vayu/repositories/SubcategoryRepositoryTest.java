@@ -40,7 +40,7 @@ class SubcategoryRepositoryTest {
     private final String studyGuide = "studyGuide";
 
     @BeforeEach
-    void beforeAll() {
+    void beforeEach() {
         this.activeCategory = createAndSaveCategory(true);
 
         em.persist(activeCategory);

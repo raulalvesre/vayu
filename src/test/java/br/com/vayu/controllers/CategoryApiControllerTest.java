@@ -11,7 +11,6 @@ import br.com.vayu.repositories.CourseRepository;
 import br.com.vayu.repositories.SubcategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -31,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureTestEntityManager
 @Transactional
 @ActiveProfiles("test")
 class CategoryApiControllerTest {
@@ -133,7 +131,6 @@ class CategoryApiControllerTest {
     }
 
     @Test
-    @Transactional
     void deactivate__should_deactivate_category() throws Exception {
         Category category = createAndSaveCategory();
 
