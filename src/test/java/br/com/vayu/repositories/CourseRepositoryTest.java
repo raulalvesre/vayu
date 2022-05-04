@@ -1,8 +1,5 @@
 package br.com.vayu.repositories;
 
-import br.com.vayu.builders.CategoryBuilder;
-import br.com.vayu.builders.CourseBuilder;
-import br.com.vayu.builders.SubcategoryBuilder;
 import br.com.vayu.dto.CourseFormDTO;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
@@ -102,7 +99,7 @@ class CourseRepositoryTest {
     void findAllForCategoryApi__should_return_empty_list_when_category_inactive() {
         Category inactiveCategory = createAndSaveCategory(false);
 
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description("description")
@@ -150,11 +147,11 @@ class CourseRepositoryTest {
 
         assertEquals(name, bdCourses.get(0).getName());
         assertEquals(code, bdCourses.get(0).getCode());
-        assertTrue(bdCourses.get(0).isVisible());
+        assertTrue(bdCourses.get(0).isActive());
 
         assertEquals(name, bdCourses.get(1).getName());
         assertEquals(code, bdCourses.get(1).getCode());
-        assertTrue(bdCourses.get(1).isVisible());
+        assertTrue(bdCourses.get(1).isActive());
     }
 
     @Test
@@ -199,7 +196,7 @@ class CourseRepositoryTest {
 
     @Test
     void findAllForCategoryPublicPage__should_return_empty_list_when_course_invisible() {
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(1)
@@ -232,11 +229,11 @@ class CourseRepositoryTest {
 
         assertEquals(name, courses.get(0).getName());
         assertEquals(code, courses.get(0).getCode());
-        assertTrue(courses.get(0).isVisible());
+        assertTrue(courses.get(0).isActive());
 
         assertEquals(name, courses.get(1).getName());
         assertEquals(code, courses.get(1).getCode());
-        assertTrue(courses.get(1).isVisible());
+        assertTrue(courses.get(1).isActive());
     }
 
     @Test
@@ -252,7 +249,7 @@ class CourseRepositoryTest {
     }
 
     private Course createAndSaveCourse() {
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(estimatedHoursToFinish)
@@ -268,7 +265,7 @@ class CourseRepositoryTest {
     }
 
     private Course createAndSaveCourse(Subcategory subcategory) {
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(1)
@@ -284,7 +281,7 @@ class CourseRepositoryTest {
     }
 
     private Subcategory createAndSaveSubcategory(boolean active) {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description("description")
@@ -298,7 +295,7 @@ class CourseRepositoryTest {
     }
 
     private Category createAndSaveCategory(boolean active) {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description("description")

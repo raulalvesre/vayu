@@ -1,6 +1,7 @@
 package br.com.vayu.models;
 
 import br.com.vayu.dto.CategoryFormDTO;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -9,6 +10,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Category {
 
     @Id
@@ -42,27 +48,6 @@ public class Category {
     )
     List<Subcategory> subcategories = new ArrayList<>();
 
-    public Category(String code,
-                    String name,
-                    String description,
-                    String studyGuide,
-                    boolean active,
-                    Integer order,
-                    String iconPath,
-                    String colorCode) {
-        this(code, name);
-        this.description = description;
-        this.studyGuide = studyGuide;
-        this.active = active;
-        this.order = order;
-        this.iconPath = iconPath;
-        this.colorCode = colorCode;
-    }
-
-    public Category(String code, String name) {
-        this.code = code;
-        this.name = name;
-    }
 
     public Category(CategoryFormDTO categoryDTO) {
         this.id = categoryDTO.getId();
@@ -74,55 +59,6 @@ public class Category {
         this.order = categoryDTO.getOrder();
         this.iconPath = categoryDTO.getIconPath();
         this.colorCode = categoryDTO.getColorCode();
-    }
-
-    @Deprecated
-    public Category() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getStudyGuide() {
-        return studyGuide;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public String getIconPath() {
-        return iconPath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public List<Subcategory> getSubcategories() {
-        return subcategories;
     }
 
     public void merge(CategoryFormDTO form) {
@@ -154,20 +90,6 @@ public class Category {
     @Override
     public int hashCode() {
         return Objects.hash(code, name, description, studyGuide, active, order, iconPath, colorCode);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", studyGuide='" + studyGuide + '\'' +
-                ", active=" + active +
-                ", order=" + order +
-                ", iconPath='" + iconPath + '\'' +
-                ", colorCode='" + colorCode + '\'' +
-                '}';
     }
 
 }

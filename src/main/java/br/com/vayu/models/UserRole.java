@@ -1,5 +1,10 @@
 package br.com.vayu.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,6 +12,10 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class UserRole {
 
     @Id
@@ -15,30 +24,6 @@ public class UserRole {
     @NotBlank
     @Column(nullable = false)
     private String name;
-
-    public UserRole(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    @Deprecated
-    public UserRole() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,11 +1,19 @@
 package br.com.vayu.models.activities.questions;
 
 import br.com.vayu.models.activities.Question;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "alternative")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Alternative {
 
     @Id
@@ -24,14 +32,5 @@ public class Alternative {
 
     private boolean correct;
     private String justification;
-
-    public Alternative(String text, boolean correct, Question question) {
-        this.text = text;
-        this.correct = correct;
-        this.question = question;
-    }
-
-    @Deprecated
-    public Alternative() {}
 
 }

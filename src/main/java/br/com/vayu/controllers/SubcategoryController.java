@@ -4,28 +4,29 @@ import br.com.vayu.dto.SubcategoryFormDTO;
 import br.com.vayu.projections.SubcategoryMinifiedProjection;
 import br.com.vayu.services.CategoryService;
 import br.com.vayu.services.SubcategoryService;
+import br.com.vayu.validation.SubcategoryFormDTOValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin/subcategories")
+@RequiredArgsConstructor
 public class SubcategoryController {
 
     private final SubcategoryService subcategoryService;
     private final CategoryService categoryService;
+    private final SubcategoryFormDTOValidator subcategoryFormDTOValidator;
 
-    public SubcategoryController(SubcategoryService subcategoryService,
-                                 CategoryService categoryService) {
-        this.subcategoryService = subcategoryService;
-        this.categoryService = categoryService;
+    @InitBinder("subcategoryFormDTO")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(subcategoryFormDTOValidator);
     }
 
     @GetMapping("{categoryCode}")

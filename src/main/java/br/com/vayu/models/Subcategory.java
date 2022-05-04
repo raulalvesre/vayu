@@ -1,6 +1,7 @@
 package br.com.vayu.models;
 
 import br.com.vayu.dto.SubcategoryFormDTO;
+import lombok.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.annotations.Type;
@@ -11,6 +12,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Subcategory {
 
     @Id
@@ -45,29 +51,6 @@ public class Subcategory {
     )
     List<Course> courses = new ArrayList<>();
 
-    public Subcategory(String code,
-                       String name,
-                       String description,
-                       String studyGuide,
-                       boolean active,
-                       Integer order,
-                       Category category) {
-        this(code, name, category);
-
-        this.description = description;
-        this.studyGuide = studyGuide;
-        this.active = active;
-        this.order = order;
-    }
-
-    public Subcategory(String code,
-                       String name,
-                       Category category) {
-        this.code = code;
-        this.name = name;
-        this.category = category;
-    }
-
     public Subcategory(SubcategoryFormDTO subcategoryFormDTO, Category category) {
         this.id = subcategoryFormDTO.getId();
         this.code = subcategoryFormDTO.getCode();
@@ -77,47 +60,6 @@ public class Subcategory {
         this.active = subcategoryFormDTO.isActive();
         this.order = subcategoryFormDTO.getOrder();
         this.category = category;
-    }
-
-    @Deprecated
-    public Subcategory() {
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getStudyGuide() {
-        return studyGuide;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
     }
 
     public void merge(SubcategoryFormDTO form, Category category) {
@@ -147,19 +89,6 @@ public class Subcategory {
     @Override
     public int hashCode() {
         return Objects.hash(code, name, description, studyGuide, active, order, category);
-    }
-
-    @Override
-    public String toString() {
-        return "SubCategory{" +
-               "code='" + code + '\'' +
-               ", name='" + name + '\'' +
-               ", description='" + description + '\'' +
-               ", studyGuide='" + studyGuide + '\'' +
-               ", active=" + active +
-               ", order=" + order +
-               ", category=" + category.getName() +
-               '}';
     }
 
 }

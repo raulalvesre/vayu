@@ -1,6 +1,7 @@
 package br.com.vayu.models;
 
 import br.com.vayu.dto.CourseFormDTO;
+import lombok.*;
 import org.hibernate.annotations.LazyToOne;
 import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.annotations.Type;
@@ -10,6 +11,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "course")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Course {
 
     @Id
@@ -41,35 +47,6 @@ public class Course {
 
     private String developedAbilities;
 
-    public Course(String code,
-                  String name,
-                  int estimatedHoursToFinish,
-                  boolean visible,
-                  String targetAudience,
-                  String instructorName,
-                  String syllabus,
-                  String developedAbilities,
-                  Subcategory subcategory) {
-        this(code, name, estimatedHoursToFinish, instructorName, subcategory);
-
-        this.visible = visible;
-        this.targetAudience = targetAudience;
-        this.syllabus = syllabus;
-        this.developedAbilities = developedAbilities;
-    }
-
-    public Course(String code,
-                  String name,
-                  int estimatedHoursToFinish,
-                  String instructorName,
-                  Subcategory subcategory) {
-        this.code = code;
-        this.name = name;
-        this.estimatedHoursToFinish = estimatedHoursToFinish;
-        this.instructorName = instructorName;
-        this.subcategory = subcategory;
-    }
-
     public Course(CourseFormDTO form, Subcategory subcategory) {
         this.id = form.getId();
         this.name = form.getName();
@@ -81,48 +58,6 @@ public class Course {
         this.syllabus = form.getSyllabus();
         this.developedAbilities = form.getDevelopedAbilities();
         this.subcategory = subcategory;
-    }
-
-    @Deprecated
-    public Course() {}
-    public int getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getEstimatedHoursToFinish() {
-        return estimatedHoursToFinish;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public String getSyllabus() {
-        return syllabus;
-    }
-
-    public String getDevelopedAbilities() {
-        return developedAbilities;
-    }
-
-    public Subcategory getSubcategory() {
-        return subcategory;
     }
 
     public void merge(CourseFormDTO form, Subcategory subcategory) {
@@ -163,21 +98,6 @@ public class Course {
                 syllabus,
                 developedAbilities,
                 subcategory);
-    }
-
-    @Override
-    public String toString() {
-        return "Course{" +
-               "code='" + code + '\'' +
-               ", name='" + name + '\'' +
-               ", estimatedHoursToFinish=" + estimatedHoursToFinish +
-               ", visible=" + visible +
-               ", targetAudience='" + targetAudience + '\'' +
-               ", instructorName='" + instructorName + '\'' +
-               ", syllabus='" + syllabus + '\'' +
-               ", developedAbilities='" + developedAbilities + '\'' +
-               ", subCategory=" + subcategory.getName() +
-               '}';
     }
 
 }

@@ -1,6 +1,9 @@
 package br.com.vayu.models.activities;
 
-import br.com.vayu.models.Section;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -9,6 +12,10 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("video")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Video extends Activity {
 
     @Column(nullable = false)
@@ -18,19 +25,5 @@ public class Video extends Activity {
 
     @Type(type = "text")
     private String transcription;
-
-    public Video(String code,
-                 String title,
-                 Section section,
-                 String url) {
-        super(code, title, section);
-
-        this.url = url;
-    }
-
-    @Deprecated
-    public Video() {
-        super();
-    }
 
 }

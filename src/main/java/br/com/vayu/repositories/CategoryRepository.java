@@ -55,4 +55,8 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
             WHERE ct.id = :ctId""")
     void deactivate(@Param("ctId") int id);
 
+    boolean existsByCodeAndIdNot(String code, int id);
+
+    boolean existsByNameAndIdNot(String name, int id);
+
 }

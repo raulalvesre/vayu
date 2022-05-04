@@ -1,10 +1,18 @@
 package br.com.vayu.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Section {
 
     @Id
@@ -28,15 +36,4 @@ public class Section {
     private boolean active;
     private boolean test;
 
-    public Section(String code,
-                   String name,
-                   Course course) {
-        this.code = code;
-        this.name = name;
-        this.order = 0;
-        this.course = course;
-    }
-
-    @Deprecated
-    public Section() {}
 }

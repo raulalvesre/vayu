@@ -70,4 +70,7 @@ public interface SubcategoryRepository extends JpaRepository<Subcategory, Intege
             WHERE sb.id = :sbId""")
     void deactivate(@Param("sbId") int id);
 
+    boolean existsByCodeAndIdNot(String code, int id);
+    boolean existsByNameAndIdNot(String name, int id);
+
 }

@@ -1,5 +1,6 @@
 package br.com.vayu.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -9,13 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Profile("!test")
 @RestController
+@RequiredArgsConstructor
 public class CachingController {
 
     private final CacheManager cacheManager;
-
-    public CachingController(CacheManager cacheManager) {
-        this.cacheManager = cacheManager;
-    }
 
     @GetMapping("/bGltcGEtby1jYWNoZS1kYS1hcGktYWU")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -3,12 +3,15 @@ package br.com.vayu.controllers;
 import br.com.vayu.dto.CategoryFormDTO;
 import br.com.vayu.dto.CategoryPublicPageDTO;
 import br.com.vayu.projections.CategoryMinifiedProjection;
-import br.com.vayu.repositories.CategoryRepository;
 import br.com.vayu.services.CategoryService;
+import br.com.vayu.validation.CategoryFormDTOValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,14 +19,15 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
+    private final CategoryFormDTOValidator categoryFormDTOUniqueCodeValidator;
 
-    public CategoryController(CategoryService categoryService, CategoryRepository categoryRepository) {
-        this.categoryService = categoryService;
-        this.categoryRepository = categoryRepository;
+    @InitBinder("categoryFormDTO")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(categoryFormDTOUniqueCodeValidator);
     }
 
     @GetMapping("/category/{categoryCode}")

@@ -43,7 +43,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     DashboardInstructorProjection getDashboardInstructorView();
 
     @Query(value = """
-            SELECT crs.name, crs.code, crs.visible
+            SELECT crs.id, crs.name, crs.code, crs.visible as active
             FROM course crs
                 INNER JOIN subcategory sb ON crs.subcategory_id = sb.id
             WHERE sb.code = :sbCode""",
@@ -69,5 +69,8 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
         return new PageImpl<>(holder.getPageList(), pageable, courses.size());
     }
+
+    boolean existsByCodeAndIdNot(String code, int id);
+    boolean existsByNameAndIdNot(String name, int id);
 
 }

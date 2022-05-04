@@ -4,6 +4,7 @@ import br.com.vayu.projections.DashboardCategoryProjection;
 import br.com.vayu.projections.DashboardInstructorProjection;
 import br.com.vayu.services.CategoryService;
 import br.com.vayu.services.CourseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class DashboardController {
 
     private final CategoryService categoryService;
     private final CourseService courseService;
-
-    public DashboardController(CategoryService categoryService, CourseService courseService) {
-        this.categoryService = categoryService;
-        this.courseService = courseService;
-    }
 
     @GetMapping("/admin")
     public String redirectToDashBoard() {
