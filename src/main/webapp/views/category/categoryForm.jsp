@@ -77,3 +77,5 @@
         </form:form>
     </div>
 </templates:admin-template>
+<templates:admin-footer>
+</templates:admin-footer>

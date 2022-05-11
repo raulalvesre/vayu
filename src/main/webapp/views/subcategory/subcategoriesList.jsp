@@ -19,8 +19,7 @@
                                editFormUrlContext="/admin/subcategories/${categoryDto.code}"/>
 
     </div>
-    <footer>
-        <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/subcategoryList.js"></script>
-    </footer>
 </templates:admin-template>
+<templates:admin-footer>
+    <script src="${pageContext.request.contextPath}/js/subcategoryList.js"></script>
+</templates:admin-footer>
