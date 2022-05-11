@@ -3,7 +3,7 @@
 <%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 <c:url value="admin/categories" var="linkCategoryServlet"/>
 
-<templates:admin-template title="Categorias" cssPath="css/list.css">
+<templates:admin-template title="Categorias" cssPath="css/list.css" />
     <div class="container">
         <h1 style="margin-top: 10px">Categorias</h1>
         <a href="categories/new">
@@ -18,7 +18,6 @@
                            childrenModelName="Subcategoria"
                            editFormUrlContext="categories"/>
     </div>
-</templates:admin-template>
 <templates:admin-footer>
     <script src="${pageContext.request.contextPath}/js/categoryList.js"></script>
 </templates:admin-footer>

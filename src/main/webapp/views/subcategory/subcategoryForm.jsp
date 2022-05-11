@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<templates:admin-template title='${formIsCreate ? "Novo" : "Editar"} subcategoria'>
+<templates:admin-template title='${formIsCreate ? "Novo" : "Editar"} subcategoria' />
     <div class="container">
         <h1 id="header">${formIsCreate ? "Nova" : "Editar"} subcategoria</h1>
             <%--@elvariable id="subcategoryFormDTO" type="br.com.vayu.dto.SubcategoryFormDTO"--%>
@@ -69,6 +69,4 @@
             <button type="submit" class="btn btn-primary mb-2" id="submitButton">Enviar</button>
         </form:form>
     </div>
-</templates:admin-template>
-<templates:admin-footer>
-</templates:admin-footer>
+<templates:admin-footer />

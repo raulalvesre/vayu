@@ -2,7 +2,7 @@
 <%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<templates:admin-template title="Subcategorias" cssPath="css/list.css">
+<templates:admin-template title="Subcategorias" cssPath="css/list.css" />
     <div class="container">
         <h4>${categoryDto.name}</h4>
         <h1 style="margin-top: 10px">Subcategorias</h1>
@@ -19,7 +19,6 @@
                                editFormUrlContext="/admin/subcategories/${categoryDto.code}"/>
 
     </div>
-</templates:admin-template>
 <templates:admin-footer>
     <script src="${pageContext.request.contextPath}/js/subcategoryList.js"></script>
 </templates:admin-footer>

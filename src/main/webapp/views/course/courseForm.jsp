@@ -4,7 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<templates:admin-template title="${formIsCreate ? 'Criar curso' : 'Editar curso'}" cssPath="css/form.css">
+<templates:admin-template title="${formIsCreate ? 'Criar curso' : 'Editar curso'}"
+                          cssPath="css/form.css" />
     <div class="container">
         <h1 id="header">${formIsCreate ? "Novo" : "Editar"} curso</h1>
             <%--@elvariable id="courseFormDTO" type="br.com.vayu.dto.CourseFormDTO"--%>
@@ -88,6 +89,4 @@
             <button type="submit" class="btn btn-primary mb-2" id="submitButton">Enviar</button>
         </form:form>
     </div>
-</templates:admin-template>
-<templates:admin-footer>
-</templates:admin-footer>
+<templates:admin-footer />
