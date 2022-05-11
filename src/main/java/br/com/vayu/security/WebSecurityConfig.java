@@ -3,6 +3,7 @@ package br.com.vayu.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@Profile("prod")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -22,14 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/bGltcGEtby1jYWNoZS1kYS1hcGktYWU").permitAll()
                     .antMatchers("/api/**/").permitAll()
-                    .antMatchers("/category/**").permitAll()
-                    .and()
-                .authorizeRequests()
-                    .anyRequest()
-                    .authenticated()
-                    .and()
+                    .antMatchers("/api/deactivate/**").hasRole("ADMIN")
+                    .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/category/**").hasAnyRole("ADMIN", "STUDENT")
+                    .antMatchers("/bGltcGEtby1jYWNoZS1kYS1hcGktYWU").hasRole("ADMIN")
+                .and()
                 .formLogin()
                     .loginPage("/login")
                     .permitAll();

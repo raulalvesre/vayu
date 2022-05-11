@@ -9,7 +9,7 @@ public record CourseApiDTO(String name,
 
     public CourseApiDTO(Course course) {
         this(course.getName(),
-                course.getName(),
+                course.getCode(),
                 course.getEstimatedHoursToFinish(),
                 course.getDevelopedAbilities());
     }

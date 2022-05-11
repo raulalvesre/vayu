@@ -46,8 +46,7 @@ public class CategoryService {
     }
 
     public List<CategoryApiDTO> getAllForCategoryApi() {
-        List<Course> courses = courseRepository
-                .findAllForCategoryApi();
+        List<Course> courses = courseRepository.findAllForCategoryApi();
 
         if (courses.isEmpty()) {
             return new ArrayList<>();
@@ -142,6 +141,10 @@ public class CategoryService {
     @Modifying
     @Transactional
     public void deactivate(int id) {
+        if (!categoryRepository.existsById(id)) {
+            throw new NotFoundException("Category not found!");
+        }
+
         categoryRepository.deactivate(id);
     }
 

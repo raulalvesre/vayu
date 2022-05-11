@@ -3,6 +3,7 @@ package br.com.vayu.security;
 import br.com.vayu.exceptions.NotFoundException;
 import br.com.vayu.models.User;
 import br.com.vayu.repositories.UserRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Profile("prod")
 public class MyUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -22,13 +24,13 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByEmailIncludingRole(email)
                 .orElseThrow(() -> new NotFoundException("User not found!"));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
-                List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+                List.of(new SimpleGrantedAuthority(user.getRole().getName())));
     }
 
 }

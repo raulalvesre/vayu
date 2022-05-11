@@ -22,6 +22,11 @@ public final class CategoryApiDTO {
         this.colorCode = category.getColorCode();
         this.studyGuide = category.getStudyGuide();
         this.subcategories = subcategories;
+
+        this.totalOfCourses = subcategories.stream()
+                .map(SubcategoryApiDTO::courses)
+                .mapToInt(List::size)
+                .sum();
     }
 
     @Deprecated
