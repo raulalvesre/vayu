@@ -1,6 +1,5 @@
 package br.com.vayu.repositories;
 
-import br.com.vayu.builders.UserBuilder;
 import br.com.vayu.models.User;
 import br.com.vayu.models.UserRole;
 import org.junit.jupiter.api.Test;
@@ -32,7 +31,7 @@ class UserRepositoryTest {
 
         em.persist(role);
 
-        User user = new UserBuilder()
+        User user = User.builder()
                 .name("raul")
                 .email("rar@gmail.com")
                 .username("rar")

@@ -7,6 +7,7 @@ import br.com.vayu.models.Subcategory;
 import br.com.vayu.projections.SubcategoryMinifiedProjection;
 import br.com.vayu.repositories.CategoryRepository;
 import br.com.vayu.repositories.SubcategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SubcategoryService {
 
     private final SubcategoryRepository subcategoryRepository;
     private final CategoryRepository categoryRepository;
-
-    public SubcategoryService(SubcategoryRepository subcategoryRepository,
-                              CategoryRepository categoryRepository) {
-        this.subcategoryRepository = subcategoryRepository;
-        this.categoryRepository = categoryRepository;
-    }
 
     public List<SubcategoryMinifiedProjection> getAllMinified() {
         return subcategoryRepository.findAllMinified();

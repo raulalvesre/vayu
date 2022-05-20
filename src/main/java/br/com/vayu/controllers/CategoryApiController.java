@@ -2,6 +2,7 @@ package br.com.vayu.controllers;
 
 import br.com.vayu.dto.CategoryApiDTO;
 import br.com.vayu.services.CategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,13 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
+@RequiredArgsConstructor
 public class CategoryApiController {
 
     private final CategoryService categoryService;
-
-    public CategoryApiController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     @Cacheable("categoryApiList")

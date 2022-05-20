@@ -1,8 +1,5 @@
 package br.com.vayu.controllers;
 
-import br.com.vayu.builders.CategoryBuilder;
-import br.com.vayu.builders.CourseBuilder;
-import br.com.vayu.builders.SubcategoryBuilder;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
 import br.com.vayu.models.Subcategory;
@@ -57,7 +54,7 @@ class CategoryApiControllerTest {
     void getCategoryApiDtoList__should_return_correct_content() throws Exception {
         Category category = createAndSaveCategory();
 
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -69,7 +66,7 @@ class CategoryApiControllerTest {
 
         subcategoryRepository.save(subcategory);
 
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(1)
@@ -132,7 +129,7 @@ class CategoryApiControllerTest {
     }
 
     private Category createAndSaveCategory() {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description(description)

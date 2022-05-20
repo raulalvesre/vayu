@@ -10,6 +10,7 @@ import br.com.vayu.projections.DashboardCategoryProjection;
 import br.com.vayu.repositories.CategoryRepository;
 import br.com.vayu.repositories.CourseRepository;
 import br.com.vayu.repositories.SubcategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +22,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final SubcategoryRepository subcategoryRepository;
     private final CourseRepository courseRepository;
-
-    public CategoryService(CategoryRepository categoryRepository,
-                           SubcategoryRepository subcategoryRepository,
-                           CourseRepository courseRepository) {
-        this.categoryRepository = categoryRepository;
-        this.subcategoryRepository = subcategoryRepository;
-        this.courseRepository = courseRepository;
-    }
 
     public CategoryMinifiedProjection getByCodeMinified(String categoryCode) {
         return categoryRepository.findByCodeMinified(categoryCode)

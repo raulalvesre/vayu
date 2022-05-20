@@ -1,6 +1,5 @@
 package br.com.vayu.repositories;
 
-import br.com.vayu.builders.CategoryBuilder;
 import br.com.vayu.dto.CategoryFormDTO;
 import br.com.vayu.models.Category;
 import br.com.vayu.projections.CategoryMinifiedProjection;
@@ -108,7 +107,7 @@ class CategoryRepositoryTest {
     }
 
     private Category createAndSaveCategory() {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -123,7 +122,7 @@ class CategoryRepositoryTest {
     }
 
     private Category createAndSaveCategory(String name, int order) {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description(description)

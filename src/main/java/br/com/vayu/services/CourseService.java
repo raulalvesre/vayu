@@ -8,6 +8,7 @@ import br.com.vayu.projections.CourseMinifiedProjection;
 import br.com.vayu.projections.DashboardInstructorProjection;
 import br.com.vayu.repositories.CourseRepository;
 import br.com.vayu.repositories.SubcategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,15 +16,11 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class CourseService {
 
     private final CourseRepository courseRepository;
     private final SubcategoryRepository subcategoryRepository;
-
-    public CourseService(CourseRepository courseRepository, SubcategoryRepository subcategoryRepository) {
-        this.courseRepository = courseRepository;
-        this.subcategoryRepository = subcategoryRepository;
-    }
 
     public CourseFormDTO getByCodeAsFormDto(String courseCode) {
         return courseRepository.findByCodeAsFormDto(courseCode)

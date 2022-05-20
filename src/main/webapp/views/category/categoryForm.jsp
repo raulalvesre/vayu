@@ -1,20 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<html>
-<head>
-    <title>${formIsCreate ? "Nova" : "Editar"} categoria</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
-    <link href="${pageContext.request.contextPath}/css/form.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
+<templates:admin-template title="${formIsCreate ? 'Criar categoria' : 'Editar Categoria'}"
+                          cssPath="css/form.css"/>
 <div class="container">
     <h1 id="header">${formIsCreate ? "Nova" : "Editar"} categoria</h1>
-
     <%--@elvariable id="categoryFormDTO" type="br.com.vayu.dto.CategoryFormDTO"--%>
     <form:form modelAttribute="categoryFormDTO" action="${postURL}" method="POST">
         <input type="hidden" name="id" value="${categoryFormDTO.id}">
@@ -24,10 +17,9 @@
                 <form:label path="name">Nome</form:label>
                 <form:input path="name" cssClass="form-control" placeholder="Digite aqui o nome da categoria"/>
                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                <form:errors path="name" cssClass="help-block" element="div"/>
+                <form:errors path="name" cssClass="help-block with-errors" element="div"/>
             </div>
         </spring:bind>
-
 
         <spring:bind path="code">
             <div class="form-group ${status.error ? "has-error has-feedback" : ""}">
@@ -85,12 +77,4 @@
         <button type="submit" class="btn btn-primary mb-2" id="submitButton">Enviar</button>
     </form:form>
 </div>
-
-<footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-</footer>
-</body>
-</html>
+<templates:admin-footer />

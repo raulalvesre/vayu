@@ -5,12 +5,15 @@ import br.com.vayu.models.Course;
 import br.com.vayu.projections.CourseMinifiedProjection;
 import br.com.vayu.services.CourseService;
 import br.com.vayu.services.SubcategoryService;
+import br.com.vayu.validation.CourseFormDTOValidator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,14 +21,16 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/courses")
+@RequiredArgsConstructor
 public class CourseController {
 
     private final CourseService courseService;
     private final SubcategoryService subcategoryService;
+    private final CourseFormDTOValidator courseFormDTOValidator;
 
-    public CourseController(CourseService courseService, SubcategoryService subcategoryService) {
-        this.courseService = courseService;
-        this.subcategoryService = subcategoryService;
+    @InitBinder("courseFormDTO")
+    void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(courseFormDTOValidator);
     }
 
     @GetMapping("{categoryCode}/{subcategoryCode}")

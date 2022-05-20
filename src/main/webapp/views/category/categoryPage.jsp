@@ -1,19 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${category.name} | Cursos online de tecnologia</title>
-    <link rel="stylesheet" type="text/css" href="../css/categoryPage.css"/>
-</head>
-<body>
+<%@ taglib prefix="templates" tagdir="/WEB-INF/tags/templates" %>
+
+<templates:admin-template title="${category.name} | Cursos online de tecnologia"
+                          cssPath="css/categoryPage.css"/>
 <section class="category-banner__wrapper">
     <div class="container category-banner">
-            <span class="category-banner__icon">
-                <img src="${category.iconPath}">
-            </span>
+    <span class="category-banner__icon">
+    <img src="${category.iconPath}">
+    </span>
         <h1 class="category-banner__title">${category.name}</h1>
     </div>
 </section>
@@ -44,5 +39,4 @@
         </div>
     </c:forEach>
 </main>
-</body>
-</html>
+<templates:admin-footer/>

@@ -1,8 +1,5 @@
 package br.com.vayu.repositories;
 
-import br.com.vayu.builders.CategoryBuilder;
-import br.com.vayu.builders.CourseBuilder;
-import br.com.vayu.builders.SubcategoryBuilder;
 import br.com.vayu.dto.SubcategoryFormDTO;
 import br.com.vayu.models.Category;
 import br.com.vayu.models.Course;
@@ -131,8 +128,8 @@ class SubcategoryRepositoryTest {
 
     @Test
     void findAllMinifiedByCategoryCode__should_return_empty_list_with_wrong_category_code() {
-        Category category2 = new CategoryBuilder()
-                .code(code+2)
+        Category category2 = Category.builder()
+                .code(code + 2)
                 .name(name)
                 .description(description)
                 .studyGuide(studyGuide)
@@ -168,7 +165,7 @@ class SubcategoryRepositoryTest {
 
     @Test
     void findDistinctForLoginPage__should_return_active_subcategories_ordered_by_category_order_asc() {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -181,9 +178,9 @@ class SubcategoryRepositoryTest {
 
         em.persist(category);
 
-        Subcategory subcategory99 = new SubcategoryBuilder()
+        Subcategory subcategory99 = Subcategory.builder()
                 .code(code)
-                .name(name+99)
+                .name(name + 99)
                 .description(description)
                 .studyGuide(studyGuide)
                 .active(true)
@@ -191,9 +188,9 @@ class SubcategoryRepositoryTest {
                 .category(category)
                 .build();
 
-        Subcategory subcategory0 = new SubcategoryBuilder()
+        Subcategory subcategory0 = Subcategory.builder()
                 .code(code)
-                .name(name+0)
+                .name(name + 0)
                 .description(description)
                 .studyGuide(studyGuide)
                 .active(true)
@@ -216,9 +213,9 @@ class SubcategoryRepositoryTest {
 
     @Test
     void findDistinctForLoginPage__should_return_active_subcategories_ordered_by_subcategory_order_asc() {
-        Subcategory subcategory99 = new SubcategoryBuilder()
+        Subcategory subcategory99 = Subcategory.builder()
                 .code(code)
-                .name(name+99)
+                .name(name + 99)
                 .description(description)
                 .studyGuide(studyGuide)
                 .active(true)
@@ -226,9 +223,9 @@ class SubcategoryRepositoryTest {
                 .category(activeCategory)
                 .build();
 
-        Subcategory subcategory0 = new SubcategoryBuilder()
+        Subcategory subcategory0 = Subcategory.builder()
                 .code(code)
-                .name(name+0)
+                .name(name + 0)
                 .description(description)
                 .studyGuide(studyGuide)
                 .active(true)
@@ -261,7 +258,7 @@ class SubcategoryRepositoryTest {
 
     @Test
     void findDistinctForLoginPage__should_return_empty_list_when_subcategory_inactive() {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -283,7 +280,7 @@ class SubcategoryRepositoryTest {
     void findDistinctForLoginPage__should_return_empty_list_when_subcategory_has_no_visible_course() {
         Subcategory subcategory = createAndSaveSubcategory(activeCategory);
 
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(1)
@@ -303,7 +300,7 @@ class SubcategoryRepositoryTest {
 
     @Test
     void deactivate__should_deactivate_subcategory() {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -324,7 +321,7 @@ class SubcategoryRepositoryTest {
     }
 
     private Subcategory createAndSaveSubcategory() {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -338,7 +335,7 @@ class SubcategoryRepositoryTest {
     }
 
     private Subcategory createAndSaveSubcategory(String name) {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -352,7 +349,7 @@ class SubcategoryRepositoryTest {
     }
 
     private Subcategory createAndSaveSubcategory(Category category) {
-        Subcategory subcategory = new SubcategoryBuilder()
+        Subcategory subcategory = Subcategory.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -366,7 +363,7 @@ class SubcategoryRepositoryTest {
     }
 
     private Category createAndSaveCategory(boolean active) {
-        Category category = new CategoryBuilder()
+        Category category = Category.builder()
                 .code(code)
                 .name(name)
                 .description(description)
@@ -381,7 +378,7 @@ class SubcategoryRepositoryTest {
     }
 
     private Course createAndSaveCourse(Subcategory subcategory) {
-        Course course = new CourseBuilder()
+        Course course = Course.builder()
                 .code(code)
                 .name(name)
                 .estimatedHoursToFinish(1)

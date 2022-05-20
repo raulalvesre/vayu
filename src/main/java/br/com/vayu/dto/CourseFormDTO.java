@@ -1,11 +1,19 @@
 package br.com.vayu.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class CourseFormDTO {
 
     private int id;
@@ -29,11 +37,9 @@ public class CourseFormDTO {
 
     private String syllabus;
     private String developedAbilities;
-
     private String subcategoryCode;
 
-    public CourseFormDTO(int id,
-                         String name,
+    public CourseFormDTO(String name,
                          String code,
                          Integer estimatedHoursToFinish,
                          boolean visible,
@@ -42,7 +48,6 @@ public class CourseFormDTO {
                          String syllabus,
                          String developedAbilities,
                          String subcategoryCode) {
-        this.id = id;
         this.name = name;
         this.code = code;
         this.estimatedHoursToFinish = estimatedHoursToFinish;
@@ -51,89 +56,6 @@ public class CourseFormDTO {
         this.instructorName = instructorName;
         this.syllabus = syllabus;
         this.developedAbilities = developedAbilities;
-        this.subcategoryCode = subcategoryCode;
-    }
-
-    @Deprecated
-    public CourseFormDTO() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Integer getEstimatedHoursToFinish() {
-        return estimatedHoursToFinish;
-    }
-
-    public void setEstimatedHoursToFinish(Integer estimatedHoursToFinish) {
-        this.estimatedHoursToFinish = estimatedHoursToFinish;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public String getTargetAudience() {
-        return targetAudience;
-    }
-
-    public void setTargetAudience(String targetAudience) {
-        this.targetAudience = targetAudience;
-    }
-
-    public String getInstructorName() {
-        return instructorName;
-    }
-
-    public void setInstructorName(String instructorName) {
-        this.instructorName = instructorName;
-    }
-
-    public String getSyllabus() {
-        return syllabus;
-    }
-
-    public void setSyllabus(String syllabus) {
-        this.syllabus = syllabus;
-    }
-
-    public String getDevelopedAbilities() {
-        return developedAbilities;
-    }
-
-    public void setDevelopedAbilities(String developedAbilities) {
-        this.developedAbilities = developedAbilities;
-    }
-
-    public String getSubcategoryCode() {
-        return subcategoryCode;
-    }
-
-    public void setSubcategoryCode(String subcategoryCode) {
         this.subcategoryCode = subcategoryCode;
     }
 

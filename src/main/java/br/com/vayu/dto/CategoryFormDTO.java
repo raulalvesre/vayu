@@ -1,9 +1,18 @@
 package br.com.vayu.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-public final class CategoryFormDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class CategoryFormDTO {
 
     private int id;
 
@@ -22,100 +31,5 @@ public final class CategoryFormDTO {
 
     @Pattern(regexp = "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$", message = "{colorcode.invalid}")
     private String colorCode;
-
-    public CategoryFormDTO(int id,
-                           String name,
-                           String code,
-                           String description,
-                           String studyGuide,
-                           boolean active,
-                           int order,
-                           String iconPath,
-                           String colorCode) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.description = description;
-        this.studyGuide = studyGuide;
-        this.active = active;
-        this.order = order;
-        this.iconPath = iconPath;
-        this.colorCode = colorCode;
-    }
-
-    @Deprecated
-    public CategoryFormDTO() {}
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStudyGuide() {
-        return studyGuide;
-    }
-
-    public void setStudyGuide(String studyGuide) {
-        this.studyGuide = studyGuide;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
-
-    public String getIconPath() {
-        return iconPath;
-    }
-
-    public void setIconPath(String iconPath) {
-        this.iconPath = iconPath;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
 
 }

@@ -1,12 +1,20 @@
 package br.com.vayu.models.activities;
 
 import br.com.vayu.models.Section;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Entity
 @DiscriminatorColumn(name="activity_type", discriminatorType=DiscriminatorType.STRING)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public abstract class Activity {
 
     @Id
@@ -26,16 +34,5 @@ public abstract class Activity {
     private boolean active;
 
     private int order;
-
-    public Activity(String code,
-                    String title,
-                    Section section) {
-        this.code = code;
-        this.title = title;
-        this.section = section;
-    }
-
-    @Deprecated
-    public Activity() {}
 
 }
